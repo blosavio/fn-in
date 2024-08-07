@@ -17,7 +17,7 @@
   [:article
    [:a {:href "https://clojars.org/com.sagevisuals/fn-in"}(element/image "https://img.shields.io/clojars/v/com.sagevisuals/fn-in.svg")]
    [:br]
-   [:a {:href "https://github.io/blosavio/fn-in/index.html"} "API"]
+   [:a {:href "https://blosavio.github.io/fn-in/index.html"} "API"]
    [:br]
    [:a {:href "#examples"} "Examples"]
    [:br]
