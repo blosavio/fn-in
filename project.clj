@@ -18,6 +18,7 @@
           :target-path "doc"
           :output-path "doc"
           :source-uri "https://github.com/blosavio/fn-in/blob/main/{filepath}#L{line}"
-          :html {:namespace-list :flat}
+          :html {:namespace-list :flat
+                 :transforms [[:div.sidebar.primary] [:append [:ul.index-link [:li.depth-1 [:a {:href "https://github.com/blosavio/fn-in"} "Project Home"]]]]]}
           :project {:name "fn-in" :version "version 0"}}
   :scm {:name "git" :url "https://github.com/blosavio/fn-in"})
