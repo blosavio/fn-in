@@ -1,5 +1,5 @@
 (ns fn-in-hiccup
-  "Convenience functions for generating Speculoos Project webpage with hiccup and TufteCSS."
+  "Convenience functions for generating project webpage with hiccup"
   (:require
    [clojure.pprint :as pp]
    [clojure.string :as str]
