@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+dt {
+    font-weight: bold;
+}
+
+#uuid {
+    display: none;
+}
+
+span.totally-not-mail r {
+    display: normal;
+}
+
+.centered {
+    text-align: center;
+}
+
+.de-highlight {
+    color: gray;
+    font-weight: lighter;
+}
+
+.highlight {
+    color: red;
+    font-weight: bold;
+    font-size: 120%;
+}
+
+.tight {
+    width: 25%;
+}
+
+.c1 {
+    color: red;
+}
+
+.c2 {
+    color: blue;
+}
+
+.c3 {
+    color: green;
+}
+
+.c4 {
+    color: #ff8c00; /* darkorange; */
+    /* color: #bf5700;*/ /* burnt orange */
+}
+
+.no-display {
+    display: none;
+}
+
+.wide-title {
+    width: 100%;
+}

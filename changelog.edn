@@ -1,0 +1,122 @@
+[{:date {:year 2024
+         :month "August"
+         :date 7}
+  :responsible {:name "Brad Losavio"
+                :email "blosavio@sagevisuals.com"}
+  :version 0
+  :comment "initial release"
+  :status :active
+  :stable false
+  :urgency :none
+  :maturity :alpha
+  :breaking? nil
+  :changes :initial-release}
+]
+
+
+(comment ;; Release entry template
+  {:date {:year 2024
+          :month nil
+          :date nil}
+   :responsible {:name "Brad Losavio"
+                 :email "blosavio@sagevisuals.com"}
+   :version nil
+   :comment ""
+   :status :active
+   :stable false
+   :urgency :low
+   :maturity :alpha
+   :breaking? nil
+   :changes
+   [{:description "Added..."
+     :date {:year 2024
+            :month nil
+            :date nil}
+     :change-type :added-function
+     :breaking? false}   
+    ]}
+  )
+
+
+(comment Release notes                  ; changelog.edn
+         "A human- and machine-readable `changelog.edn` will accompany each project
+  release at the project's root directory. `changelog.edn` is tail-appended file
+  constructed from all previous releases, possibly automatically-composed of
+  per-release release-log.edn files in a sub-directory.
+
+  Each release is a  map describing each change. Each change map has the
+  following keys with appropriate associated values:
+
+  :date {:year :month :date :index <optional, if more than one per day>}
+  :responsible {:name :email}
+  :contributors [{:name :email} ...] <included as needed>
+
+  :change
+    :initial-release
+    :security
+
+    :performance-improvement
+    :preformance-regression
+    :memory-improvement
+    :memory-regression
+    :network-resource-improvement
+    :network-resource-regression
+
+    :api-change
+
+    :relaxed-requirements
+    :increased-requirements
+
+    :documentation
+
+    :tests
+    :bug-fix
+    :deprecated-something
+
+    :name-change
+    :function-argument-signature-change
+    :removed-fn
+
+    :policy-change (i.e., considered good-form to...)
+    :meta-data
+
+    :error-messsage-improved/changed
+    :default-changed
+    :improved-output (e.g., handles more unicode; processes more numeric types)
+
+    :website-change
+    :documentation-change
+
+    :implementation-change
+    :source-formatting-change (i.e., indentation, spacing, capitalization, parentheses location)
+
+    :release-note-change (omissions, corrections)
+
+
+  :comment a string for whatever seems useful <optional>
+
+  :maturity
+    :proof-of-concept
+    :experimental
+    :pre-alpha
+    :alpha
+    :beta
+    :release
+
+  :urgency
+    :none
+    :low
+    :high
+
+  :status
+    :active
+    :stable
+    :inactive
+    :experimental
+    :deprecated
+    :mature
+
+:breaking?
+  :nil if initial public release
+  false if and only if all changes are non-breaking
+  true otherwise" )
