@@ -15,8 +15,7 @@
 (def page-body
 
   [:article
-   [:p "…update Clojars badge…"]
-   (element/image "https://img.shields.io/clojars/v/com.sagevisuals/fn-in.svg")
+   [:a {:href "https://clojars.org/com.sagevisuals/fn-in"}(element/image "https://img.shields.io/clojars/v/com.sagevisuals/fn-in.svg")]
    [:br]
    [:a {:href "https://github.io/blosavio/fn-in/index.html"} "API"]
    [:br]
