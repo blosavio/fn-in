@@ -1,5 +1,6 @@
 (ns fn-in-project-readme-generator
   "CIDER eval buffer C-c C-k generates an html page and a markdown chunk."
+  {:no-doc true}
   (:require
    [hiccup2.core :as h2]
    [hiccup.page :as page]
@@ -32,9 +33,9 @@
    [:section#setup
     [:h2 "Setup"]
     [:h3 "Leiningen/Boot"]
-    [:pre [:code "[com.sagevisuals/fn-in \"0\"]"]]
+    [:pre [:code "[com.sagevisuals/fn-in \"1\"]"]]
     [:h3 "Clojure CLI/deps.edn"]
-    [:pre [:code "com.sagevisuals/fn-in {:mvn/version \"0\"}"]]
+    [:pre [:code "com.sagevisuals/fn-in {:mvn/version \"1\"}"]]
     [:h3 "Require"]
     [:pre (print-form-then-eval "(require '[fn-in.core :refer [get-in* assoc-in* update-in* dissoc-in*]])")]]
 

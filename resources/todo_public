@@ -1,5 +1,7 @@
 ### fn-in project to-do
 
-0. Make quantitative performance measurements
-	
-1. Consider re-factoring implementation to improve performance.
+0. Investigate extending/patching `clojure.core/get-in`, et al, to handle lists and other sequences that are not currently included.
+
+1. Make quantitative performance measurements; onsider re-factoring implementation to improve performance.
+
+2. Write property tests to extend coverage beyond current hand-written unit tests.

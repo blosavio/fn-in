@@ -1,5 +1,6 @@
 (ns fn-in-hiccup
   "Convenience functions for generating project webpage with hiccup"
+  {:no-doc true}
   (:require
    [clojure.pprint :as pp]
    [clojure.string :as str]
