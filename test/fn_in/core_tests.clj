@@ -18,7 +18,8 @@
       (get* (interpose nil []) 0)
       (get* (lazy-cat) 0)
       (get* (mapcat + []) 0)
-      (get* (zipmap [] []) :a)))
+      (get* (zipmap [] []) :a)
+      (get* (subvec [] 0 0) 0)))
 
   (testing "zero-th index"
     (are [x] (= 11 x)
@@ -33,7 +34,8 @@
       (get* (interleave [11 22 33] [:a :b :c]) 0)
       (get* (interpose :foo [11 22 33]) 0)
       (get* (lazy-cat [11 22 33] [44 55 66]) 0)
-      (get* (mapcat reverse [[33 22 11] [66 55 44] [99 88 77]]) 0)))
+      (get* (mapcat reverse [[33 22 11] [66 55 44] [99 88 77]]) 0)
+      (get* (subvec [11 22 33 44 55] 0 5) 0)))
 
   (testing "provided indexes"
     (are [x] (= 33 x)
@@ -56,7 +58,8 @@
       (get* (interpose :foo [11 22 33]) 4)
       (get* (lazy-cat [11 22 33] [44 55 66]) 2)
       (get* (mapcat reverse [[33 22 11] [66 55 44] [99 88 77]]) 2)
-      (get* (zipmap [:a :b :c] [11 22 33]) :c)))
+      (get* (zipmap [:a :b :c] [11 22 33]) :c)
+      (get* (subvec [11 22 33 44 55] 0 5) 2)))
 
   (testing "composite keys on maps"
     (are [x y] (= x y)
@@ -106,7 +109,8 @@
       (get-in* (interpose nil []) [0])
       (get-in* (lazy-cat) [0])
       (get-in* (mapcat + []) [0])
-      (get-in* (zipmap [] []) [:a])))
+      (get-in* (zipmap [] []) [:a])
+      (get-in* (subvec [] 0 0) [1 2])))
 
   (testing "key/index not found"
     (are [x] (= nil x)
@@ -115,7 +119,8 @@
       (get-in* {:a 11 :b 22 :c 33 :d 44 :e 55} [:f])
       (get-in* #{11 22 33 44 55} [66])
       (get-in* (lazy-seq [11 22 33 44 55]) [5])
-      (get-in* (cons 11 '(22 33 44 55)) [5])))
+      (get-in* (cons 11 '(22 33 44 55)) [5])
+      (get-in* (subvec [11 22 33 44 55] 0 5) [5])))
 
   (testing "empty path vectors addresses the whole input collection"
     (are [x y] (= x y)
@@ -123,7 +128,8 @@
       {:a 11 :b 22 :c 33} (get-in* {:a 11 :b 22 :c 33} [])
       '(11 22 33) (get-in* '(11 22 33) [])
       #{11 22 33} (get-in* #{11 22 33} [])
-      '(11 22 33 44 55) (get-in* (cons 11 '(22 33 44 55)) [])))
+      '(11 22 33 44 55) (get-in* (cons 11 '(22 33 44 55)) [])
+      [11 22 33 44 55] (get-in* (subvec [11 22 33 44 55] 0 5) [])))
 
   (testing "zero-th indexes"
     (are [x] (= 11 x)
@@ -140,7 +146,8 @@
       (get-in* (interpose :foo [11 22 33]) [0])
       (get-in* (lazy-cat [11 22 33] [44 55 66]) [0])
       (get-in* (mapcat reverse [[33 22 11] [66 55 44] [99 88 77]]) [0])
-      (get-in* (zipmap [:a :b :c] [11 22 33]) [:a])))
+      (get-in* (zipmap [:a :b :c] [11 22 33]) [:a])
+      (get-in* (subvec [11 22 33 44 55] 0 5) [0])))
 
   (testing "provided indexes"
     (are [x] (= 33 x)
@@ -159,7 +166,8 @@
       (get-in* (interpose :foo [[11 22 33] [44 55 66] [77 88 99]]) [0 2])
       (get-in* (lazy-cat [11 [22 33]] [44 [55 66]]) [1 1])
       (get-in* (mapcat identity [[11 22 33] [[44 55 66]][77 88 99]]) [2])
-      (get-in* (zipmap [:a :b :c] [[11 22 33] [44 55 66] [77 88 99]]) [:a 2])))
+      (get-in* (zipmap [:a :b :c] [[11 22 33] [44 55 66] [77 88 99]]) [:a 2])
+      (get-in* (subvec [[11 22] [[33] 44]] 0 2) [1 0 0])))
 
   (testing "heterogeneous indexes"
     (are [x] (= 55)
@@ -172,7 +180,8 @@
       (get-in* [11 22 (lazy-seq [33 44 55])] [2 2])
       (get-in* {:a 11 :b (repeat 55)} [:b 99])
       (get-in* (list 11 22 (cycle [44 55 66])) [2 7])
-      (get-in* [11 22 {:a 33 :b (iterate inc 1)}] [2 :b 54])))
+      (get-in* [11 22 {:a 33 :b (iterate inc 1)}] [2 :b 54])
+      (get-in* (subvec [{:a 11 :b (subvec [22 33] 0 2)} {:d (subvec [44 (subvec [55] 0 1)] 0 2) :e 66}] 0 2) [1 :d 1 0])))
 
   (testing "composite keys on maps"
     (are [x y] (= x y)
@@ -391,7 +400,10 @@
       (assoc* (mapcat + []) 0 :foo)
 
       {:a 99}
-      (assoc* (zipmap [] []) :a 99)))
+      (assoc* (zipmap [] []) :a 99)
+
+      [nil nil :new-subvec-element]
+      (assoc* (subvec [] 0 0) 2 :new-subvec-element)))
 
   (testing "at the beginning of the collection"
     (are [x y] (= x y)
@@ -408,7 +420,10 @@
       '(:foo 2 3 4 5 6)
 
       (assoc* (mapcat reverse [[3 2 1] [6 5 4] [9 8 7]]) 0 :foo)
-      '(:foo 2 3 4 5 6 7 8 9)))
+      '(:foo 2 3 4 5 6 7 8 9)
+
+      [:new-subvec-element 2 3 4 5]
+      (assoc* (subvec [1 2 3 4 5] 0 5) 0 :new-subvec-element)))
 
   (testing "in the middle of the collection"
     (are [x y] (= x y)
@@ -428,7 +443,10 @@
       '("a" :foo :baz :foo "c")
 
       (assoc* (lazy-cat [1 2 3] [4 5 6]) 2 :foo)
-      '(1 2 :foo 4 5 6)))
+      '(1 2 :foo 4 5 6)
+
+      [1 2 :new-subvec-element 4 5]
+      (assoc* (subvec [1 2 3 4 5] 0 5) 2 :new-subvec-element)))
 
   (testing "at the end of the collection"
     (are [x y] (= x y)
@@ -442,7 +460,10 @@
       '("a" :foo "b" :foo :baz)
 
       (assoc* (lazy-cat [1 2 3] [4 5 6]) 5 :foo)
-      '(1 2 3 4 5 :foo)))
+      '(1 2 3 4 5 :foo)
+
+      [1 2 3 4 :new-subvec-element]
+      (assoc* (subvec [1 2 3 4 5] 0 5) 4 :new-subvec-element)))
 
   (testing "beyond the end of the collection"
     (are [x y] (= x y)
@@ -462,7 +483,10 @@
       (assoc* #{11 22 33} 44 55)
 
       '(11 22 33 nil nil 99)
-      (assoc* (cons 11 '(22 33)) 5 99)))
+      (assoc* (cons 11 '(22 33)) 5 99)
+
+      '(11 22 33 nil nil 99)
+      (assoc* (subvec [11 22 33] 0 3) 5 99)))
 
   (testing "assoc-ing over a map's pre-existing key-value pair"
     (are [x y] (= x y)
@@ -527,7 +551,10 @@
       '(1 2 3 4 :foo 6 7 8 9)
 
       (update* (zipmap [:a :b :c] [1 2 3]) :a (constantly 'foo))
-      {:a 'foo, :b 2, :c 3}))
+      {:a 'foo, :b 2, :c 3}
+
+      [11 22 330 44 55]
+      (update* (subvec [11 22 33 44 55] 0 5) 2 #(* % 10))))
 
   (testing "'updated' values beyond bounds; update function must accept nil"
     (are [x y] (= x y)
@@ -541,7 +568,10 @@
       (update* '(11 22 33) 4 #(if (nil? %) :past-end-of-list))
 
       #{11 22 33 :not-in-set}
-      (update* #{11 22 33} 44 #(if (nil? %) :not-in-set))))
+      (update* #{11 22 33} 44 #(if (nil? %) :not-in-set))
+
+      '(11 22 33 nil :beyond-end)
+      (update* (subvec [11 22 33] 0 3) 4 #(if (nil? %) :beyond-end))))
 
   (testing "updated set memmbers pruned because they're non-unique"
     (are [x y] (= x y)
@@ -585,7 +615,10 @@
       '(:a 1 :foo 2 :c 3)
 
       (assoc-in* (lazy-cat [1 2 3] [4 5 6]) [2] :foo)
-      '(1 2 :foo 4 5 6)))
+      '(1 2 :foo 4 5 6)
+
+      (assoc-in* (subvec [11 22 33] 0 3) [1] 99)
+      [11 99 33]))
 
   (testing "homogeneous nested collection"
     (are [x y] (= x y)
@@ -612,7 +645,10 @@
       '(11 [22 33] 44 [55 :foo])
 
       (assoc-in* (mapcat identity [[11 22 33] [[44 55 66]][77 88 99]]) [3 2] :foo)
-      '(11 22 33 [44 55 :foo] 77 88 99)))
+      '(11 22 33 [44 55 :foo] 77 88 99)
+
+      (assoc-in* (subvec [11 (subvec [22 (subvec [33] 0 1)] 0 2)] 0 2) [1 1 0] 99)
+      [11 [22 [99]]]))
 
   (testing "heterogeneous nested collection"
     (are [x y] (= x y)
@@ -662,7 +698,10 @@
       (assoc-in* (lazy-seq [11 22 {:a 44 :b 55 :c [66 77]}]) [2 :c 1] 99)
 
       '([11 22 33] [11 22 33] [11 99 33])
-      (take 3 (assoc-in* (repeat [11 22 33]) [2 1] 99)))))
+      (take 3 (assoc-in* (repeat [11 22 33]) [2 1] 99))
+
+      (assoc-in* (subvec [11 22 {:a 33 :b (subvec [44 55 66] 0 3)}] 0 3) [2 :b 1] 99)
+      [11 22 {:a 33, :b [44 99 66]}])))
 
 
 (deftest update-in*-test
@@ -693,7 +732,10 @@
       {:a 'foo, :b 2, :c 3}
 
       (update-in* (interleave [:a :b :c] [[11 22 33] [44 55 66] [77 88 99]]) [3 2] (constantly :bar))
-      '(:a [11 22 33] :b [44 55 :bar] :c [77 88 99])))
+      '(:a [11 22 33] :b [44 55 :bar] :c [77 88 99])
+
+      (update-in* (subvec [11 22 33 (subvec [44 55 (subvec [66 77 88] 0 3)] 0 3)] 0 4) [3 2 2] #(- % 88))
+      [11 22 33 [44 55 [66 77 0]]]))
 
   (testing "heterogeneous collections"
     (are [x y] (= x y)
@@ -727,7 +769,10 @@
       (update-in* {:a 11 :b [22 (range 0 4) 33]} [:b 1 1] #(+ 100 %))
 
       '([11 22 33] [11 220 33] [11 22 33])
-      (take 3 (update-in* (repeat [11 22 33]) [1 1] #(* 10 %)))))
+      (take 3 (update-in* (repeat [11 22 33]) [1 1] #(* 10 %)))
+
+      (update-in* {:a (subvec [11 22 33] 0 3)} [:a 1] + 5)
+      {:a [11 27 33]}))
 
   (testing "extra f args"
     (are [x y] (= x y)
@@ -754,7 +799,10 @@
       (update-in* '(11 22 33 (44 55)) [3 3] (fn [_] 99))
 
       #{11 22 #{33 99}}
-      (update-in* #{11 22 #{33}} [#{33} 44] (fn [_] 99)))))
+      (update-in* #{11 22 #{33}} [#{33} 44] (fn [_] 99))
+
+      (update-in* (subvec [:a :b :c] 0 3) [5] (fn [_] 99))
+      '(:a :b :c nil nil 99))))
 
 
 (deftest vector-dissoc-test
@@ -839,6 +887,17 @@
       [11 22 33 44]
       (dissoc* [11 22 33 44 55] 4)))
 
+  (testing "subvector"
+    (are [x y] (= x y)
+      (dissoc* (subvec [11 22 33 44 55] 0 5) 0)
+      [22 33 44 55]
+
+      (dissoc* (subvec [11 22 33 44 55] 0 5) 2)
+      [11 22 44 55]
+
+      (dissoc* (subvec [11 22 33 44 55] 0 5) 4)
+      [11 22 33 44]))
+
   (testing "list"
     (are [x y] (= x y)
       '(22 33 44 55)
@@ -913,7 +972,10 @@
       '(1 2 4 5 6)
 
       (dissoc-in* (mapcat reverse [[3 2 1] [6 5 4] [9 8 7]]) [4])
-      '(1 2 3 4 6 7 8 9)))
+      '(1 2 3 4 6 7 8 9)
+
+      (dissoc-in* (subvec [11 22 33] 0 3) [1])
+      [11 33]))
 
   (testing "preserve empty containing collections"
     (are [x y] (= x y)
@@ -945,7 +1007,10 @@
       (dissoc-in* (lazy-seq [11]) [0])
 
       '(11 22 ())
-      (dissoc-in* (cons 11 (list 22 (list 33))) [2 0])))
+      (dissoc-in* (cons 11 (list 22 (list 33))) [2 0])
+
+      (dissoc-in* (subvec [11] 0 1) [0])
+      []))
 
   (testing "nested homogeneous"
     (are [x y] (= x y)
@@ -977,7 +1042,10 @@
       '(11 [22 33] 44 [55])
 
       (dissoc-in* (mapcat identity [[11 22 33] [[44 55 66]][77 88 99]]) [3 2])
-      '(11 22 33 [44 55] 77 88 99)))
+      '(11 22 33 [44 55] 77 88 99)
+
+      (dissoc-in* (subvec [11 22 (subvec [33 44 (subvec [55 66] 0 2)] 0 3)] 0 3) [2 2 1])
+      [11 22 [33 44 [55]]]))
 
   (testing "nested heterogeneous"
     (are [x y] (= x y)
@@ -1012,7 +1080,10 @@
       (dissoc-in* [11 22 33 (take 3 (repeat [44 55 66]))] [3 1 1])
 
       (dissoc-in* (zipmap [:a :b :c] [[11 22 33] [44 55 66] [77 88 99]]) [:a 1])
-      {:a [11 33], :b [44 55 66], :c [77 88 99]})))
+      {:a [11 33], :b [44 55 66], :c [77 88 99]}
+
+      (dissoc-in* (subvec [11 {:a 22 :b 33}] 0 2) [1 :a])
+      [11 {:b 33}])))
 
 
 (run-tests)

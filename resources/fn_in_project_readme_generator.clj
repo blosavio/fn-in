@@ -11,6 +11,7 @@
 
 
 (def readme-UUID #uuid "59ecaabc-1b75-4616-9f03-2ccde4bb8729")
+(def project-version (nth (read-string (slurp "project.clj")) 2))
 
 
 (def page-body
@@ -33,9 +34,9 @@
    [:section#setup
     [:h2 "Setup"]
     [:h3 "Leiningen/Boot"]
-    [:pre [:code "[com.sagevisuals/fn-in \"1\"]"]]
+    [:pre [:code (str "[com.sagevisuals/fn-in \"" project-version "\"]")]]
     [:h3 "Clojure CLI/deps.edn"]
-    [:pre [:code "com.sagevisuals/fn-in {:mvn/version \"1\"}"]]
+    [:pre [:code (str "com.sagevisuals/fn-in {:mvn/version \"" project-version "\"}")]]
     [:h3 "Require"]
     [:pre (print-form-then-eval "(require '[fn-in.core :refer [get-in* assoc-in* update-in* dissoc-in*]])")]]
 
@@ -281,7 +282,7 @@
 
 (spit "doc/readme.html"
       (page-template
-       "fn-in — >>>Insert Title<<<"
+       "fn-in — A Clojure lib for manipulating nested data"
        readme-UUID
        (conj [:body] page-body)))
 

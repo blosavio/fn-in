@@ -1,0 +1,30 @@
+{:date {:year 2024
+        :month "November"
+        :day 9}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 2
+ :comment "Expanded collection hierarchy so that 'SubVectors' of type `clojure.lang.APersistentVector$SubVector` are handled by all core functions."
+ :project-status :active
+ :stable false
+ :urgency :low
+ :maturity :alpha
+ :breaking? false
+ :changes
+ [{:description "Added ability for all core functions to handle subvectors."
+   :date {:year 2024
+          :month "November"
+          :day 9}
+   :change-type :relaxed-input-requirements
+   :altered-functions ['get* 'get-in*
+                       'assoc* 'assoc-in*
+                       'update* 'update-in*
+                       'dissoc* 'dissoc-in*]
+   :breaking? false}
+
+  {:description "Added changelog.md generation to better communicate changes."
+   :date {:year 2024
+          :month "November"
+          :day 9}
+   :change-type :documentation
+   :breaking? false}]}

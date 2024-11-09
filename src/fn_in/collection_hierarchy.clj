@@ -11,6 +11,7 @@
 
 (derive clojure.lang.PersistentVector ::vector)
 (derive clojure.lang.PersistentVector$ChunkedSeq ::vector)
+(derive clojure.lang.APersistentVector$SubVector ::vector)
 
 (derive clojure.lang.PersistentArrayMap ::map)
 (derive clojure.lang.PersistentHashMap ::map)

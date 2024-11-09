@@ -1,0 +1,19 @@
+{:date {:year 2024
+        :month "August"
+        :day 7}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 1
+ :comment "Streamlined docs, with more accurate links between Clojars and Github."
+ :project-status :active
+ :stable false
+ :urgency :low
+ :maturity :alpha
+ :breaking? false
+ :changes
+ [{:description "Added an explicit `cljdoc.doc/tree` to try to keep clj-doc's auto-generation from choking."
+   :date {:year 2024
+          :month "August"
+          :day 7}
+   :change-type :documentation
+   :breaking? false}]}
