@@ -1,0 +1,30 @@
+{:sections [{:section-name "Setup"}
+            {:section-name "API" :section-href "https://blosavio.github.io/fn-in/index.html" :skip-section-load? true}
+            {:section-name "Changelog" :section-href "https://github.com/blosavio/fn-in/blob/master/changelog.md" :skip-section-load? true}
+            {:section-name "Ideas"}
+            {:section-name "Examples"}
+            {:section-name "Alternatives"}
+            {:section-name "Glossary"}
+            {:section-name "Contact" :section-href "https://github.com/blosavio" :skip-section-load? true}]
+
+ :clojars-badge? true
+ :copyright-holder "Brad Losavio"
+
+ ;; special directives to zprint on how to handle these functions
+ :fn-map-additions {}
+
+ :project-description "A library for manipulating heterogeneous, arbitrarily-nested Clojure data structures"
+ :project-name-formatted "fn-in"
+
+ :readme-UUID #uuid "59ecaabc-1b75-4616-9f03-2ccde4bb8729"
+
+ :readme-html-directory "doc/"
+ :readme-html-filename "readme.html"
+
+ :readme-markdown-directory ""
+ :readme-markdown-filename "README.md"
+
+ :sections-directory "resources/readme_sections/"
+
+ :separator " => "
+ :wrap-at 80}

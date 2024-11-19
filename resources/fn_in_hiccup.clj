@@ -101,7 +101,7 @@
   (page/html5
    {:lang "en"}
    [:head
-    (page/include-css "fn_in.css")
+    (page/include-css "project.css")
     [:title title]
     [:meta {"charset"  "utf-8"
             "name" "viewport"

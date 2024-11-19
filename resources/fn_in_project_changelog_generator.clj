@@ -15,7 +15,7 @@
    [fn-in-hiccup :refer :all]))
 
 
-(def changelog-data (load-file "changelog.edn"))
+(def changelog-data (load-file "resources/changelog_entries/changelog.edn"))
 
 (def changelog-webpage-UUID #uuid "07671ac9-ef7b-463a-baa4-7e2adec55d1c")
 
@@ -127,7 +127,7 @@
 
 
   (generate-version-section (get changelog-data 0))
-  ;; 
+  ;;
   )
 
 
@@ -146,6 +146,17 @@
                           [:span#uuid [:br] changelog-webpage-UUID]])
 
 
+(spit "doc/changelog.html"
+      (page-template
+       "fn-in library changelog"
+       changelog-webpage-UUID
+       (conj [:body
+              [:h1 "fn-in library changelog"]
+              [:a {:href "#info"} "changelog meta"]]
+             (into (map #(generate-version-section %) (reverse changelog-data)))
+             (conj changelog-info))))
+
+
 (spit "changelog.md"
       (h2/html
        (vec (-> [:body
@@ -156,3 +167,9 @@
                 (into (map #(generate-version-section %) (reverse changelog-data)))
                 (conj changelog-info)
                 (conj changelog-md-footer)))))
+
+
+(defn -main
+  []
+  {:UUIDv4 #uuid "8e08e6b2-864f-4f3f-88f9-f62d8744a81b"}
+  (println "generated fn-in changelog"))
