@@ -1,0 +1,13 @@
+{:project-formatted-name "fn-in"
+ :copyright-holder "Brad Losavio"
+
+ :changelog-UUID #uuid "59ecaabc-1b75-4616-9f03-2ccde4bb8729"
+
+ :changelog-html-directory "doc/"
+ :changelog-html-filename "changelog.html"
+
+ :changelog-markdown-directory ""
+ :changelog-markdown-filename "changelog.md"
+
+ :changelog-entries-directory "resources/changelog_entries/"
+ :changelog-data-file "changelog.edn"}
