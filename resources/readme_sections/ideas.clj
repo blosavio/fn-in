@@ -69,11 +69,11 @@
   [:code "identities --> 42 :foo true 22/7"]]
  [:p "A " [:em "path"] " is a sequence of indexes, keys, or identities that allow the starred functions to dive into a nested data structure, one path element per level of nesting."]
 
- [:p "Let's build a path to the third element of a vector " [:code "[11 22 33]"] ". Vector elements are addressed by zero-indexed integers, so the third element is located at integer " [:code "2"] ". We invoke " [:code "get-in*"] " just like " [:code "clojure.core/get-in"] ": the collection is the first arg. We stuff that " [:code "2"] " into the second arg, the path vector."]
+ [:p "Let's build a path to the third element of a vector " [:code "[11 22 33]"] ". Vector elements are addressed by zero-indexed integers, so the third element is located at integer " [:code "2"] ". We invoke " [:code "get-in*"] " just like " [:code "clojure.core/get-in"] ": the collection is the first arg. We stuff that " [:code "2"] " into the second arg, the path vector."]
 
  [:pre (print-form-then-eval "(get-in* [11 22 33] [2])")]
 
- [:p "And we receive the third element, integer " [:code "33"] ". Let's get a little more fancy: a vector nested within another vector " [:code "[11 22 [33 44 55]]"] ". The nested vector is located at the third spot, index " [:code "2"] ". If we call " [:code "get-in*"] " with that path…"]
+ [:p "And we receive the third element, integer " [:code "33"] ". Let's get a little more fancy: a vector nested within another vector " [:code "[11 22 [33 44 55]]"] ". The nested vector is located at the third spot, index " [:code "2"] ". If we call " [:code "get-in*"] " with that path…"]
 
  [:pre (print-form-then-eval "(get-in* [11 22 [33 44 55]] [2])")]
 

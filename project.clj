@@ -10,8 +10,8 @@
   :profiles {:dev {:dependencies [[org.clojure/test.check "1.1.1"]
                                   [hiccup "2.0.0-RC3"]
                                   [zprint "1.2.9"]
-                                  [com.sagevisuals/chlog "0"]
-                                  [com.sagevisuals/readmoi "2"]]
+                                  [com.sagevisuals/chlog "1-SNAPSHOT0"]
+                                  [com.sagevisuals/readmoi "3-SNAPSHOT0"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]
                              [lein-codox "0.10.8"]]}
              :repl {}}
