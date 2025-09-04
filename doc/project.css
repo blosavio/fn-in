@@ -144,3 +144,16 @@ body {
 .wide-body {
     width: 80rem;
 }
+
+caption {
+    caption-side: bottom;
+}
+
+td {
+    padding: 0.5rem 0.75rem;
+}
+
+.collapsable {
+    display: none;
+}
+

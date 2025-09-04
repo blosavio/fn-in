@@ -132,7 +132,7 @@
 
 
 (defn vector-assoc
-  "Returns a new vector with the element at index x replaced with value x."
+  "Returns a new vector with the element at index i replaced with value x."
   {:UUIDv4 #uuid "4d4a4386-d08c-4501-9b52-67f7eaf685cf"
    :no-doc true}
   [c i x]
@@ -370,7 +370,7 @@
   Similar to
   [`clojure.core/dissoc`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/dissoc)
   , but operates on all Clojure collections. `i` must be within the bounds of a
-  a sequence. If element at `i` does not exist in a map or set, the new returned
+  sequence. If element at `i` does not exist in a map or set, the new returned
   collection is identical. Similarly, `dissoc`-ing an element from a
   `clojure.lang.Repeat` returns an indistinguishable sequence.
 

@@ -7,11 +7,9 @@
   :dependencies [[org.clojure/clojure "1.12.0"]]
   :repl-options {:init-ns fn-in.core}
   :plugins []
-  :profiles {:dev {:dependencies [[org.clojure/test.check "1.1.1"]
-                                  [hiccup "2.0.0-RC3"]
-                                  [zprint "1.2.9"]
-                                  [com.sagevisuals/chlog "1"]
-                                  [com.sagevisuals/readmoi "3"]]
+  :profiles {:dev {:dependencies [[com.sagevisuals/chlog "1"]
+                                  [com.sagevisuals/fastester "0-SNAPSHOT2"]
+                                  [com.sagevisuals/readmoi "4"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]
                              [lein-codox "0.10.8"]]}
              :repl {}}
@@ -19,7 +17,9 @@
           :namespaces [#"^fn-in\.(?!scratch)"]
           :target-path "doc"
           :output-path "doc"
+          :doc-files []
           :source-uri "https://github.com/blosavio/fn-in/blob/main/{filepath}#L{line}"
           :html {:transforms [[:div.sidebar.primary] [:append [:ul.index-link [:li.depth-1 [:a {:href "https://github.com/blosavio/fn-in"} "Project Home"]]]]]}
           :project {:name "fn-in" :version "version 4"}}
   :scm {:name "git" :url "https://github.com/blosavio/fn-in"})
+

@@ -107,7 +107,7 @@
       </p>
       <pre><code>(get-in* [11 22 [33 44 55]] [2 2]) ;; =&gt; 55</code></pre>
       <p>
-        Nothing terribly special that <code>clojure.core/get-in</code> cant&apos; do. But, if for some reason, that nested thing is instead a list…
+        Nothing terribly special that <code>clojure.core/get-in</code> can&apos;t do. But, if for some reason, that nested thing is instead a list…
       </p>
       <pre><code>(get-in [11 22 &apos;(33 44 55)] [2 2]) ;; =&gt; nil</code></pre>
       <p>
@@ -277,8 +277,8 @@
     </p>
     <p></p>
     <p id="page-footer">
-      Copyright © 2024 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2024 December 06.<span id="uuid"><br>
+      Copyright © 2024–2025 Brad Losavio.<br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 August 31.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

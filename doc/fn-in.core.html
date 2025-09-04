@@ -59,7 +59,7 @@
 (assoc-in* {:a 11 :b {:c 22}} [:b :d] 99) ;; =&gt; {:a 11, :b {:c 22, :d 99}}
 </code></pre>
 </div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/main/src/fn_in/core.clj#L218">view source</a></div></div><div class="public anchor" id="var-dissoc*"><h3>dissoc*</h3><h4 class="type">multimethod</h4><div class="usage"></div><div class="doc"><div class="markdown"><p><code>(dissoc* c i)</code></p>
-<p>Returns a new collection <code>c</code> with the value located at key/index <code>i</code> removed. Similar to <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/dissoc"><code>clojure.core/dissoc</code></a> , but operates on all Clojure collections. <code>i</code> must be within the bounds of a a sequence. If element at <code>i</code> does not exist in a map or set, the new returned collection is identical. Similarly, <code>dissoc</code>-ing an element from a <code>clojure.lang.Repeat</code> returns an indistinguishable sequence.</p>
+<p>Returns a new collection <code>c</code> with the value located at key/index <code>i</code> removed. Similar to <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/dissoc"><code>clojure.core/dissoc</code></a> , but operates on all Clojure collections. <code>i</code> must be within the bounds of a sequence. If element at <code>i</code> does not exist in a map or set, the new returned collection is identical. Similarly, <code>dissoc</code>-ing an element from a <code>clojure.lang.Repeat</code> returns an indistinguishable sequence.</p>
 <p>Examples:</p>
 <pre><code class="language-clojure">(dissoc* [11 22 33] 1) ;; =&gt; [11 33]
 (dissoc* {:a 11 :b 22} :a) ;; =&gt; {:b 22}

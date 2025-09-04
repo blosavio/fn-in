@@ -81,7 +81,7 @@
 
  [:pre (print-form-then-eval "(get-in* [11 22 [33 44 55]] [2 2])")]
 
- [:p "Nothing terribly special that " [:code "clojure.core/get-in"] " cant' do. But, if for some reason, that nested thing is instead a list…"]
+ [:p "Nothing terribly special that " [:code "clojure.core/get-in"] " can't do. But, if for some reason, that nested thing is instead a list…"]
 
  [:pre (print-form-then-eval "(get-in [11 22 '(33 44 55)] [2 2])")]
 
