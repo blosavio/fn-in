@@ -121,38 +121,6 @@
 ;; Unit tests for benchmark functions
 
 
-#_(deftest update-in-update-in*-benchmark-tests
-  (testing "sequences"
-    (is (every? true? (map #(= (inc (get-in* (nested-seq %) (repeat % (dec %))))
-                               (fn-then-get-in* (test-update-in*-seq :f) %))
-                           (range 1 max-in)))))
-  (testing "vectors"
-    (is (every? true? (map #(= (inc (get-in* (nested-vec %) (repeat % (dec %))))
-                               (fn-then-get-in* (test-update-in-vec :f) %))
-                           (range 1 max-in))))
-    (is (every? true? (map #(= (inc (get-in* (nested-vec %) (repeat % (dec %))))
-                               (fn-then-get-in* (test-update-in*-vec :f) %))
-                           (range 1 max-in))))
-    (is (every? true? (map #(= (inc (get-in* (narrow-deep-vec %) (concat (take n-levels (repeat %)) [(dec %)])))
-                               (fn-then-get-in*-2 (test-update-in-vec-2 :f) % n-levels))
-                           (range-pow-10 5))))
-    (is (every? true? (map #(= (inc (get-in* (narrow-deep-vec %) (concat (take n-levels (repeat %)) [(dec %)])))
-                               (fn-then-get-in*-2 (test-update-in*-vec-2 :f) % n-levels))
-                           (range-pow-10 5)))))
-  (testing "lists"
-    ;; lists are not associative, so skip `clojure.core/update-in`
-    (is (every? true? (map #(= (inc (get-in* (nested-list %) (repeat % (dec %))))
-                               (fn-then-get-in* (test-update-in*-list :f) %))
-                           (range 1 5)))))
-  (testing "hashmaps"
-    (is (every? true? (map #(= (inc (get-in (nested-map %) (repeat % 0)))
-                               (get-in* ((test-update-in-map :f) %) (repeat % 0)))
-                           (range 1 max-in))))
-    (is (every? true? (map #(= (inc (get-in (nested-map %) (repeat % 0)))
-                               (get-in* ((test-update-in*-map :f) %) (repeat % 0)))
-                           (range 1 max-in))))))
-
-
 (deftest update-in-update-in*-benchmark-tests
   (are [structure benchmark-name n]
       (every? true? (map #(= (inc (get-in* (structure %) (repeat % (dec %)))) (fn-then-get-in* (benchmark-name :f) %)) n))
