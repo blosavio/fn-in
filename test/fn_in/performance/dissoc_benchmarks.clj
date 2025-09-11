@@ -93,25 +93,13 @@
 
 
 (deftest dissoc-dissoc*-benchmark-tests
-  (testing "sequences"
-    (is (every? true? (map #(= (dec (count (seq-of-n-rand-ints %)))
-                               (count ((test-dissoc*-seq :f) %)))
-                           (range-pow-10 max-seq-length)))))
-  (testing "vectors"
-    (is (every? true? (map #(= (dec (count (vec-of-n-rand-ints %)))
-                               (count ((test-dissoc*-vec :f) %)))
-                           (range-pow-10 max-seq-length)))))
-  (testing "lists"
-    (is (every? true? (map #(= (dec (count (list-of-n-rand-ints %)))
-                               (count ((test-dissoc*-list :f) %)))
-                           (range-pow-10 3)))))
-  (testing "hashmaps"
-    (is (every? true? (map #(= (dec (count (map-of-n-key-vals %1)))
-                               (count ((test-dissoc-map :f) %)))
-                           (range-pow-10 max-hashmap-length))))
-    (is (every? true? (map #(= (dec (count (map-of-n-key-vals %1)))
-                               (count ((test-dissoc*-map :f) %)))
-                           (range-pow-10 max-hashmap-length))))))
+  (are [structure benchmark-name n]
+      (every? true? (map #(= (dec (count (seq-of-n-rand-ints %))) (count ((test-dissoc*-seq :f) %))) n))
+    seq-of-n-rand-ints test-dissoc*-seq (range-pow-10 max-seq-length)
+    vec-of-n-rand-ints test-dissoc*-vec (range-pow-10 max-seq-length)
+    list-of-n-rand-ints test-dissoc*-list (range-pow-10 3)
+    map-of-n-key-vals test-dissoc-map (range-pow-10 max-hashmap-length)
+    map-of-n-key-vals test-dissoc*-map (range-pow-10 max-hashmap-length)))
 
 
 #_(run-tests)

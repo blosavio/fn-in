@@ -124,37 +124,20 @@
 
 
 (deftest assoc-in-assoc-in*-benchmark-tests
-  (testing "sequences"
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get-in* (test-assoc-in*-seq :f) %))
-                           (range 1 max-in)))))
-  (testing "vectors"
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get-in* (test-assoc-in-vec :f) %))
-                           (range 1 max-in))))
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get-in* (test-assoc-in*-vec :f) %))
-                           (range 1 max-in))))
-    (is (every? true?
-                (map #(= :benchmark-sentinel
-                         (fn-then-get-in*-2 (test-assoc-in-vec-2 :f) % n-levels))
-                     (range-pow-10 5))))
-    (is (every? true?
-                (map #(= :benchmark-sentinel
-                         (fn-then-get-in*-2 (test-assoc-in*-vec-2 :f) % n-levels))
-                     (range-pow-10 5)))))
-  (testing "lists"
-    ;; lists are not associative, so skip `clojure.core/assoc-in`
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get-in* (test-assoc-in*-list :f) %))
-                           (range 1 5)))))
-  (testing "hashmaps"
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (get-in* ((test-assoc-in-map :f) %) (repeat % 0)))
-                           (range 1 max-in))))
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (get-in* ((test-assoc-in*-map :f) %) (repeat % 0)))
-                           (range 1 max-in))))))
+  (are [benchmark-name n]
+      (every? true? (map #(= :benchmark-sentinel (fn-then-get-in* (benchmark-name :f) %)) n))
+    test-assoc-in*-seq (range 1 max-in)
+    test-assoc-in-vec (range 1 max-in)
+    test-assoc-in*-vec (range 1 max-in)
+    test-assoc-in*-list (range 1 5))
+  (are [benchmark-name]
+      (every? true? (map #(= :benchmark-sentinel (fn-then-get-in*-2 (benchmark-name :f) % n-levels)) (range-pow-10 5)))
+    test-assoc-in-vec-2
+    test-assoc-in*-vec-2)
+  (are [benchmark-name]
+      (every? true? (map #(= :benchmark-sentinel (get-in* ((benchmark-name :f) %) (repeat % 0))) (range 1 max-in)))
+    test-assoc-in-map
+    test-assoc-in*-map))
 
 
 #_(run-tests)

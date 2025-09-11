@@ -93,25 +93,13 @@
 
 
 (deftest dissoc-in-dissoc-in*-benchmark-tests
-  (testing "lists"
-    (is (every? true? (map #(= (dec (count (get-in* (nested-list %) (repeat (dec %) (dec %)))))
-                               (count (get-in* ((test-dissoc-in*-list :f) %) (repeat (dec %) (dec %)))))
-                           (range 1 max-list)))))
-  (testing "sequences"
-    (is (every? true? (map #(= (dec (count (get-in* (nested-seq %) (repeat (dec %) (dec %)))))
-                               (count (get-in* ((test-dissoc-in*-seq :f) %) (repeat (dec %) (dec %)))))
-                           (range 1 max-in)))))
-  (testing "maps"
-    (is (every? true? (map #(= (dec (count (get-in* (nested-map %) (repeat (dec %) 0))))
-                               (count (get-in* ((test-dissoc-in*-map :f) %) (repeat (dec %) 0))))
-                           (range 1 max-in)))))
-  (testing "vectors"
-    (is (every? true? (map #(= (dec (count (get-in* (nested-vec %) (repeat (dec %) (dec %)))))
-                               (count (get-in* ((test-dissoc-in*-vec :f) %) (repeat (dec %) (dec %)))))
-                           (range 1 max-in))))
-    (is (every? true? (map #(= (dec (count (get-in* (narrow-deep-vec %) (repeat n-levels %))))
-                               (count (get-in* ((test-dissoc-in*-vec-2 :f) %) (repeat n-levels %))))
-                           (range-pow-10 5))))))
+  (are [structure path-fn benchmark-name n]
+      (every? true? (map #(= (dec (count (get-in* (structure %) (path-fn %)))) (count (get-in* ((benchmark-name :f) %) (path-fn %)))) n))
+    nested-list #(repeat (dec %) (dec %)) test-dissoc-in*-list (range 1 max-list)
+    nested-seq #(repeat (dec %) (dec %)) test-dissoc-in*-seq (range 1 max-in)
+    nested-vec #(repeat (dec %) (dec %)) test-dissoc-in*-vec (range 1 max-in)
+    nested-map #(repeat (dec %) 0) test-dissoc-in*-map (range 1 max-in)
+    narrow-deep-vec #(repeat n-levels %) test-dissoc-in*-vec-2 (range-pow-10 5)))
 
 
 #_(run-tests)

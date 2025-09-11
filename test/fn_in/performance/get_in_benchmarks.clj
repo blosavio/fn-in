@@ -106,32 +106,16 @@
 
 
 (deftest get-in-get-in*-benchmark-tests
-  (testing "lists"
-    (is (every? true? (map #(= (int (dec (Math/pow % %)))
-                               ((test-get-in*-list :f) %))
-                           (range 1 max-list)))))
-  (testing "sequences"
-    (is (every? true? (map #(= (int (dec (Math/pow % %)))
-                               ((test-get-in*-seq :f) %))
-                           (range 1 max-in)))))
-  (testing "maps"
-    (is (every? true? (map #(= 0 ((test-get-in-map :f) %))
-                           (range 1 max-in))))
-    (is (every? true? (map #(= 0 ((test-get-in*-map :f) %))
-                           (range 1 max-in)))))
-  (testing "vectors"
-    (is (every? true? (map #(= (int (dec (Math/pow % %)))
-                               ((test-get-in-vec :f) %))
-                           (range 1 max-in))))
-    (is (every? true? (map #(= (int (dec (Math/pow % %)))
-                               ((test-get-in*-vec :f) %))
-                           (range 1 max-in))))
-    (is (every? true? (map #(= (dec %)
-                               ((test-get-in-vec-2 :f) %))
-                           (range-pow-10 5))))
-    (is (every? true? (map #(= (dec %)
-                               ((test-get-in*-vec-2 :f) %))
-                           (range-pow-10 5))))))
+  (are [value-fn benchmark-name n]
+      (every? true? (map #(= (value-fn %) ((benchmark-name :f) %)) n))
+    #(int (dec (Math/pow % %))) test-get-in*-list (range 1 max-list)
+    #(int (dec (Math/pow % %))) test-get-in*-seq (range 1 max-in)
+    #(int (dec (Math/pow % %))) test-get-in-vec (range 1 max-in)
+    #(int (dec (Math/pow % %))) test-get-in*-vec (range 1 max-in)
+    #(dec %) test-get-in-vec-2 (range-pow-10 5)
+    #(dec %) test-get-in*-vec-2 (range-pow-10 5)
+    (constantly 0) test-get-in-map (range 1 max-in)
+    (constantly 0) test-get-in*-map (range 1 max-in)))
 
 
 #_(run-tests)

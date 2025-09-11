@@ -106,32 +106,15 @@
 
 
 (deftest update-update*-benchmark-tests
-  (testing "sequences"
-    (is (every? true? (map #(= (inc (get (seq-of-n-rand-ints %) (dec %)))
-                               (fn-then-get* (test-update-seq :f) %))
-                           (range-pow-10 max-seq-length))))
-    (is (every? true? (map #(= (inc (get (seq-of-n-rand-ints %) (dec %)))
-                               (fn-then-get* (test-update*-seq :f) %))
-                           (range-pow-10 max-seq-length)))))
-  (testing "vectors"
-    (is (every? true? (map #(= (inc (get (vec-of-n-rand-ints %) (dec %)))
-                               (fn-then-get* (test-update-vec :f) %))
-                           (range-pow-10 max-seq-length))))
-    (is (every? true? (map #(= (inc (get (vec-of-n-rand-ints %) (dec %)))
-                               (fn-then-get* (test-update*-vec :f) %))
-                           (range-pow-10 max-seq-length)))))
-  (testing "lists"
-    ;; lists are not associative, so skip `clojure.core/update`
-    (is (every? true? (map #(= (inc (get* (list-of-n-rand-ints %) (dec %)))
-                               (fn-then-get* (test-update*-list :f) %))
-                           (range-pow-10 3)))))
-  (testing "hashmaps"
-    (is (every? true? (map #(= (inc (get (map-of-n-key-vals %) (dec %)))
-                               (fn-then-get* (test-update-map :f) %))
-                           (range-pow-10 max-hashmap-length))))
-    (is (every? true? (map #(= (inc (get (map-of-n-key-vals %) (dec %)))
-                               (fn-then-get* (test-update*-map :f) %))
-                           (range-pow-10 max-hashmap-length))))))
+  (are [structure benchmark-name n]
+      (every? true? (map #(= (inc (get* (structure %) (dec %))) (fn-then-get* (benchmark-name :f) %)) n))
+    seq-of-n-rand-ints test-update-seq (range-pow-10 max-seq-length)
+    seq-of-n-rand-ints test-update*-seq (range-pow-10 max-seq-length)
+    vec-of-n-rand-ints test-update-vec (range-pow-10 max-seq-length)
+    vec-of-n-rand-ints test-update*-vec (range-pow-10 max-seq-length)
+    list-of-n-rand-ints test-update*-list (range-pow-10 3)
+    map-of-n-key-vals test-update-map (range-pow-10 max-hashmap-length)
+    map-of-n-key-vals test-update*-map (range-pow-10 max-hashmap-length)))
 
 
 #_(run-tests)

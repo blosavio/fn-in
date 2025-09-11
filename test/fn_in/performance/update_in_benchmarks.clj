@@ -121,7 +121,7 @@
 ;; Unit tests for benchmark functions
 
 
-(deftest update-in-update-in*-benchmark-tests
+#_(deftest update-in-update-in*-benchmark-tests
   (testing "sequences"
     (is (every? true? (map #(= (inc (get-in* (nested-seq %) (repeat % (dec %))))
                                (fn-then-get-in* (test-update-in*-seq :f) %))
@@ -151,6 +151,24 @@
     (is (every? true? (map #(= (inc (get-in (nested-map %) (repeat % 0)))
                                (get-in* ((test-update-in*-map :f) %) (repeat % 0)))
                            (range 1 max-in))))))
+
+
+(deftest update-in-update-in*-benchmark-tests
+  (are [structure benchmark-name n]
+      (every? true? (map #(= (inc (get-in* (structure %) (repeat % (dec %)))) (fn-then-get-in* (benchmark-name :f) %)) n))
+    nested-seq test-update-in*-seq (range 1 max-in)
+    nested-vec test-update-in-vec (range 1 max-in)
+    nested-vec test-update-in*-vec (range 1 max-in)
+    nested-list test-update-in*-list (range 1 5))
+  (are [benchmark-name]
+      (every? true? (map #(= (inc (get-in* (nested-map %) (repeat % 0))) (get-in* ((benchmark-name :f) %) (repeat % 0))) (range 1 max-in)))
+    test-update-in-map
+    test-update-in*-map)
+  (are [benchmark-name]
+      (every? true? (map #(= (inc (get-in* (narrow-deep-vec %) (concat (take n-levels (repeat %)) [(dec %)]))) (fn-then-get-in*-2 (benchmark-name :f) % n-levels)) (range-pow-10 5)))
+    test-update-in-vec-2
+    test-update-in*-vec-2))
+
 
 
 #_(run-tests)

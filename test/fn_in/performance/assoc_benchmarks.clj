@@ -106,32 +106,15 @@
 
 
 (deftest assoc-assoc*-benchmark-tests
-  (testing "sequences"
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get* (test-assoc-seq :f) %))
-                           (range-pow-10 max-seq-length))))
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get* (test-assoc*-seq :f) %))
-                           (range-pow-10 max-seq-length)))))
-  (testing "vectors"
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get* (test-assoc-vec :f) %))
-                           (range-pow-10 max-seq-length))))
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get* (test-assoc*-vec :f) %))
-                           (range-pow-10 max-seq-length)))))
-  (testing "lists"
-    ;; lists are not associative, so skip `clojure.core/assoc`
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get* (test-assoc*-list :f) %))
-                           (range-pow-10 3)))))
-  (testing "hashmaps"
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get* (test-assoc-map :f) %))
-                           (range-pow-10 max-hashmap-length))))
-    (is (every? true? (map #(= :benchmark-sentinel
-                               (fn-then-get* (test-assoc*-map :f) %))
-                           (range-pow-10 max-hashmap-length))))))
+  (are [benchmark-name target-sequence]
+      (every? true? (map #(= :benchmark-sentinel (fn-then-get* (benchmark-name   :f) %)) target-sequence))
+    test-assoc-seq (range-pow-10 max-seq-length)
+    test-assoc*-seq (range-pow-10 max-seq-length)
+    test-assoc-vec (range-pow-10 max-seq-length)
+    test-assoc*-vec (range-pow-10 max-seq-length)
+    test-assoc*-list (range-pow-10 3)
+    test-assoc-map (range-pow-10 max-hashmap-length)
+    test-assoc*-map (range-pow-10 max-hashmap-length)))
 
 
 #_(run-tests)

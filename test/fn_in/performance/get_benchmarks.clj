@@ -111,36 +111,16 @@
 
 
 (deftest get-get*-benchmark-tests
-  (testing "sequences"
-    (is (every? true? (map #(= (last (seq-of-n-rand-ints %))
-                               ((test-get-seq :f) %))
-                           (range-pow-10 max-seq-length))))
-
-    (is (every? true? (map #(= (last (seq-of-n-rand-ints %))
-                               ((test-get*-seq :f) %))
-                           (range-pow-10 max-seq-length)))))
-  (testing "vectors"
-    (is (every? true? (map #(= (last (vec-of-n-rand-ints %))
-                               ((test-get-vec :f) %))
-                           (range-pow-10 max-seq-length))))
-    (is (every? true? (map #(= (last (vec-of-n-rand-ints %))
-                               ((test-get*-vec :f) %))
-                           (range-pow-10 max-seq-length)))))
-  (testing "lists"
-    ;; `get` fails on lists
-    (is (every? true? (map #(nil? ((test-get-list :f) %))
-                           (range-pow-10 max-list-length))))
-
-    (is (every? true? (map #(= (last (list-of-n-rand-ints %))
-                               ((test-get*-list :f) %))
-                           (range-pow-10 max-list-length)))))
-  (testing "hashmaps"
-    (is (every? true? (map #(= ((map-of-n-key-vals %1) (dec %))
-                               ((test-get-map :f) %))
-                           (range-pow-10 max-hashmap-length))))
-    (is (every? true? (map #(= ((map-of-n-key-vals %1) (dec %))
-                               ((test-get*-map :f) %))
-                           (range-pow-10 max-hashmap-length))))))
+  (are [value-fn benchmark-name n]
+      (every? true? (map #(= (value-fn %) ((benchmark-name :f) %)) n))
+    #(last (seq-of-n-rand-ints %)) test-get-seq (range-pow-10 max-seq-length)
+    #(last (seq-of-n-rand-ints %)) test-get*-seq (range-pow-10 max-seq-length)
+    #(last (vec-of-n-rand-ints %)) test-get-vec (range-pow-10 max-seq-length)
+    #(last (vec-of-n-rand-ints %)) test-get*-vec (range-pow-10 max-seq-length)
+    (constantly nil) test-get-list (range-pow-10 max-list-length)
+    #(last (list-of-n-rand-ints %)) test-get*-list (range-pow-10 max-list-length)
+    #((map-of-n-key-vals %) (dec %)) test-get-map (range-pow-10 max-hashmap-length)
+    #((map-of-n-key-vals %) (dec %)) test-get*-map (range-pow-10 max-hashmap-length)))
 
 
 #_(run-tests)
