@@ -9,27 +9,77 @@
 
  :preferred-version-info :lein
 
- :benchmarks {'fn-in.performance.get-benchmarks
-              #{#_'test-get-seq
-                #_'test-get*-seq
-                #_'test-get-vec
-                #_'test-get*-vec
-                #_'test-get-list
-                #_'test-get*-list
-                #_'test-get-map
-                #_'test-get*-map}
+ :benchmarks {#_'fn-in.performance.get-benchmarks
+              #_#{'test-get*-list
+                  'test-get*-map
+                  'test-get*-seq
+                  'test-get*-vec
+                  'test-get-list
+                  'test-get-map
+                  'test-get-seq
+                  'test-get-vec}
 
-              'fn-in.performance.get-in-benchmarks
-              #{'test-get-in-vec
-                'test-get-in*-vec
-                'test-get-in*-seq
-                'test-get-in*-list
-                'test-get-in-map
-                'test-get-in*-map
+              #_'fn-in.performance.get-in-benchmarks
+              #_#{'test-get-in*-list
+                  'test-get-in*-map
+                  'test-get-in*-seq
+                  'test-get-in*-vec
+                  'test-get-in*-vec-2
+                  'test-get-in-map
+                  'test-get-in-vec
+                  'test-get-in-vec-2}
 
-                'test-get-in-vec-2
-                'test-get-in*-vec-2
-                }}
+              #_'fn-in.performance.assoc-benchmarks
+              #_#{'test-assoc*-list
+                  'test-assoc*-map
+                  'test-assoc*-seq
+                  'test-assoc*-vec
+                  'test-assoc-map
+                  'test-assoc-seq
+                  'test-assoc-vec}
+
+              #_'fn-in.performance.assoc-in-benchmarks
+              #_#{'test-assoc-in*-list
+                  'test-assoc-in*-map
+                  'test-assoc-in*-seq
+                  'test-assoc-in*-vec
+                  'test-assoc-in*-vec-2
+                  'test-assoc-in-map
+                  'test-assoc-in-vec
+                  'test-assoc-in-vec-2}
+
+              #_'fn-in.performance.update-benchmarks
+              #_#{'test-update*-list
+                  'test-update*-map
+                  'test-update*-seq
+                  'test-update*-vec
+                  'test-update-map
+                  'test-update-seq
+                  'test-update-vec}
+
+              #_'fn-in.performance.update-in-benchmarks
+              #_#{'test-update-in*-list
+                  'test-update-in*-map
+                  'test-update-in*-seq
+                  'test-update-in*-vec
+                  'test-update-in*-vec-2
+                  'test-update-in-map
+                  'test-update-in-vec
+                  'test-update-in-vec-2}
+
+              #_'fn-in.performance.dissoc-benchmarks
+              #_#{'test-dissoc*-list
+                  'test-dissoc*-map
+                  'test-dissoc*-seq
+                  'test-dissoc*-vec
+                  'test-dissoc-map}
+
+              #_'fn-in.performance.dissoc-in-benchmarks
+              #_#{'test-dissoc-in*-list
+                  'test-dissoc-in*-map
+                  'test-dissoc-in*-seq
+                  'test-dissoc-in*-vec
+                  'test-dissoc-in*-vec-2}}
 
  ;; output directories and filenames
  :html-directory "doc/"
@@ -37,10 +87,10 @@
  :img-subdirectory "img/"
 
  :markdown-directory "doc/"
- :markdown-filename "performance.md-not"
+ :markdown-filename "performance.md"
 
  :results-url "https://github.com/blosavio/fn_in/blob/main/"
- :results-directory "resources/fn_in_performance/"
+ :results-directory "resources/fn_in_performance/get/"
 
  :verbose? true
  :testing-thoroughness :quick
@@ -81,7 +131,23 @@
 
 
  :chart-settings
- {"(fn [n] (get (seq-of-n-rand-ints n) (dec n)))"
+ {"(fn [n] (get (map-of-n-key-vals n) (dec n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (get* (map-of-n-key-vals n) (dec n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (get (list-of-n-rand-ints n) (dec n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (get* (list-of-n-rand-ints n) (dec n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+  "(fn [n] (get (seq-of-n-rand-ints n) (dec n)))"
   {:x-axis-logarithmic? true
    :y-axis-logarithmic? false}
 
@@ -97,27 +163,17 @@
   {:x-axis-logarithmic? true
    :y-axis-logarithmic? false}
 
-  "(fn [n] (get (list-of-n-rand-ints n) (dec n)))"
-  {:x-axis-logarithmic? true
-   :y-axis-logarithmic? false}
 
-  "(fn [n] (get* (list-of-n-rand-ints n) (dec n)))"
-  {:x-axis-logarithmic? true
-   :y-axis-logarithmic? false}
 
-  "(fn [n] (get (map-of-n-key-vals n) (dec n)))"
-  {:x-axis-logarithmic? true
-   :y-axis-logarithmic? false}
-
-  "(fn [n] (get* (map-of-n-key-vals n) (dec n)))"
-  {:x-axis-logarithmic? true
-   :y-axis-logarithmic? false}
-
-  "(fn [n] (get-in (nested-vec n) (take n (repeat (dec n)))))"
+  "(fn [n] (get-in* (nested-list n) (repeat n (dec n))))"
   {:x-axis-logarithmic? false
    :y-axis-logarithmic? false}
 
-  "(fn [n] (get-in* (nested-vec n) (take n (repeat (dec n)))))"
+  "(fn [n] (get-in (nested-map n) (repeat n 0)))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (get-in* (nested-map n) (repeat n 0)))"
   {:x-axis-logarithmic? false
    :y-axis-logarithmic? false}
 
@@ -125,13 +181,191 @@
   {:x-axis-logarithmic? false
    :y-axis-logarithmic? false}
 
-  "(fn [n] (get-in (narrow-deep-vec n) (concat (take n-levels (repeat n)) [(dec n)])))"
+  "(fn [n] (get-in (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))"
   {:x-axis-logarithmic? true
    :y-axis-logarithmic? false}
 
-  "(fn [n] (get-in* (narrow-deep-vec n) (concat (take n-levels (repeat n)) [(dec n)])))"
+  "(fn [n] (get-in (nested-vec n) (repeat n (dec n))))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (get-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))"
   {:x-axis-logarithmic? true
    :y-axis-logarithmic? false}
-  }
- }
+
+  "(fn [n] (get-in* (nested-vec n) (repeat n (dec n))))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+
+
+  "(fn [n] (assoc (map-of-n-key-vals n) (dec n) :benchmark-sentinel))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc* (map-of-n-key-vals n) (dec n) :benchmark-sentinel))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc* (list-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+  "(fn [n] (assoc (seq-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc* (seq-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc (vec-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc* (vec-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+
+
+  "(fn [n] (assoc-in (nested-map n) (repeat n 0) :benchmark-sentinel))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc-in* (nested-map n) (repeat n 0) :benchmark-sentinel))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc-in* (nested-list n) (repeat n (dec n)) :benchmark-sentinel))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc-in* (nested-seq n) (repeat n (dec n)) :benchmark-sentinel))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc-in (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) :benchmark-sentinel))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc-in (nested-vec n) (repeat n (dec n)) :benchmark-sentinel))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) :benchmark-sentinel))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (assoc-in* (nested-vec n) (repeat n (dec n)) :benchmark-sentinel))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+
+
+  "(fn [n] (update (map-of-n-key-vals n) (dec n) inc))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update* (map-of-n-key-vals n) (dec n) inc))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update* (list-of-n-rand-ints n) (dec n) inc))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+  "(fn [n] (update (seq-of-n-rand-ints n) (dec n) inc))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update* (seq-of-n-rand-ints n) (dec n) inc))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update (vec-of-n-rand-ints n) (dec n) inc))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update* (vec-of-n-rand-ints n) (dec n) inc))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+
+
+  "(fn [n] (update-in (nested-map n) (repeat n 0) inc))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update-in* (nested-map n) (repeat n 0) inc))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update-in* (nested-list n) (repeat n (dec n)) inc))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update-in* (nested-seq n) (repeat n (dec n)) inc))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update-in (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) inc))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update-in (nested-vec n) (repeat n (dec n)) inc))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) inc))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (update-in* (nested-vec n) (repeat n (dec n)) inc))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+
+
+  "(fn [n] (dissoc (map-of-n-key-vals n) (dec n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (dissoc* (map-of-n-key-vals n) (dec n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (dissoc* (list-of-n-rand-ints n) (dec n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+  "(fn [n] (dissoc* (seq-of-n-rand-ints n) (dec n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+  "(fn [n] (dissoc* (vec-of-n-rand-ints n) (dec n)))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+
+
+  "(fn [n] (dissoc-in* (nested-list n) (repeat n (dec n))))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (dissoc-in* (nested-map n) (repeat n 0)))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (dissoc-in* (nested-seq n) (repeat n (dec n))))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}
+
+  "(fn [n] (dissoc-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))"
+  {:x-axis-logarithmic? true
+   :y-axis-logarithmic? true}
+
+  "(fn [n] (dissoc-in* (nested-vec n) (repeat n (dec n))))"
+  {:x-axis-logarithmic? false
+   :y-axis-logarithmic? false}}}
 

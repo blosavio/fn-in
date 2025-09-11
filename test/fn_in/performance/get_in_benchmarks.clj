@@ -1,4 +1,5 @@
 (ns fn-in.performance.get-in-benchmarks
+  "Benchmarks to measure `get-in*` performance."
   (:require
    [clojure.test :refer [are
                          is
@@ -12,130 +13,85 @@
                               run-benchmarks
                               run-manual-benchmark
                               run-one-defined-benchmark]]
-   [fn-in.performance.benchmark-utils :refer [narrow-deep
-                                              nested]]
+   [fn-in.performance.benchmark-structures :refer [max-in
+                                                   max-list
+                                                   narrow-deep-vec
+                                                   nested-list
+                                                   nested-map
+                                                   nested-seq
+                                                   nested-vec
+                                                   n-levels]]
    [fn-in.core :refer [get-in*]]))
-
-
-(def max-in 7)
 
 
 ;; Vectors
 
 
-(def nested-vec
-  (persistent!
-   (reduce
-    (fn [m k] (assoc! m k (nested k :vector)))
-    (transient {})
-    (range 1 max-in))))
-
-
 (defbench
   test-get-in-vec
   "Vectors"
-  (fn [n] (get-in (nested-vec n) (take n (repeat (dec n)))))
+  (fn [n] (get-in (nested-vec n) (repeat n (dec n))))
   (range 1 max-in))
 
 
 (defbench
   test-get-in*-vec
   "Vectors"
-  (fn [n] (get-in* (nested-vec n) (take n (repeat (dec n)))))
+  (fn [n] (get-in* (nested-vec n) (repeat n (dec n))))
   (range 1 max-in))
-
-
-(def n-levels 3)
-
-
-(def narrow-deep-vec
-  (persistent!
-   (reduce
-    (fn [m k] (assoc! m k (narrow-deep :vector k n-levels)))
-    (transient {})
-    (range-pow-10 5))))
 
 
 (defbench
   test-get-in-vec-2
   "Vectors"
-  (fn [n] (get-in (narrow-deep-vec n) (concat (take n-levels (repeat n))
-                                              [(dec n)])))
+  (fn [n] (get-in (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))
   (range-pow-10 5))
 
 
 (defbench
   test-get-in*-vec-2
   "Vectors"
-  (fn [n] (get-in* (narrow-deep-vec n) (concat (take n-levels (repeat n))
-                                               [(dec n)])))
+  (fn [n] (get-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))
   (range-pow-10 5))
 
 
 #_(run-one-defined-benchmark test-get-in-vec-2 :lightning)
 
 
-
 ;; Sequences
-
-
-(def nested-seq
-  (persistent!
-   (reduce
-    (fn [m k] (assoc! m k (nested k :sequence)))
-    (transient {})
-    (range 1 max-in))))
 
 
 (defbench
   test-get-in*-seq
   "Sequences"
-  (fn [n] (get-in* (nested-seq n) (take n (repeat (dec n)))))
+  (fn [n] (get-in* (nested-seq n) (repeat n (dec n))))
   (range 1 max-in))
 
 
 ;; Lists
 
 
-(def max-list 5)
-
-
-(def nested-list
-  (doall
-   (reduce
-    (fn [m k] (assoc m k (nested k :list)))
-    {}
-    (range 1 max-list))))
-
-
 (defbench
   test-get-in*-list
   "Lists"
-  (fn [n] (get-in* (nested-list n) (take n (repeat (dec n)))))
+  (fn [n] (get-in* (nested-list n) (repeat n (dec n))))
   (range 1 max-list))
 
 
 ;; Hashmaps
 
-(def nested-map
-  (persistent!
-   (reduce
-    (fn [m k] (assoc! m k (nested k :map)))
-    (transient {})
-    (range 1 max-in))))
-
 
 (defbench
   test-get-in-map
   "Maps"
-  (fn [n] (get-in (nested-map n) (take n (repeat 0))))
+  (fn [n] (get-in (nested-map n) (repeat n 0)))
   (range 1 max-in))
 
 
 (defbench
   test-get-in*-map
   "Maps"
-  (fn [n] (get-in* (nested-map n) (take n (repeat 0))))
+  (fn [n] (get-in* (nested-map n) (repeat n 0)))
   (range 1 max-in))
 
 
@@ -144,4 +100,39 @@
 
 #_(run-benchmarks)
 #_(generate-documents)
+
+
+;; Unit tests for benchmark functions
+
+
+(deftest get-in-get-in*-benchmark-tests
+  (testing "lists"
+    (is (every? true? (map #(= (int (dec (Math/pow % %)))
+                               ((test-get-in*-list :f) %))
+                           (range 1 max-list)))))
+  (testing "sequences"
+    (is (every? true? (map #(= (int (dec (Math/pow % %)))
+                               ((test-get-in*-seq :f) %))
+                           (range 1 max-in)))))
+  (testing "maps"
+    (is (every? true? (map #(= 0 ((test-get-in-map :f) %))
+                           (range 1 max-in))))
+    (is (every? true? (map #(= 0 ((test-get-in*-map :f) %))
+                           (range 1 max-in)))))
+  (testing "vectors"
+    (is (every? true? (map #(= (int (dec (Math/pow % %)))
+                               ((test-get-in-vec :f) %))
+                           (range 1 max-in))))
+    (is (every? true? (map #(= (int (dec (Math/pow % %)))
+                               ((test-get-in*-vec :f) %))
+                           (range 1 max-in))))
+    (is (every? true? (map #(= (dec %)
+                               ((test-get-in-vec-2 :f) %))
+                           (range-pow-10 5))))
+    (is (every? true? (map #(= (dec %)
+                               ((test-get-in*-vec-2 :f) %))
+                           (range-pow-10 5))))))
+
+
+#_(run-tests)
 
