@@ -1,0 +1,82 @@
+(->>
+ {:title "`update-in` performance"
+
+  :fastester-UUID #uuid "ffaad48e-c77b-48dc-bd5f-8c4af5332cf5"
+
+  :benchmarks {'fn-in.performance.update-in-benchmarks
+               #{'test-update-in*-list
+                 'test-update-in*-map
+                 'test-update-in*-seq
+                 'test-update-in*-vec
+                 'test-update-in*-vec-2
+                 'test-update-in-map
+                 'test-update-in-vec
+                 'test-update-in-vec-2}}
+
+  :html-filename "update_in_performance.html"
+  :markdown-filename "update_in_performance.md"
+  :results-directory "resources/fn_in_performance/update_in/"
+
+  :preamble [:div
+             [:p "fn-in preamble"]]
+
+  :comments
+  {"Sequences"
+   [:div
+    [:p "Comments for sequences..."]]
+
+   "Hashmaps"
+   [:div
+    [:p "Comments for hashmaps..."]]
+
+   "Lists"
+   [:div
+    [:p "This is unfair to "
+     [:code "get*"]
+     ": "
+     [:code "clojure.core/get"]
+     " always returns "
+     [:code "nil"]
+     " when given a list, whereas "
+     [:code "get*"]
+     " actually retrieves the element."]]
+
+   "Vectors"
+   [:div
+    [:p "Comments for vectors..."]]}
+
+
+  :chart-settings
+  {"(fn [n] (update-in (nested-map n) (repeat n 0) inc))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update-in* (nested-map n) (repeat n 0) inc))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update-in* (nested-list n) (repeat n (dec n)) inc))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update-in* (nested-seq n) (repeat n (dec n)) inc))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update-in (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) inc))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update-in (nested-vec n) (repeat n (dec n)) inc))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) inc))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update-in* (nested-vec n) (repeat n (dec n)) inc))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}}}
+ (merge (load-file "resources/fastester_options_base.edn")))
+

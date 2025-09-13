@@ -157,3 +157,12 @@ td {
     display: none;
 }
 
+hr {
+    margin-top: 1.5rem;
+    margin-bottom: 4rem;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom-style: none;
+    border-width: 1.5px;
+    color: whitesmoke;
+}

@@ -1,0 +1,21 @@
+{:responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+
+ :copyright-holder "Brad Losavio"
+
+ :preferred-version-info :lein
+
+ :html-directory "doc/"
+ :img-subdirectory "img/"
+ :markdown-directory "doc/"
+ :results-url "https://github.com/blosavio/fn_in/blob/main/"
+
+ :verbose? true
+ :testing-thoroughness :quick
+ :parallel? false
+ :save-benchmark-fn-results? false
+
+ :sort-comparator compare #_#(> (Integer/parseInt %1) (Integer/parseInt %2))
+
+ :tidy-html? true}
+

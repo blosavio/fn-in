@@ -1,0 +1,67 @@
+(->>
+ {:title "`dissoc-in` performance"
+
+  :fastester-UUID #uuid "abd643c6-c697-4d28-b491-837e69bfa3e0"
+
+  :benchmarks {'fn-in.performance.dissoc-in-benchmarks
+               #{'test-dissoc-in*-list
+                 'test-dissoc-in*-map
+                 'test-dissoc-in*-seq
+                 'test-dissoc-in*-vec
+                 'test-dissoc-in*-vec-2}}
+
+  :html-filename "dissoc_in_performance.html"
+  :markdown-filename "dissoc_in_performance.md"
+  :results-directory "resources/fn_in_performance/dissoc_in/"
+
+  :preamble [:div
+             [:p "fn-in preamble"]]
+
+  :comments
+  {"Sequences"
+   [:div
+    [:p "Comments for sequences..."]]
+
+   "Hashmaps"
+   [:div
+    [:p "Comments for hashmaps..."]]
+
+   "Lists"
+   [:div
+    [:p "This is unfair to "
+     [:code "get*"]
+     ": "
+     [:code "clojure.core/get"]
+     " always returns "
+     [:code "nil"]
+     " when given a list, whereas "
+     [:code "get*"]
+     " actually retrieves the element."]]
+
+   "Vectors"
+   [:div
+    [:p "Comments for vectors..."]]}
+
+
+  :chart-settings
+  {"(fn [n] (dissoc-in* (nested-list n) (repeat n (dec n))))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (dissoc-in* (nested-map n) (repeat n 0)))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (dissoc-in* (nested-seq n) (repeat n (dec n))))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (dissoc-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? true}
+
+   "(fn [n] (dissoc-in* (nested-vec n) (repeat n (dec n))))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}}}
+ (merge (load-file "resources/fastester_options_base.edn")))
+

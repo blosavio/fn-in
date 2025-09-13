@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Attempt to minimize benchmark variance by explicitly setting CPU affinity.
+
+set -eu
+
+cooloff_duration=2
+
+cooloff () {
+    echo $cooloff_duration "second cool-off"
+    sleep $cooloff_duration
+}
+
+cooloff
+cooloff
+
+# taskset --cpu-list 3 lein run -m fastester.core :benchmarks resources/fastester_options.edn
+
+exit 0

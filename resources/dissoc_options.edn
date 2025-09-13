@@ -1,0 +1,67 @@
+(->>
+ {:title "`dissoc` performance"
+
+  :fastester-UUID #uuid "93d36b21-7d1e-4785-b732-a8c41ab7e748"
+
+  :benchmarks {'fn-in.performance.dissoc-benchmarks
+               #{'test-dissoc*-list
+                 'test-dissoc*-map
+                 'test-dissoc*-seq
+                 'test-dissoc*-vec
+                 'test-dissoc-map}}
+
+  :html-filename "dissoc_performance.html"
+  :markdown-filename "dissoc_performance.md"
+  :results-directory "resources/fn_in_performance/dissoc/"
+
+  :preamble [:div
+             [:p "fn-in preamble"]]
+
+  :comments
+  {"Sequences"
+   [:div
+    [:p "Comments for sequences..."]]
+
+   "Hashmaps"
+   [:div
+    [:p "Comments for hashmaps..."]]
+
+   "Lists"
+   [:div
+    [:p "This is unfair to "
+     [:code "get*"]
+     ": "
+     [:code "clojure.core/get"]
+     " always returns "
+     [:code "nil"]
+     " when given a list, whereas "
+     [:code "get*"]
+     " actually retrieves the element."]]
+
+   "Vectors"
+   [:div
+    [:p "Comments for vectors..."]]}
+
+
+  :chart-settings
+  {"(fn [n] (dissoc (map-of-n-key-vals n) (dec n)))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (dissoc* (map-of-n-key-vals n) (dec n)))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (dissoc* (list-of-n-rand-ints n) (dec n)))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? true}
+
+   "(fn [n] (dissoc* (seq-of-n-rand-ints n) (dec n)))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? true}
+
+   "(fn [n] (dissoc* (vec-of-n-rand-ints n) (dec n)))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? true}}}
+ (merge (load-file "resources/fastester_options_base.edn")))
+

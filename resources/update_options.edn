@@ -1,0 +1,77 @@
+(->>
+ {:title "`update` performance"
+
+  :fastester-UUID #uuid "f6698382-3d68-4305-8210-41942be1724d"
+
+  :benchmarks {'fn-in.performance.update-benchmarks
+               #{'test-update*-list
+                 'test-update*-map
+                 'test-update*-seq
+                 'test-update*-vec
+                 'test-update-map
+                 'test-update-seq
+                 'test-update-vec}}
+
+  :html-filename "update_performance.html"
+  :markdown-filename "update_performance.md"
+  :results-directory "resources/fn_in_performance/update/"
+
+  :preamble [:div
+             [:p "`update` preamble"]]
+
+  :comments
+  {"Sequences"
+   [:div
+    [:p "Comments for sequences..."]]
+
+   "Hashmaps"
+   [:div
+    [:p "Comments for hashmaps..."]]
+
+   "Lists"
+   [:div
+    [:p "This is unfair to "
+     [:code "get*"]
+     ": "
+     [:code "clojure.core/get"]
+     " always returns "
+     [:code "nil"]
+     " when given a list, whereas "
+     [:code "get*"]
+     " actually retrieves the element."]]
+
+   "Vectors"
+   [:div
+    [:p "Comments for vectors..."]]}
+
+
+  :chart-settings
+  {"(fn [n] (update (map-of-n-key-vals n) (dec n) inc))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update* (map-of-n-key-vals n) (dec n) inc))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update* (list-of-n-rand-ints n) (dec n) inc))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? true}
+
+   "(fn [n] (update (seq-of-n-rand-ints n) (dec n) inc))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update* (seq-of-n-rand-ints n) (dec n) inc))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update (vec-of-n-rand-ints n) (dec n) inc))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (update* (vec-of-n-rand-ints n) (dec n) inc))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}}}
+ (merge (load-file "resources/fastester_options_base.edn")))
+

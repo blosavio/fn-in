@@ -83,14 +83,14 @@
 
 (defbench
   test-get-in-map
-  "Maps"
+  "Hashmaps"
   (fn [n] (get-in (nested-map n) (repeat n 0)))
   (range 1 max-in))
 
 
 (defbench
   test-get-in*-map
-  "Maps"
+  "Hashmaps"
   (fn [n] (get-in* (nested-map n) (repeat n 0)))
   (range 1 max-in))
 

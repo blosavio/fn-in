@@ -77,7 +77,7 @@
 
 (defbench
   test-dissoc-in*-map
-  "Maps"
+  "Hashmaps"
   (fn [n] (dissoc-in* (nested-map n) (repeat n 0)))
   (range 1 max-in))
 

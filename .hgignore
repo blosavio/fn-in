@@ -9,5 +9,5 @@ pom.xml.asc
 *.class
 /.lein-*
 /.nrepl-port
-.git/**
-fn_in/.git/**
+.git/*
+

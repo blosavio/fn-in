@@ -1,0 +1,82 @@
+(->>
+ {:title "`assoc-in` performance"
+
+  :fastester-UUID #uuid "c5f40541-5057-4758-bc7e-5ae7f867b439"
+
+  :benchmarks {'fn-in.performance.assoc-in-benchmarks
+               #{'test-assoc-in*-list
+                 'test-assoc-in*-map
+                 'test-assoc-in*-seq
+                 'test-assoc-in*-vec
+                 'test-assoc-in*-vec-2
+                 'test-assoc-in-map
+                 'test-assoc-in-vec
+                 'test-assoc-in-vec-2}}
+
+  :html-filename "assoc_in_performance.html"
+  :markdown-filename "assoc_in_performance.md"
+  :results-directory "resources/fn_in_performance/assoc_in/"
+
+  :preamble [:div
+             [:p "`assoc-in` preamble"]]
+
+  :comments
+  {"Sequences"
+   [:div
+    [:p "Comments for sequences..."]]
+
+   "Hashmaps"
+   [:div
+    [:p "Comments for hashmaps..."]]
+
+   "Lists"
+   [:div
+    [:p "This is unfair to "
+     [:code "get*"]
+     ": "
+     [:code "clojure.core/get"]
+     " always returns "
+     [:code "nil"]
+     " when given a list, whereas "
+     [:code "get*"]
+     " actually retrieves the element."]]
+
+   "Vectors"
+   [:div
+    [:p "Comments for vectors..."]]}
+
+
+  :chart-settings
+  {"(fn [n] (assoc-in (nested-map n) (repeat n 0) :benchmark-sentinel))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc-in* (nested-map n) (repeat n 0) :benchmark-sentinel))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc-in* (nested-list n) (repeat n (dec n)) :benchmark-sentinel))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc-in* (nested-seq n) (repeat n (dec n)) :benchmark-sentinel))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc-in (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) :benchmark-sentinel))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc-in (nested-vec n) (repeat n (dec n)) :benchmark-sentinel))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) :benchmark-sentinel))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc-in* (nested-vec n) (repeat n (dec n)) :benchmark-sentinel))"
+   {:x-axis-logarithmic? false
+    :y-axis-logarithmic? false}}}
+ (merge (load-file "resources/fastester_options_base.edn")))
+

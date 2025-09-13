@@ -8,7 +8,7 @@
   :repl-options {:init-ns fn-in.core}
   :plugins []
   :profiles {:dev {:dependencies [[com.sagevisuals/chlog "1"]
-                                  [com.sagevisuals/fastester "0-SNAPSHOT2"]
+                                  [com.sagevisuals/fastester "0-SNAPSHOT4"]
                                   [com.sagevisuals/readmoi "4"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]
                              [lein-codox "0.10.8"]]}

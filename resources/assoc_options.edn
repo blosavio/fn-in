@@ -1,0 +1,77 @@
+(->>
+ {:title "`assoc` performance"
+
+  :fastester-UUID #uuid "950a5376-ea22-474d-a95e-cac23b4179bc"
+
+  :benchmarks {'fn-in.performance.assoc-benchmarks
+               #{'test-assoc*-list
+                 'test-assoc*-map
+                 'test-assoc*-seq
+                 'test-assoc*-vec
+                 'test-assoc-map
+                 'test-assoc-seq
+                 'test-assoc-vec}}
+
+  :html-filename "assoc_performance.html"
+  :markdown-filename "assoc_performance.md"
+  :results-directory "resources/fn_in_performance/assoc/"
+
+  :preamble [:div
+             [:p "`assoc` preamble"]]
+
+  :comments
+  {"Sequences"
+   [:div
+    [:p "Comments for sequences..."]]
+
+   "Hashmaps"
+   [:div
+    [:p "Comments for hashmaps..."]]
+
+   "Lists"
+   [:div
+    [:p "This is unfair to "
+     [:code "get*"]
+     ": "
+     [:code "clojure.core/get"]
+     " always returns "
+     [:code "nil"]
+     " when given a list, whereas "
+     [:code "get*"]
+     " actually retrieves the element."]]
+
+   "Vectors"
+   [:div
+    [:p "Comments for vectors..."]]}
+
+
+  :chart-settings
+  {"(fn [n] (assoc (map-of-n-key-vals n) (dec n) :benchmark-sentinel))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc* (map-of-n-key-vals n) (dec n) :benchmark-sentinel))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc* (list-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? true}
+
+   "(fn [n] (assoc (seq-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc* (seq-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc (vec-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}
+
+   "(fn [n] (assoc* (vec-of-n-rand-ints n) (dec n) :benchmark-sentinel))"
+   {:x-axis-logarithmic? true
+    :y-axis-logarithmic? false}}}
+ (merge (load-file "resources/fastester_options_base.edn")))
+
