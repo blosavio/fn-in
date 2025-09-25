@@ -13,6 +13,7 @@
                  'test-update-vec}}
 
   :html-filename "update_performance.html"
+  :img-subdirectory "img_update/"
   :markdown-filename "update_performance.md"
   :results-directory "resources/fn_in_performance/update/"
 

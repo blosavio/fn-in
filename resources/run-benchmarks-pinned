@@ -4,16 +4,30 @@
 
 set -eu
 
-cooloff_duration=2
+cooloff_duration=10
 
 cooloff () {
     echo $cooloff_duration "second cool-off"
     sleep $cooloff_duration
 }
 
+taskset --cpu-list 3 lein with-profiles default,benchmark run -m fastester.core :benchmarks resources/get_options.edn
 cooloff
+taskset --cpu-list 3 lein with-profiles default,benchmark run -m fastester.core :benchmarks resources/get_in_options.edn
 cooloff
+taskset --cpu-list 3 lein with-profiles default,benchmark run -m fastester.core :benchmarks resources/assoc_options.edn
+cooloff
+taskset --cpu-list 3 lein with-profiles default,benchmark run -m fastester.core :benchmarks resources/assoc_in_options.edn
+cooloff
+taskset --cpu-list 3 lein with-profiles default,benchmark run -m fastester.core :benchmarks resources/update_options.edn
+cooloff
+taskset --cpu-list 3 lein with-profiles default,benchmark run -m fastester.core :benchmarks resources/update_in_options.edn
+cooloff
+taskset --cpu-list 3 lein with-profiles default,benchmark run -m fastester.core :benchmarks resources/dissoc_options.edn
+cooloff
+taskset --cpu-list 3 lein with-profiles default,benchmark run -m fastester.core :benchmarks resources/dissoc_in_options.edn
 
-# taskset --cpu-list 3 lein run -m fastester.core :benchmarks resources/fastester_options.edn
+echo "All benchmarks completed."
 
 exit 0
+

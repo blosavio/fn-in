@@ -98,8 +98,8 @@
 #_(run-one-defined-benchmark test-update-map :lightning)
 
 
-#_(run-benchmarks)
-#_(generate-documents)
+#_(run-benchmarks "resources/update_options.edn")
+#_(generate-documents "resources/update_options.edn")
 
 
 ;; Unit tests for benchmark functions

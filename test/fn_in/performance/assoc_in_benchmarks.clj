@@ -20,7 +20,12 @@
                                                    nested-map
                                                    nested-seq
                                                    nested-vec
-                                                   n-levels]]
+                                                   n-levels
+                                                   path-list
+                                                   path-map
+                                                   path-narrow-deep-vec
+                                                   path-nested-vec
+                                                   path-seq]]
    [fn-in.performance.benchmark-utils :refer [fn-then-get-in*
                                               fn-then-get-in*-2]]
    [fn-in.core :refer [assoc-in*
@@ -36,9 +41,7 @@
 (defbench
   test-assoc-in*-seq
   "Sequences"
-  (fn [n] (assoc-in* (nested-seq n)
-                     (repeat n (dec n))
-                     :benchmark-sentinel))
+  (fn [n] (assoc-in* (nested-seq n) (path-seq n) :benchmark-sentinel))
   (range 1 max-in))
 
 
@@ -51,14 +54,14 @@
 (defbench
   test-assoc-in-vec
   "Vectors"
-  (fn [n] (assoc-in (nested-vec n) (repeat n (dec n)) :benchmark-sentinel))
+  (fn [n] (assoc-in (nested-vec n) (path-nested-vec n) :benchmark-sentinel))
   (range 1 max-in))
 
 
 (defbench
   test-assoc-in*-vec
   "Vectors"
-  (fn [n] (assoc-in* (nested-vec n) (repeat n (dec n)) :benchmark-sentinel))
+  (fn [n] (assoc-in* (nested-vec n) (path-nested-vec n) :benchmark-sentinel))
   (range 1 max-in))
 
 
@@ -66,7 +69,7 @@
   test-assoc-in-vec-2
   "Vectors"
   (fn [n] (assoc-in (narrow-deep-vec n)
-                    (concat (repeat n-levels n) [(dec n)])
+                    (path-narrow-deep-vec n)
                     :benchmark-sentinel))
   (range-pow-10 5))
 
@@ -75,7 +78,7 @@
   test-assoc-in*-vec-2
   "Vectors"
   (fn [n] (assoc-in* (narrow-deep-vec n)
-                     (concat (repeat n-levels n) [(dec n)])
+                     (path-narrow-deep-vec n)
                      :benchmark-sentinel))
   (range-pow-10 5))
 
@@ -89,7 +92,7 @@
 (defbench
   test-assoc-in*-list
   "Lists"
-  (fn [n] (assoc-in* (nested-list n) (repeat n (dec n)) :benchmark-sentinel))
+  (fn [n] (assoc-in* (nested-list n) (path-list n) :benchmark-sentinel))
   (range 1 5))
 
 
@@ -102,22 +105,22 @@
 (defbench
   test-assoc-in-map
   "Hashmaps"
-  (fn [n] (assoc-in (nested-map n) (repeat n 0) :benchmark-sentinel))
+  (fn [n] (assoc-in (nested-map n) (path-map n) :benchmark-sentinel))
   (range 1 max-in))
 
 
 (defbench
   test-assoc-in*-map
   "Hashmaps"
-  (fn [n] (assoc-in* (nested-map n) (repeat n 0) :benchmark-sentinel))
+  (fn [n] (assoc-in* (nested-map n) (path-map n) :benchmark-sentinel))
   (range 1 max-in))
 
 
 #_(run-one-defined-benchmark test-assoc-in-map :lightning)
 
 
-#_(run-benchmarks)
-#_(generate-documents)
+#_(run-benchmarks "resources/assoc_in_options.edn")
+#_(generate-documents "resources/assoc_in_options.edn")
 
 
 ;; Unit tests for benchmark functions

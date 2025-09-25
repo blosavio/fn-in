@@ -98,8 +98,8 @@
 #_(run-one-defined-benchmark test-assoc-map :lightning)
 
 
-#_(run-benchmarks)
-#_(generate-documents)
+#_(run-benchmarks "resources/assoc_options.edn")
+#_(generate-documents "resources/assoc_options.edn")
 
 
 ;; Unit tests for benchmark functions

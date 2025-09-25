@@ -11,11 +11,12 @@
                  'test-dissoc-in*-vec-2}}
 
   :html-filename "dissoc_in_performance.html"
+  :img-subdirectory "img_dissoc_in/"
   :markdown-filename "dissoc_in_performance.md"
   :results-directory "resources/fn_in_performance/dissoc_in/"
 
   :preamble [:div
-             [:p "fn-in preamble"]]
+             [:p "`dissoc-in` preamble"]]
 
   :comments
   {"Sequences"
@@ -44,23 +45,23 @@
 
 
   :chart-settings
-  {"(fn [n] (dissoc-in* (nested-list n) (repeat n (dec n))))"
+  {"(fn [n] (dissoc-in* (nested-list n) (path-list n)))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
-   "(fn [n] (dissoc-in* (nested-map n) (repeat n 0)))"
+   "(fn [n] (dissoc-in* (nested-map n) (path-map n)))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
-   "(fn [n] (dissoc-in* (nested-seq n) (repeat n (dec n))))"
+   "(fn [n] (dissoc-in* (nested-seq n) (path-seq n)))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
-   "(fn [n] (dissoc-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))"
+   "(fn [n] (dissoc-in* (narrow-deep-vec n) (path-narrow-deep-vec n)))"
    {:x-axis-logarithmic? true
     :y-axis-logarithmic? true}
 
-   "(fn [n] (dissoc-in* (nested-vec n) (repeat n (dec n))))"
+   "(fn [n] (dissoc-in* (nested-vec n) (path-nested-vec n)))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}}}
  (merge (load-file "resources/fastester_options_base.edn")))

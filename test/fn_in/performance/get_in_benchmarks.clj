@@ -20,7 +20,12 @@
                                                    nested-map
                                                    nested-seq
                                                    nested-vec
-                                                   n-levels]]
+                                                   n-levels
+                                                   path-list
+                                                   path-map
+                                                   path-narrow-deep-vec
+                                                   path-nested-vec
+                                                   path-seq]]
    [fn-in.core :refer [get-in*]]))
 
 
@@ -30,28 +35,28 @@
 (defbench
   test-get-in-vec
   "Vectors"
-  (fn [n] (get-in (nested-vec n) (repeat n (dec n))))
+  (fn [n] (get-in (nested-vec n) (path-nested-vec n)))
   (range 1 max-in))
 
 
 (defbench
   test-get-in*-vec
   "Vectors"
-  (fn [n] (get-in* (nested-vec n) (repeat n (dec n))))
+  (fn [n] (get-in* (nested-vec n) (path-nested-vec n)))
   (range 1 max-in))
 
 
 (defbench
   test-get-in-vec-2
   "Vectors"
-  (fn [n] (get-in (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))
+  (fn [n] (get-in (narrow-deep-vec n) (path-narrow-deep-vec n)))
   (range-pow-10 5))
 
 
 (defbench
   test-get-in*-vec-2
   "Vectors"
-  (fn [n] (get-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))
+  (fn [n] (get-in* (narrow-deep-vec n) (path-narrow-deep-vec n)))
   (range-pow-10 5))
 
 
@@ -64,7 +69,7 @@
 (defbench
   test-get-in*-seq
   "Sequences"
-  (fn [n] (get-in* (nested-seq n) (repeat n (dec n))))
+  (fn [n] (get-in* (nested-seq n) (path-seq n)))
   (range 1 max-in))
 
 
@@ -74,7 +79,7 @@
 (defbench
   test-get-in*-list
   "Lists"
-  (fn [n] (get-in* (nested-list n) (repeat n (dec n))))
+  (fn [n] (get-in* (nested-list n) (path-list n)))
   (range 1 max-list))
 
 
@@ -84,22 +89,22 @@
 (defbench
   test-get-in-map
   "Hashmaps"
-  (fn [n] (get-in (nested-map n) (repeat n 0)))
+  (fn [n] (get-in (nested-map n) (path-map n)))
   (range 1 max-in))
 
 
 (defbench
   test-get-in*-map
   "Hashmaps"
-  (fn [n] (get-in* (nested-map n) (repeat n 0)))
+  (fn [n] (get-in* (nested-map n) (path-map n)))
   (range 1 max-in))
 
 
 #_(run-one-defined-benchmark test-get-in-map :lightning)
 
 
-#_(run-benchmarks)
-#_(generate-documents)
+#_(run-benchmarks "resources/get_in_options.edn")
+#_(generate-documents "resources/get_in_options.edn")
 
 
 ;; Unit tests for benchmark functions

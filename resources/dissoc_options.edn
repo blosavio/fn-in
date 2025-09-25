@@ -11,11 +11,12 @@
                  'test-dissoc-map}}
 
   :html-filename "dissoc_performance.html"
+  :img-subdirectory "img_dissoc/"
   :markdown-filename "dissoc_performance.md"
   :results-directory "resources/fn_in_performance/dissoc/"
 
   :preamble [:div
-             [:p "fn-in preamble"]]
+             [:p "`dissoc` preamble"]]
 
   :comments
   {"Sequences"

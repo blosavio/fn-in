@@ -14,11 +14,12 @@
                  'test-update-in-vec-2}}
 
   :html-filename "update_in_performance.html"
+  :img-subdirectory "img_update_in/"
   :markdown-filename "update_in_performance.md"
   :results-directory "resources/fn_in_performance/update_in/"
 
   :preamble [:div
-             [:p "fn-in preamble"]]
+             [:p "`update-in` preamble"]]
 
   :comments
   {"Sequences"
@@ -47,35 +48,35 @@
 
 
   :chart-settings
-  {"(fn [n] (update-in (nested-map n) (repeat n 0) inc))"
+  {"(fn [n] (update-in (nested-map n) (path-map n) inc))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
-   "(fn [n] (update-in* (nested-map n) (repeat n 0) inc))"
+   "(fn [n] (update-in* (nested-map n) (path-map n) inc))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
-   "(fn [n] (update-in* (nested-list n) (repeat n (dec n)) inc))"
+   "(fn [n] (update-in* (nested-list n) (path-list n) inc))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
-   "(fn [n] (update-in* (nested-seq n) (repeat n (dec n)) inc))"
+   "(fn [n] (update-in* (nested-seq n) (path-seq n) inc))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
-   "(fn [n] (update-in (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) inc))"
+   "(fn [n] (update-in (narrow-deep-vec n) (path-narrow-deep-vec n) inc))"
    {:x-axis-logarithmic? true
     :y-axis-logarithmic? false}
 
-   "(fn [n] (update-in (nested-vec n) (repeat n (dec n)) inc))"
+   "(fn [n] (update-in (nested-vec n) (path-nested-vec n) inc))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
-   "(fn [n] (update-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)]) inc))"
+   "(fn [n] (update-in* (narrow-deep-vec n) (path-narrow-deep-vec n) inc))"
    {:x-axis-logarithmic? true
     :y-axis-logarithmic? false}
 
-   "(fn [n] (update-in* (nested-vec n) (repeat n (dec n)) inc))"
+   "(fn [n] (update-in* (nested-vec n) (path-nested-vec n) inc))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}}}
  (merge (load-file "resources/fastester_options_base.edn")))

@@ -13,6 +13,7 @@
                  'test-assoc-vec}}
 
   :html-filename "assoc_performance.html"
+  :img-subdirectory "img_assoc/"
   :markdown-filename "assoc_performance.md"
   :results-directory "resources/fn_in_performance/assoc/"
 

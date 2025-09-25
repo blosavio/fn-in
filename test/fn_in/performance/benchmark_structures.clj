@@ -3,6 +3,7 @@
   library benchmarks."
   (:require
    [fastester.measure :refer [range-pow-10]]
+   [fn-in.core :refer [update*]]
    [fn-in.performance.benchmark-utils :refer [coll-of-n-rand-ints
                                               narrow-deep
                                               nested]]))
@@ -68,4 +69,25 @@
     (fn [m k] (assoc! m k (nested k :map)))
     (transient {})
     (range 1 max-in))))
+
+
+(def path-seq
+  (let [f (fn [m k] (assoc m k (repeat k (dec k))))]
+    (reduce f {} (range 1 max-in))))
+
+
+(def path-nested-vec path-seq)
+
+
+(def path-narrow-deep-vec
+  (let [f (fn [m k] (assoc m k (update* (repeat (inc n-levels) k) n-levels dec)))]
+    (reduce f {} (range-pow-10 5))))
+
+
+(def path-list path-seq)
+
+
+(def path-map
+  (let [f (fn [m k] (assoc m k (repeat k 0)))]
+    (reduce f {} (range 1 max-in))))
 

@@ -6,7 +6,6 @@
  :preferred-version-info :lein
 
  :html-directory "doc/"
- :img-subdirectory "img/"
  :markdown-directory "doc/"
  :results-url "https://github.com/blosavio/fn_in/blob/main/"
 

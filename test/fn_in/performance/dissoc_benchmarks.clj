@@ -85,8 +85,8 @@
 #_(run-one-defined-benchmark test-dissoc-map :lightning)
 
 
-#_(run-benchmarks)
-#_(generate-documents)
+#_(run-benchmarks "resources/dissoc_options.edn")
+#_(generate-documents "resources/dissoc_options.edn")
 
 
 ;; Unit tests for benchmark functions

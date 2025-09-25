@@ -20,7 +20,12 @@
                                                    nested-map
                                                    nested-seq
                                                    nested-vec
-                                                   n-levels]]
+                                                   n-levels
+                                                   path-list
+                                                   path-map
+                                                   path-seq
+                                                   path-narrow-deep-vec
+                                                   path-nested-vec]]
    [fn-in.performance.benchmark-utils :refer [fn-then-get-in*
                                               fn-then-get-in*-2]]
    [fn-in.core :refer [update-in*
@@ -36,7 +41,7 @@
 (defbench
   test-update-in*-seq
   "Sequences"
-  (fn [n] (update-in* (nested-seq n) (repeat n (dec n)) inc))
+  (fn [n] (update-in* (nested-seq n) (path-seq n) inc))
   (range 1 max-in))
 
 
@@ -49,32 +54,28 @@
 (defbench
   test-update-in-vec
   "Vectors"
-  (fn [n] (update-in (nested-vec n) (repeat n (dec n)) inc))
+  (fn [n] (update-in (nested-vec n) (path-nested-vec n) inc))
   (range 1 max-in))
 
 
 (defbench
   test-update-in*-vec
   "Vectors"
-  (fn [n] (update-in* (nested-vec n) (repeat n (dec n)) inc))
+  (fn [n] (update-in* (nested-vec n) (path-nested-vec n) inc))
   (range 1 max-in))
 
 
 (defbench
   test-update-in-vec-2
   "Vectors"
-  (fn [n] (update-in (narrow-deep-vec n)
-                     (concat (repeat n-levels n) [(dec n)])
-                     inc))
+  (fn [n] (update-in (narrow-deep-vec n) (path-narrow-deep-vec n) inc))
   (range-pow-10 5))
 
 
 (defbench
   test-update-in*-vec-2
   "Vectors"
-  (fn [n] (update-in* (narrow-deep-vec n)
-                      (concat (repeat n-levels n) [(dec n)])
-                      inc))
+  (fn [n] (update-in* (narrow-deep-vec n) (path-narrow-deep-vec n) inc))
   (range-pow-10 5))
 
 
@@ -87,7 +88,7 @@
 (defbench
   test-update-in*-list
   "Lists"
-  (fn [n] (update-in* (nested-list n) (repeat n (dec n)) inc))
+  (fn [n] (update-in* (nested-list n) (path-list n) inc))
   (range 1 5))
 
 
@@ -100,22 +101,22 @@
 (defbench
   test-update-in-map
   "Hashmaps"
-  (fn [n] (update-in (nested-map n) (repeat n 0) inc))
+  (fn [n] (update-in (nested-map n) (path-map n) inc))
   (range 1 max-in))
 
 
 (defbench
   test-update-in*-map
   "Hashmaps"
-  (fn [n] (update-in* (nested-map n) (repeat n 0) inc))
+  (fn [n] (update-in* (nested-map n) (path-map n) inc))
   (range 1 max-in))
 
 
 #_(run-one-defined-benchmark test-update-in-map :lightning)
 
 
-#_(run-benchmarks)
-#_(generate-documents)
+#_(run-benchmarks "resources/update_in_options.edn")
+#_(generate-documents "resources/update_in_options.edn")
 
 
 ;; Unit tests for benchmark functions
@@ -136,7 +137,6 @@
       (every? true? (map #(= (inc (get-in* (narrow-deep-vec %) (concat (take n-levels (repeat %)) [(dec %)]))) (fn-then-get-in*-2 (benchmark-name :f) % n-levels)) (range-pow-10 5)))
     test-update-in-vec-2
     test-update-in*-vec-2))
-
 
 
 #_(run-tests)

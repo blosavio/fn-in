@@ -103,8 +103,8 @@
 #_(run-one-defined-benchmark test-get-map :lightning)
 
 
-#_(run-benchmarks)
-#_(generate-documents)
+#_(run-benchmarks "resources/get_options.edn" )
+#_(generate-documents "resources/get_options.edn")
 
 
 ;; Unit tests for benchmark functions

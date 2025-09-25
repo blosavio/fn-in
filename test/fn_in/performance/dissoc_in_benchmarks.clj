@@ -20,7 +20,12 @@
                                                    nested-map
                                                    nested-seq
                                                    nested-vec
-                                                   n-levels]]
+                                                   n-levels
+                                                   path-list
+                                                   path-map
+                                                   path-seq
+                                                   path-narrow-deep-vec
+                                                   path-nested-vec]]
    [fn-in.core :refer [dissoc-in*
                        get-in*]]))
 
@@ -31,14 +36,14 @@
 (defbench
   test-dissoc-in*-vec
   "Vectors"
-  (fn [n] (dissoc-in* (nested-vec n) (repeat n (dec n))))
+  (fn [n] (dissoc-in* (nested-vec n) (path-nested-vec n)))
   (range 1 max-in))
 
 
 (defbench
   test-dissoc-in*-vec-2
   "Vectors"
-  (fn [n] (dissoc-in* (narrow-deep-vec n) (concat (repeat n-levels n) [(dec n)])))
+  (fn [n] (dissoc-in* (narrow-deep-vec n) (path-narrow-deep-vec n)))
   (range-pow-10 5))
 
 
@@ -52,7 +57,7 @@
 (defbench
   test-dissoc-in*-seq
   "Sequences"
-  (fn [n] (dissoc-in* (nested-seq n) (repeat n (dec n))))
+  (fn [n] (dissoc-in* (nested-seq n) (path-seq n)))
   (range 1 max-in))
 
 
@@ -65,7 +70,7 @@
 (defbench
   test-dissoc-in*-list
   "Lists"
-  (fn [n] (dissoc-in* (nested-list n) (repeat n (dec n))))
+  (fn [n] (dissoc-in* (nested-list n) (path-list n)))
   (range 1 max-list))
 
 
@@ -78,15 +83,15 @@
 (defbench
   test-dissoc-in*-map
   "Hashmaps"
-  (fn [n] (dissoc-in* (nested-map n) (repeat n 0)))
+  (fn [n] (dissoc-in* (nested-map n) (path-map n)))
   (range 1 max-in))
 
 
 #_(run-one-defined-benchmark test-dissoc-in*-map :lightning)
 
 
-#_(run-benchmarks)
-#_(generate-documents)
+#_(run-benchmarks "resources/dissoc_in_options.edn")
+#_(generate-documents "resources/dissoc_in_options.edn")
 
 
 ;; Unit tests for benchmark functions

@@ -1,11 +1,19 @@
 (ns fn-in.core-tests
   (:require
    [fn-in.core :refer :all]
-   [clojure.test :refer [are is deftest testing run-tests]]
+   [clojure.test :refer [are
+                         is
+                         deftest
+                         testing
+                         run-tests
+                         run-test]]
    [clojure.string :as string]))
 
 
 (deftest get*-test
+  (testing "`nil`"
+    (is (nil? (get* nil :foo))))
+  
   (testing "empty collections"
     (are [x] (= nil x)
       (get* '() 0)
@@ -60,6 +68,27 @@
       (get* (mapcat reverse [[33 22 11] [66 55 44] [99 88 77]]) 2)
       (get* (zipmap [:a :b :c] [11 22 33]) :c)
       (get* (subvec [11 22 33 44 55] 0 5) 2)))
+
+  (testing "not-found"
+    (are [x] (= :foo x)
+      (get* '(11 22 33 44 55) 5 :foo)
+      (get* [11 22 33 44 55] 5 :foo)
+      (get* {:a 11 :b 22 :c 33 :d 44 :e 55} :f :foo)
+      (get* {:a 11 :b 22 :c 33 :d 44
+             :e 55 :f 66 :g 77 :h 88 :i 99} :j :foo)
+      (get* (sorted-map :a 11 :b 22 :c 33 :d 44 :e 55) :f :foo)
+      (get* #{11 22 33 44 55} 66 :foo)
+      (get* (sorted-set 11 22 33 44 55) 66 :foo)
+      (get* (lazy-seq [11 22 33 44 55]) 5 :foo)
+      (get* (range 0 5) 5 :foo)
+      (get* (repeat 5 33) 5 :foo)
+      (get* (cons 11 '(22 33 44 55)) 5 :foo)
+      (get* (interleave [:a :b :c] [11 22 33]) 6 :foo)
+      (get* (interpose :foo [11 22 33]) 5 :foo)
+      (get* (lazy-cat [11 22 33] [44 55 66]) 6 :foo)
+      (get* (mapcat reverse [[33 22 11] [66 55 44] [99 88 77]]) 9 :foo)
+      (get* (zipmap [:a :b :c] [11 22 33]) :d :foo)
+      (get* (subvec [11 22 33 44 55] 0 5) 5 :foo)))
 
   (testing "composite keys on maps"
     (are [x y] (= x y)
@@ -482,7 +511,7 @@
       #{11 22 33 55}
       (assoc* #{11 22 33} 44 55)
 
-      '(11 22 33 nil nil 99)
+      '(11 22 33 nil nil 99) ;; nope
       (assoc* (cons 11 '(22 33)) 5 99)
 
       '(11 22 33 nil nil 99)

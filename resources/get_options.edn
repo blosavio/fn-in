@@ -14,6 +14,7 @@
                  'test-get-vec}}
 
   :html-filename "get_performance.html"
+  :img-subdirectory "img_get/"
   :markdown-filename "get_performance.md"
   :results-directory "resources/fn_in_performance/get/"
 
