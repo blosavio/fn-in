@@ -52,7 +52,7 @@
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
-   "(fn [n] (assoc-in* (nested-map n) (path-map) :benchmark-sentinel))"
+   "(fn [n] (assoc-in* (nested-map n) (path-map n) :benchmark-sentinel))"
    {:x-axis-logarithmic? false
     :y-axis-logarithmic? false}
 
