@@ -11,7 +11,10 @@
  :maturity :alpha
  :breaking? false
  :changes
- [{:description "To improve performance, changed type dispatch from multimethods to protocol. Performance improved..."
+ [{:description "To improve performance, changed type dispatch from multimethods
+ to protocols. Performance improved for many cases, particularly when handling
+ hashmaps and vectors. In some cases, functions nearly match their clojure.core
+ namesakes. Observed no significant performance regressions."
    :date {:year 2025
           :month "September"
           :day 27}

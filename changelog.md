@@ -31,7 +31,8 @@
         <ul>
           <li>
             <div>
-              To improve performance, changed type dispatch from multimethods to protocol. Performance improved...
+              To improve performance, changed type dispatch from multimethods to protocols. Performance improved for many cases, particularly when handling
+              hashmaps and vectors. In some cases, functions nearly match their clojure.core namesakes. Observed no significant performance regressions.
             </div>
           </li>
           <li>
@@ -222,7 +223,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 September 27.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 01.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

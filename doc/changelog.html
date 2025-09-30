@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2025-09-27 19:44:41" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2025-10-01 07:04:05" content="width=device-width, initial-scale=1" name="viewport">
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
       fn-in library changelog
@@ -40,7 +40,8 @@
         <ul>
           <li>
             <div>
-              To improve performance, changed type dispatch from multimethods to protocol. Performance improved...
+              To improve performance, changed type dispatch from multimethods to protocols. Performance improved for many cases, particularly when handling
+              hashmaps and vectors. In some cases, functions nearly match their clojure.core namesakes. Observed no significant performance regressions.
             </div>
           </li>
           <li>
@@ -231,7 +232,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 September 27.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 01.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>
