@@ -1,0 +1,61 @@
+{:overhead 1.6656685238211717E-9,
+ :samples (99371691 98893137 99576048 98972658 99362449 99234125),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.6889446751773052E-6 (1.685521185815603E-6 1.6917857758865248E-6)],
+ :final-gc-time 412732836,
+ :execution-count 58750,
+ :variance
+ [2.47770376187303E-17
+  (1.0661550040327328E-17 3.7693945459078553E-17)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888887,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5110469349,
+ :lower-q
+ [1.6832874382978725E-6 (1.6832874382978725E-6 1.6846409872340427E-6)],
+ :warmup-executions 3013317,
+ :sample-count 6,
+ :upper-q
+ [1.6944569893617023E-6 (1.6911403446808512E-6 1.6949114553191491E-6)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in* (nested-map n) (path-map n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Hashmaps",
+  :index 15,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "d4f1a035-3536-4cff-9641-4b6edbb02743",
+  :name "test-assoc-in*-map",
+  :testing-thoroughness :quick,
+  :arg 4,
+  :version "4",
+  :parallel? false},
+ :total-time 0.595410108,
+ :sample-variance [1.9523668761611592E-17 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6656685238211717E-9},
+ :sample-mean
+ [1.6891066893617022E-6 (1.6758510106218375E-6 1.7023623681015672E-6)],
+ :results :fastester/benchmark-fn-results-elided}

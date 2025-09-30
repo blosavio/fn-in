@@ -1,0 +1,62 @@
+{:overhead 1.6656685238211717E-9,
+ :samples
+ (101242543 101821995 101250834 101955059 101426385 101436026),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [3.40807881980113E-7 (3.4010432934293893E-7 3.416005565962361E-7)],
+ :final-gc-time 405589099,
+ :execution-count 297882,
+ :variance
+ [1.1472287780838369E-18
+  (5.546928107376907E-19 1.6899901801792325E-18)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888878,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5018436632,
+ :lower-q
+ [3.398746584217912E-7 (3.398746584217912E-7 3.3995180390221635E-7)],
+ :warmup-executions 14767664,
+ :sample-count 6,
+ :upper-q
+ [3.4204879742649776E-7 (3.405201417843307E-7 3.4226659885458E-7)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in (narrow-deep-vec n) (path-narrow-deep-vec n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Vectors",
+  :index 18,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "c39aa2d6-b986-41c5-b307-9145bdca9c8f",
+  :name "test-assoc-in-vec-2",
+  :testing-thoroughness :quick,
+  :arg 1,
+  :version "4",
+  :parallel? false},
+ :total-time 0.609132842,
+ :sample-variance [1.0045744093918876E-18 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6656685238211717E-9},
+ :sample-mean
+ [3.4081327617423454E-7 (3.378064223892083E-7 3.4382012995926085E-7)],
+ :results :fastester/benchmark-fn-results-elided}

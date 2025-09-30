@@ -1,0 +1,61 @@
+{:overhead 1.903472241458587E-9,
+ :samples (98868785 101097782 99033195 99098751 101308825 100794805),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [3.283317068764473E-7 (3.2602117842850655E-7 3.3091735453037496E-7)],
+ :final-gc-time 411772384,
+ :execution-count 304445,
+ :variance
+ [1.5622818436075782E-17
+  (1.07976816271665E-17 1.8239618209412104E-17)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.1388888888888886,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5254507358,
+ :lower-q
+ [3.2475089096552745E-7 (3.2475089096552745E-7 3.252909228267832E-7)],
+ :warmup-executions 15860260,
+ :sample-count 6,
+ :upper-q
+ [3.3255455829460167E-7 (3.303808512210744E-7 3.3276560626714183E-7)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in (narrow-deep-vec n) (path-narrow-deep-vec n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 29},
+  :group "Vectors",
+  :index 19,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "b1c24c29-a2f2-4bf7-9533-3f56fa78956f",
+  :name "test-assoc-in-vec-2",
+  :testing-thoroughness :quick,
+  :arg 10,
+  :version "5",
+  :parallel? false},
+ :total-time 0.600202143,
+ :sample-variance [1.417605291990361E-17 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.903472241458587E-9},
+ :sample-mean
+ [3.285772159174892E-7 (3.172818860737382E-7 3.398725457612402E-7)],
+ :results :fastester/benchmark-fn-results-elided}

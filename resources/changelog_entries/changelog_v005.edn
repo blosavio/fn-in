@@ -1,0 +1,28 @@
+{:date {:year 2025
+        :month "September"
+        :day 27}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 5
+ :comment "Performance enhancements and additional arities."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :maturity :alpha
+ :breaking? false
+ :changes
+ [{:description "To improve performance, changed type dispatch from multimethods to protocol. Performance improved..."
+   :date {:year 2025
+          :month "September"
+          :day 27}
+   :change-type :performance-improvement
+   :breaking? false}
+  {:description "`get*` and `get-in*` now support 'not-found' arity."
+   :date {:year 2025
+          :month "September"
+          :day 27}
+   :change-type :function-arguments
+   :altered-functions ['get*
+                       'get-in*]
+   :breaking? false}]}
+

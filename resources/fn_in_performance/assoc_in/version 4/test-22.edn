@@ -1,0 +1,61 @@
+{:overhead 1.6656685238211717E-9,
+ :samples
+ (100107980 102513949 103517204 101614625 100754352 100201923),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [5.614418737630018E-7 (5.568628746502281E-7 5.677303422185085E-7)],
+ :final-gc-time 406749174,
+ :execution-count 180713,
+ :variance
+ [6.538021287768476E-17 (2.716371677674724E-17 1.048546733761399E-16)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888856,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5000203698,
+ :lower-q
+ [5.539611428065496E-7 (5.539611428065496E-7 5.544809891928085E-7)],
+ :warmup-executions 8822221,
+ :sample-count 6,
+ :upper-q
+ [5.715105256677716E-7 (5.622983681306824E-7 5.7282654817307E-7)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in (narrow-deep-vec n) (path-narrow-deep-vec n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Vectors",
+  :index 22,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "bbd7d547-4b77-4600-8d04-fa10ed5b15b9",
+  :name "test-assoc-in-vec-2",
+  :testing-thoroughness :quick,
+  :arg 10000,
+  :version "4",
+  :parallel? false},
+ :total-time 0.608710033,
+ :sample-variance [5.680246798607573E-17 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6656685238211717E-9},
+ :sample-mean
+ [5.613966464320037E-7 (5.387864228180126E-7 5.840068700459948E-7)],
+ :results :fastester/benchmark-fn-results-elided}

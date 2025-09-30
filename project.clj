@@ -10,7 +10,8 @@
   :plugins []
   :profiles {:dev {:dependencies [[com.sagevisuals/chlog "1"]
                                   [com.sagevisuals/fastester "0"]
-                                  [com.sagevisuals/readmoi "4"]]
+                                  [com.sagevisuals/readmoi "4"]
+                                  [hiccup "2.0.0-RC3"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]
                              [lein-codox "0.10.8"]]
                    :jvm-opts ["-Djdk.attach.allowAttachSelf"

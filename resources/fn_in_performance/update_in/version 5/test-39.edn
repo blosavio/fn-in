@@ -1,0 +1,61 @@
+{:overhead 1.631441015677214E-9,
+ :samples (98860654 99082765 98903675 99028443 100085980 98753076),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [9.543253982008352E-7 (9.520303123666112E-7 9.603277522633983E-7)],
+ :final-gc-time 410068673,
+ :execution-count 103863,
+ :variance
+ [2.2091664933622262E-17
+  (7.467195891764977E-19 4.2525456832865937E-17)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888873,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 1},
+ :warmup-time 5559732903,
+ :lower-q
+ [9.508013055659861E-7 (9.508013055659861E-7 9.518370738376517E-7)],
+ :warmup-executions 5797914,
+ :sample-count 6,
+ :upper-q
+ [9.623618408384122E-7 (9.533023983516749E-7 9.636345955730146E-7)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (update-in* (narrow-deep-vec n) (path-narrow-deep-vec n) inc))",
+  :date {:year 2025, :month "September", :day 29},
+  :group "Vectors",
+  :index 39,
+  :ns "fn-in.performance.update-in-benchmarks",
+  :UUIDv4 #uuid "36cac2df-6612-44db-ac3f-1ee239a68167",
+  :name "test-update-in*-vec-2",
+  :testing-thoroughness :quick,
+  :arg 100000,
+  :version "5",
+  :parallel? false},
+ :total-time 0.594714593,
+ :sample-variance [2.2091664933622144E-17 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.631441015677214E-9},
+ :sample-mean
+ [9.543253982008352E-7 (9.402248668490527E-7 9.684259295526177E-7)],
+ :results :fastester/benchmark-fn-results-elided}

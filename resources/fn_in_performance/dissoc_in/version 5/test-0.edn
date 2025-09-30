@@ -1,0 +1,62 @@
+{:overhead 1.6307488957364638E-9,
+ :samples
+ (100873472 104402673 104883583 104379509 102012097 101802394),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.0018476784591349E-6 (9.896284513552587E-7 1.0129387848376996E-6)],
+ :final-gc-time 403699589,
+ :execution-count 102834,
+ :variance
+ [3.098658830746772E-16
+  (1.7491937787270473E-16 4.2197995689437646E-16)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888873,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5012086340,
+ :lower-q
+ [9.809350214909465E-7 (9.809350214909465E-7 9.899682400762394E-7)],
+ :warmup-executions 4695488,
+ :sample-count 6,
+ :upper-q
+ [1.0193182580663984E-6 (1.0123485520353191E-6 1.0199309858607077E-6)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (dissoc-in* (narrow-deep-vec n) (path-narrow-deep-vec n)))",
+  :date {:year 2025, :month "September", :day 29},
+  :group "Vectors",
+  :index 0,
+  :ns "fn-in.performance.dissoc-in-benchmarks",
+  :UUIDv4 #uuid "fddc57ce-00a7-47b9-b287-a6d4d5e11743",
+  :name "test-dissoc-in*-vec-2",
+  :testing-thoroughness :quick,
+  :arg 1,
+  :version "5",
+  :parallel? false},
+ :total-time 0.618353728,
+ :sample-variance [2.71019001203225E-16 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6307488957364638E-9},
+ :sample-mean
+ [1.0021875514583375E-6 (9.527995872278792E-7 1.0515755156887958E-6)],
+ :results :fastester/benchmark-fn-results-elided}

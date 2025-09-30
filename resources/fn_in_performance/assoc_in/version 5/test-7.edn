@@ -1,0 +1,62 @@
+{:overhead 1.903472241458587E-9,
+ :samples
+ (101292466 101088423 101314492 100614699 100570791 101998216),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [7.6964196065301E-7 (7.670201288060959E-7 7.725707076471961E-7)],
+ :final-gc-time 405770744,
+ :execution-count 131412,
+ :variance
+ [1.631696445324354E-17
+  (4.6945413797952354E-18 3.325218626151062E-17)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888878,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5444096433,
+ :lower-q
+ [7.653090357045019E-7 (7.653090357045019E-7 7.658014108300612E-7)],
+ :warmup-executions 7082489,
+ :sample-count 6,
+ :upper-q
+ [7.754999334155177E-7 (7.706066464630324E-7 7.761712476790553E-7)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in* (narrow-deep-vec n) (path-narrow-deep-vec n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 29},
+  :group "Vectors",
+  :index 7,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "75659af7-5a16-4388-a581-b52c68055543",
+  :name "test-assoc-in*-vec-2",
+  :testing-thoroughness :quick,
+  :arg 10,
+  :version "5",
+  :parallel? false},
+ :total-time 0.606879087,
+ :sample-variance [1.6127910713534303E-17 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.903472241458587E-9},
+ :sample-mean
+ [7.696900929899858E-7 (7.576422219572344E-7 7.817379640227372E-7)],
+ :results :fastester/benchmark-fn-results-elided}

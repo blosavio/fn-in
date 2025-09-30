@@ -1,0 +1,61 @@
+{:overhead 1.6656685238211717E-9,
+ :samples (99315308 99709222 98993255 99780079 99136091 99159427),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [2.595185648607701E-6 (2.5898867309266323E-6 2.6024064225136273E-6)],
+ :final-gc-time 415533211,
+ :execution-count 38282,
+ :variance
+ [8.220218336297336E-17
+  (4.150623566946883E-17 1.1969471909843512E-16)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888887,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5107576070,
+ :lower-q
+ [2.5858955906170004E-6 (2.5858955906170004E-6 2.5896267436393086E-6)],
+ :warmup-executions 1960621,
+ :sample-count 6,
+ :upper-q
+ [2.604931367875242E-6 (2.593799249647354E-6 2.606448957734706E-6)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in* (nested-map n) (path-map n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Hashmaps",
+  :index 17,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "b0250de0-9535-411c-b5c4-3199146cb2a8",
+  :name "test-assoc-in*-map",
+  :testing-thoroughness :quick,
+  :arg 6,
+  :version "4",
+  :parallel? false},
+ :total-time 0.596093382,
+ :sample-variance [7.158548285424426E-17 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6656685238211717E-9},
+ :sample-mean
+ [2.595185648607701E-6 (2.5698031872280752E-6 2.620568109987327E-6)],
+ :results :fastester/benchmark-fn-results-elided}

@@ -5,6 +5,46 @@
     </h1><a href="https://github.com/blosavio/chlog">changelog info</a>
     <section>
       <h3>
+        version 5
+      </h3>
+      <p>
+        2025 September 27<br>
+        Brad Losavio (blosavio@sagevisuals.com)<br>
+        <em>Description:</em> Performance enhancements and additional arities.<br>
+        <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
+        <em>Urgency:</em> medium<br>
+        <em>Breaking:</em> no
+      </p>
+      <p></p>
+      <div>
+        <em>altered functions:</em> <code>get*</code>, <code>get-in*</code>
+      </div>
+      <p></p>
+      <div>
+        <h4>
+          Breaking changes
+        </h4>
+        <ul></ul>
+        <h4>
+          Non-breaking changes
+        </h4>
+        <ul>
+          <li>
+            <div>
+              To improve performance, changed type dispatch from multimethods to protocol. Performance improved...
+            </div>
+          </li>
+          <li>
+            <div>
+              `get*` and `get-in*` now support &apos;not-found&apos; arity.
+            </div>
+          </li>
+        </ul>
+      </div>
+      <hr>
+    </section>
+    <section>
+      <h3>
         version 4
       </h3>
       <p>
@@ -181,8 +221,8 @@
       <hr>
     </section>
     <p id="page-footer">
-      Copyright © 2024 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2024 December 06.<span id="uuid"><br>
+      Copyright © 2024–2025 Brad Losavio.<br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 September 27.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

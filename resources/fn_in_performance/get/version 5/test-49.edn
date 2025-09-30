@@ -1,0 +1,60 @@
+{:overhead 1.907838175830428E-9,
+ :samples (98604586 99433135 98858949 98198879 97935957 98067513),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [9.549461387188153E-8 (9.516589862793671E-8 9.597847277768892E-8)],
+ :final-gc-time 407227125,
+ :execution-count 1031415,
+ :variance
+ [3.316246741772958E-19
+  (1.0359793464661264E-19 6.321224899686464E-19)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888887,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5037400578,
+ :lower-q
+ [9.495300824595339E-8 (9.495300824595339E-8 9.508055729265138E-8)],
+ :warmup-executions 51529099,
+ :sample-count 6,
+ :upper-q
+ [9.630417084781588E-8 (9.560127203889803E-8 9.640458496337556E-8)],
+ :fastester/metadata
+ {:fexpr "(fn [n] (get* (vec-of-n-rand-ints n) (dec n)))",
+  :date {:year 2025, :month "September", :day 29},
+  :group "Vectors",
+  :index 49,
+  :ns "fn-in.performance.get-benchmarks",
+  :UUIDv4 #uuid "6f2885e1-0fe4-40a2-9312-5808ef4117bf",
+  :name "test-get*-vec",
+  :testing-thoroughness :quick,
+  :arg 10000,
+  :version "5",
+  :parallel? false},
+ :total-time 0.591099019,
+ :sample-variance [3.0169717767492903E-19 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.907838175830428E-9},
+ :sample-mean
+ [9.551587204633119E-8 (9.386806301641469E-8 9.716368107624769E-8)],
+ :results :fastester/benchmark-fn-results-elided}

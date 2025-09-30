@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Generate documents from discretized options hashmaps.
+
+set -eu
+
+lein run -m fastester.core :documents resources/get_options.edn
+lein run -m fastester.core :documents resources/get_in_options.edn
+lein run -m fastester.core :documents resources/assoc_options.edn
+lein run -m fastester.core :documents resources/assoc_in_options.edn
+lein run -m fastester.core :documents resources/update_options.edn
+lein run -m fastester.core :documents resources/update_in_options.edn
+lein run -m fastester.core :documents resources/dissoc_options.edn
+lein run -m fastester.core :documents resources/dissoc_in_options.edn
+
+echo "Generated all documents."
+
+exit 0
+

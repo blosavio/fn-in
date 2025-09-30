@@ -1,0 +1,61 @@
+{:overhead 1.6307488957364638E-9,
+ :samples (99106318 98491402 99024530 96784311 97748734 104327644),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.583440329874967E-5 (1.563039225857941E-5 1.623139957435488E-5)],
+ :final-gc-time 430184600,
+ :execution-count 6265,
+ :variance
+ [1.8690876909946612E-13
+  (8.899300249500864E-15 4.017961088575437E-13)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.1388888888888886,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 1},
+ :warmup-time 5699428302,
+ :lower-q
+ [1.5448413567438147E-5 (1.5448413567438147E-5 1.5602351795690344E-5)],
+ :warmup-executions 360540,
+ :sample-count 6,
+ :upper-q
+ [1.6546648802873105E-5 (1.5795353391859538E-5 1.6652457142857144E-5)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (dissoc-in* (narrow-deep-vec n) (path-narrow-deep-vec n)))",
+  :date {:year 2025, :month "September", :day 29},
+  :group "Vectors",
+  :index 2,
+  :ns "fn-in.performance.dissoc-in-benchmarks",
+  :UUIDv4 #uuid "18b87edc-630c-4e34-8e7a-8028acc548b6",
+  :name "test-dissoc-in*-vec-2",
+  :testing-thoroughness :quick,
+  :arg 100,
+  :version "5",
+  :parallel? false},
+ :total-time 0.595482939,
+ :sample-variance [1.7713424108466887E-13 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6307488957364638E-9},
+ :sample-mean
+ [1.5841525379090184E-5 (1.4578905812569048E-5 1.710414494561132E-5)],
+ :results :fastester/benchmark-fn-results-elided}

@@ -158,7 +158,7 @@
   ;; non-keyword key
   (get* {[11 22 33] 'val-1 99 'val-2} 99) ;; => val-2
   ```")
-  
+
   (assoc*
     [c i x]
     "Returns a new collection `c` with the key/index `i` associated with the
@@ -189,7 +189,7 @@
   ;; associating a value beyond a sequence's bounds causes nil-padding
   (assoc* [11 22 33] 5 99) ;; => (11 22 33 nil nil 99)
   ```")
-  
+
   (dissoc*
     [c i]
     "Returns a new collection `c` with the value located at key/index `i` removed.
@@ -258,7 +258,7 @@
     ([s idx not-found] (nth s idx not-found)))
   (assoc* [c i x] (list-assoc c i x))
   (dissoc* [c i] (list-dissoc c i))
-  
+
   clojure.lang.PersistentList$EmptyList
   (get*
     ([c idx] (nth c idx nil))

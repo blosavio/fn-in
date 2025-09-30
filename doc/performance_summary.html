@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
+    <meta charset="utf-8" compile-date="2025-09-30 08:51:13" content="width=device-width, initial-scale=1" name="viewport">
+    <link href="project.css" rel="stylesheet" type="text/css">
+    <title>
+      fn-in library performance summary
+    </title>
+  </head>
+  <body>
+    <div>
+      <h1>
+        <code>fn-in</code> library performance summary
+      </h1><a href="#v4-&gt;v5">Discussion</a><br>
+      <a href="#details">Details</a><br>
+      <a href="#results">Results</a><br>
+      <h3 id="v4-&gt;v5">
+        Version&nbsp;4 to version&nbsp;5
+      </h3>
+      <p>
+        Version&nbsp;5 introduces type dispatch with Clojure protocols, bringing improved performance compared to version&nbsp;4's multimethod type dispatch.
+        Across a wide span of collection types and collection sizes, all eight of the public functions are significantly faster in at least some cases, while
+        none regress. Upgrading to version&nbsp;5 therefore provides improved performance for general uses.
+      </p>
+      <h3 id="details">
+        Details
+      </h3>
+      <p>
+        To ensure that any implementation change gives general performance improvement and not merely for one special case, we use <a href=
+        "https://github.com/blosavio/fastester">Fastester</a> to test a broad span of arguments. That involves running <a href=
+        "https://github.com/hugoduncan/criterium/">Criterium</a> benchmarks for various sizes of vectors, maps, sequences, and lists for each of
+        <code>fn-in</code>'s eight functions.
+      </p>
+      <p>
+        For example, to test the performance of associating a new value into a flat (i.e., un-nested) vector, we do a lookup in
+        <code>vec-of-n-rand-ints</code>, whose ten-element entry looks like this.
+      </p>
+      <pre><code>(vec-of-n-rand-ints 10) ;; =&gt; [68 71 2 89 4 19 35 4 84 37]</code></pre>
+      <p>
+        This provides the benchmark with a pre-made, one-dimensional series of random integers. We pre-compute the collections so that the benchmark does not
+        measure the time it takes to construct the argument collection.
+      </p>
+      <p>
+        In our example, a single benchmark run takes multiple measurements of the time to associate a new value to the final element. Like this.
+      </p>
+      <pre><code>(assoc* (vec-of-n-rand-ints 10) (dec 10) :benchmark-sentinel)
+;; =&gt; [68 71 2 89 4 19 35 4 84 :benchmark-sentinel]</code></pre>
+      <p>
+        <code>assoc*</code> replaces the <code>37</code> at the end of the test vector with <code>:benchmark-sentinal</code> in about 151&nbsp;nanoseconds.
+      </p>
+      <p>
+        The benchmarks for the 'plain' functions (i.e., <code>get*</code>, <code>assoc*</code>, <code>update*</code>, and <code>dissoc*</code>) cover hashmaps,
+        lists, sequences, and vectors, each containing up to one million elements. In total, over fifty benchmarks per function.
+      </p>
+      <p>
+        The <code>-in</code> function variants are benchmarked against nested versions of four collection types. For example, to test updating a value buried
+        in a nested vector, we do a lookup in <code>nested-vec</code>, whose third entry looks like this.
+      </p>
+      <pre><code>(nested-vec 3)
+;; =&gt; [[[0 1 2]
+;;      [3 4 5]
+;;      [6 7 8]]
+;;     [[9 10 11]
+;;      [12 13 14]
+;;      [15 16 17]]
+;;     [[18 19 20]
+;;      [21 22 23]
+;;      [24 25 26]]]</code></pre>
+      <p>
+        This supplies the benchmark with a pre-made, triply-nested series of vectors containing a range of integers.
+      </p>
+      <p>
+        A single benchmark run takes multiple measurements of the time to increment the last element of the last nested vector. Like this.
+      </p>
+      <pre><code>(update-in* (nested-vec 3) [2 2 2] inc)
+;; =&gt; [[[0 1 2]
+;;      [3 4 5]
+;;      [6 7 8]]
+;;     [[9 10 11]
+;;      [12 13 14]
+;;      [15 16 17]]
+;;     [[18 19 20]
+;;      [21 22 23]
+;;      [24 25 27]]]</code></pre>
+      <p>
+        <code>update-in*</code> dives into the nested collection and increments the final <code>26</code> to a <code>27</code> in about 576&nbsp;nanoseconds.
+      </p>
+      <p>
+        For each of the <code>-in</code> function variants (i.e., <code>get-in*</code>, <code>assoc-in*</code>, <code>update-in*</code>, and
+        <code>dissoc-in*</code>), we run over fifty benchmarks, involving deeply-nested (up to six levels) hashmaps, lists, sequences, and vectors, whose sizes
+        span up to one-hundred thousand elements.
+      </p>
+      <h3 id="results">
+        Benchmark results
+      </h3><a href="get_performance.html"><code>get*</code></a><br>
+      <a href="get_in_performance.html"><code>get-in*</code></a><br>
+      <a href="assoc_performance.html"><code>assoc*</code></a><br>
+      <a href="assoc_in_performance.html"><code>assoc-in*</code></a><br>
+      <a href="update_performance.html"><code>update*</code></a><br>
+      <a href="update_in_performance.html"><code>update-in*</code></a><br>
+      <a href="dissoc_performance.html"><code>dissoc*</code></a><br>
+      <a href="dissoc_in_performance.html"><code>dissoc-in*</code></a>
+    </div>
+    <p id="page-footer">
+      Copyright © 2024–2025 Brad Losavio.<br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 September 30.<span id="uuid"><br>
+      dd080235-f818-4d4c-b95c-8cfc549ef23a</span>
+    </p>
+  </body>
+</html>

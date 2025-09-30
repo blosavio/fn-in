@@ -1,0 +1,62 @@
+{:overhead 1.6656685238211717E-9,
+ :samples
+ (102663058 104118911 102765071 101819628 104270275 102566041),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [3.4938565841528204E-5 (3.47177847858031E-5 3.51733844806149E-5)],
+ :final-gc-time 413875729,
+ :execution-count 2949,
+ :variance
+ [1.2498933392573364E-13
+  (5.341553303480311E-14 1.9081419726071893E-13)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888867,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5708186143,
+ :lower-q
+ [3.452683214649034E-5 (3.452683214649034E-5 3.477993930145813E-5)],
+ :warmup-executions 164798,
+ :sample-count 6,
+ :upper-q
+ [3.5306514411664975E-5 (3.484310592573754E-5 3.535784164123432E-5)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in* (nested-seq n) (path-seq n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Sequences",
+  :index 34,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "bea64b14-1508-4562-9287-334aae7793c2",
+  :name "test-assoc-in*-seq",
+  :testing-thoroughness :quick,
+  :arg 5,
+  :version "4",
+  :parallel? false},
+ :total-time 0.618202984,
+ :sample-variance [1.0599574100210734E-13 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6656685238211717E-9},
+ :sample-mean
+ [3.4938565841528204E-5 (3.396185622807139E-5 3.5915275454985025E-5)],
+ :results :fastester/benchmark-fn-results-elided}

@@ -1,0 +1,62 @@
+{:overhead 1.903472241458587E-9,
+ :samples
+ (100332972 101669377 102354379 100776565 100052291 100353905),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.2430808514394575E-6 (1.2362490207912502E-6 1.2523399619812452E-6)],
+ :final-gc-time 403303515,
+ :execution-count 81188,
+ :variance
+ [1.3624457632534614E-16
+  (5.087709766016191E-17 2.224346679021901E-16)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.1388888888888889,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5435318371,
+ :lower-q
+ [1.2323531925900382E-6 (1.2323531925900382E-6 1.2358103660639506E-6)],
+ :warmup-executions 4337060,
+ :sample-count 6,
+ :upper-q
+ [1.2582789605606742E-6 (1.2406233987781448E-6 1.2607082204266643E-6)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in* (nested-map n) (path-map n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 29},
+  :group "Hashmaps",
+  :index 17,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "54f5d9ee-fb52-488e-b38d-db093ec1dd70",
+  :name "test-assoc-in*-map",
+  :testing-thoroughness :quick,
+  :arg 6,
+  :version "5",
+  :parallel? false},
+ :total-time 0.605539489,
+ :sample-variance [1.2311337201885998E-16 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.903472241458587E-9},
+ :sample-mean
+ [1.2430808514394575E-6 (1.2097939118359174E-6 1.2763677910429978E-6)],
+ :results :fastester/benchmark-fn-results-elided}

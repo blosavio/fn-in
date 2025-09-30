@@ -1,0 +1,62 @@
+{:overhead 1.6656685238211717E-9,
+ :samples
+ (100289598 100181102 100565866 100768919 100080189 100143403),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.8833455996446183E-6 (1.879969088645294E-6 1.8874769220662215E-6)],
+ :final-gc-time 410767793,
+ :execution-count 53276,
+ :variance
+ [2.8875480240113317E-17
+  (1.020304849840072E-17 5.0136733492042135E-17)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.1388888888888889,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5232474684,
+ :lower-q
+ [1.8785229559276225E-6 (1.8785229559276225E-6 1.8797094939560029E-6)],
+ :warmup-executions 2757206,
+ :sample-count 6,
+ :upper-q
+ [1.8903259230235006E-6 (1.8821990389668897E-6 1.891450540581125E-6)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in* (nested-vec n) (path-nested-vec n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Vectors",
+  :index 4,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "dff1d1b8-9845-4975-905e-f1927d2d42be",
+  :name "test-assoc-in*-vec",
+  :testing-thoroughness :quick,
+  :arg 5,
+  :version "4",
+  :parallel? false},
+ :total-time 0.602029077,
+ :sample-variance [2.599471256062729E-17 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6656685238211717E-9},
+ :sample-mean
+ [1.883365483519784E-6 (1.8680699804863548E-6 1.8986609865532132E-6)],
+ :results :fastester/benchmark-fn-results-elided}

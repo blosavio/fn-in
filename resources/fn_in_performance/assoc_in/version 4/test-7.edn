@@ -1,0 +1,62 @@
+{:overhead 1.6656685238211717E-9,
+ :samples
+ (105127429 106654257 105041052 106213973 105522900 104194414),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.5385479549654705E-6 (1.5290637267775509E-6 1.5479835740686706E-6)],
+ :final-gc-time 433273191,
+ :execution-count 68540,
+ :variance
+ [1.9729459153477426E-16
+  (6.543614923470015E-17 3.2317617883247423E-16)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888878,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5076989973,
+ :lower-q
+ [1.5201986285380802E-6 (1.5201986285380802E-6 1.5226214582725417E-6)],
+ :warmup-executions 3302515,
+ :sample-count 6,
+ :upper-q
+ [1.5540244729355122E-6 (1.5388600251677855E-6 1.5560877881529036E-6)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in* (narrow-deep-vec n) (path-narrow-deep-vec n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Vectors",
+  :index 7,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "3cee47fe-e781-48ad-93b2-0bdfff95b425",
+  :name "test-assoc-in*-vec-2",
+  :testing-thoroughness :quick,
+  :arg 10,
+  :version "4",
+  :parallel? false},
+ :total-time 0.632754025,
+ :sample-variance [1.6546302248578214E-16 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6656685238211717E-9},
+ :sample-mean
+ [1.5386490249003017E-6 (1.5000592956660608E-6 1.5772387541345428E-6)],
+ :results :fastester/benchmark-fn-results-elided}

@@ -1,0 +1,59 @@
+{:overhead 1.684887231164245E-9,
+ :samples
+ (105223121 108041677 104342090 105814949 105478743 104766578),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [0.015087313285714285 (0.01498835780952381 0.01528943826190476)],
+ :final-gc-time 445659379,
+ :execution-count 7,
+ :variance
+ [3.574765000465851E-8 (3.6399707633360813E-9 7.800058797762234E-8)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888876,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 1, :high-severe 0},
+ :warmup-time 5969527726,
+ :lower-q [0.014906012857142856 (0.014906012857142856 0.014966654)],
+ :warmup-executions 391,
+ :sample-count 6,
+ :upper-q
+ [0.015388758607142857 (0.015063827178571429 0.015434525285714285)],
+ :fastester/metadata
+ {:fexpr "(fn [n] (dissoc* (seq-of-n-rand-ints n) (dec n)))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Sequences",
+  :index 19,
+  :ns "fn-in.performance.dissoc-benchmarks",
+  :UUIDv4 #uuid "ef832fc7-5b44-4ebe-a8d8-6f72bc5e4a60",
+  :name "test-dissoc*-seq",
+  :testing-thoroughness :quick,
+  :arg 100000,
+  :version "4",
+  :parallel? false},
+ :total-time 0.633667158,
+ :sample-variance [3.445268891555102E-8 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.684887231164245E-9},
+ :sample-mean
+ [0.015087313285714285 (0.014530470219635556 0.015644156351793014)],
+ :results :fastester/benchmark-fn-results-elided}

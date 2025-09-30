@@ -1,0 +1,61 @@
+{:overhead 1.9528911521867916E-9,
+ :samples (98753684 98621626 99736984 99410939 98597380 99339104),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [1.9146126113065554E-7 (1.908554619141506E-7 1.920363977268334E-7)],
+ :final-gc-time 422162764,
+ :execution-count 517340,
+ :variance
+ [9.297821340541658E-19
+  (4.857132082899561E-19 1.3165982095879507E-18)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.1388888888888886,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5145169170,
+ :lower-q
+ [1.9058526307650675E-7 (1.9058526307650675E-7 1.906230293424054E-7)],
+ :warmup-executions 26482473,
+ :sample-count 6,
+ :upper-q
+ [1.9269194146982643E-7 (1.9187753991572273E-7 1.9278807747322845E-7)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc* (seq-of-n-rand-ints n) (dec n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 29},
+  :group "Sequences",
+  :index 29,
+  :ns "fn-in.performance.assoc-benchmarks",
+  :UUIDv4 #uuid "1a952a54-76e8-4c79-b13c-847ccc43bbba",
+  :name "test-assoc*-seq",
+  :testing-thoroughness :quick,
+  :arg 10000,
+  :version "5",
+  :parallel? false},
+ :total-time 0.594459717,
+ :sample-variance [8.651344431470309E-19 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.9528911521867916E-9},
+ :sample-mean
+ [1.9151161615185372E-7 (1.8872123804336674E-7 1.9430199426034068E-7)],
+ :results :fastester/benchmark-fn-results-elided}

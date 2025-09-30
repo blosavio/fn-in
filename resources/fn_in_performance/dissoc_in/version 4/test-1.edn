@@ -1,0 +1,62 @@
+{:overhead 1.735599445999022E-9,
+ :samples
+ (100078494 100515652 100485691 100967212 100589549 100020730),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [3.1412504325079204E-6 (3.134867365974654E-6 3.1499735701183927E-6)],
+ :final-gc-time 456089163,
+ :execution-count 31984,
+ :variance
+ [1.3339433157143246E-16
+  (4.432801514502241E-17 2.2013994683163654E-16)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888873,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5034714971,
+ :lower-q
+ [3.1272114182091045E-6 (3.1272114182091045E-6 3.1290285806965986E-6)],
+ :warmup-executions 1559299,
+ :sample-count 6,
+ :upper-q
+ [3.1553277928026515E-6 (3.142685467733867E-6 3.1568037768884445E-6)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (dissoc-in* (narrow-deep-vec n) (path-narrow-deep-vec n)))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Vectors",
+  :index 1,
+  :ns "fn-in.performance.dissoc-in-benchmarks",
+  :UUIDv4 #uuid "97bb3761-2d7e-4774-8383-8f83c08989ba",
+  :name "test-dissoc-in*-vec-2",
+  :testing-thoroughness :quick,
+  :arg 10,
+  :version "4",
+  :parallel? false},
+ :total-time 0.602657328,
+ :sample-variance [1.2014983984183316E-16 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.735599445999022E-9},
+ :sample-mean
+ [3.140410455227614E-6 (3.1075265905128865E-6 3.173294319942341E-6)],
+ :results :fastester/benchmark-fn-results-elided}

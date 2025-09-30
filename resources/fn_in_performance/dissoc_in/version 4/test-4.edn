@@ -1,0 +1,62 @@
+{:overhead 1.735599445999022E-9,
+ :samples
+ (100966429 102027651 102044914 101790084 102875692 101672812),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [0.0015208397562189056 (0.0015143761169154229 0.001528289684079602)],
+ :final-gc-time 448696089,
+ :execution-count 67,
+ :variance
+ [1.1872074620623004E-10
+  (3.5609896886136126E-11 2.020526174173315E-10)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888887,
+ :outliers {:low-severe 0, :low-mild 1, :high-mild 1, :high-severe 0},
+ :warmup-time 5175976036,
+ :lower-q
+ [0.0015069616268656718 (0.0015069616268656718 0.001517504656716418)],
+ :warmup-executions 3411,
+ :sample-count 6,
+ :upper-q
+ [0.0015338759235074629 (0.0015225829888059702 0.0015354580895522389)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (dissoc-in* (narrow-deep-vec n) (path-narrow-deep-vec n)))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Vectors",
+  :index 4,
+  :ns "fn-in.performance.dissoc-in-benchmarks",
+  :UUIDv4 #uuid "56358e40-80ac-436c-ab46-5e13ddfb7c61",
+  :name "test-dissoc-in*-vec-2",
+  :testing-thoroughness :quick,
+  :arg 10000,
+  :version "4",
+  :parallel? false},
+ :total-time 0.611377582,
+ :sample-variance [8.57401064549491E-11 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.735599445999022E-9},
+ :sample-mean
+ [0.0015208397562189056 (0.0014930609701026166 0.0015486185423351946)],
+ :results :fastester/benchmark-fn-results-elided}

@@ -1,0 +1,60 @@
+{:overhead 1.964192159553168E-9,
+ :samples (100920172 102140691 102394163 100079644 99696809 101329182),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [2.0492378996822823E-5 (2.03139177651592E-5 2.066244379098222E-5)],
+ :final-gc-time 446151981,
+ :execution-count 4931,
+ :variance
+ [5.4872002170248114E-14
+  (1.8465536590332902E-14 8.458577268795137E-14)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888867,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5597169442,
+ :lower-q
+ [2.0218375380247416E-5 (2.0218375380247416E-5 2.0296013790306228E-5)],
+ :warmup-executions 274054,
+ :sample-count 6,
+ :upper-q
+ [2.0738397966943827E-5 (2.0539050040559727E-5 2.076539505171365E-5)],
+ :fastester/metadata
+ {:fexpr "(fn [n] (update-in* (nested-seq n) (path-seq n) inc))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Sequences",
+  :index 31,
+  :ns "fn-in.performance.update-in-benchmarks",
+  :UUIDv4 #uuid "b8502dd3-134c-4b50-9e63-3b7786e86c08",
+  :name "test-update-in*-seq",
+  :testing-thoroughness :quick,
+  :arg 4,
+  :version "4",
+  :parallel? false},
+ :total-time 0.606560661,
+ :sample-variance [4.814007055073668E-14 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.964192159553168E-9},
+ :sample-mean
+ [2.0501610930845673E-5 (1.9843385562938428E-5 2.1159836298752917E-5)],
+ :results :fastester/benchmark-fn-results-elided}

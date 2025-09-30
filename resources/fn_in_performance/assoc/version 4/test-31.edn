@@ -1,0 +1,61 @@
+{:overhead 1.6382712867628493E-9,
+ :samples (101898429 99893565 102014345 99928776 99149449 99202992),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [3.5962616025287247E-7 (3.563049801577347E-7 3.6294734034801025E-7)],
+ :final-gc-time 411284019,
+ :execution-count 279034,
+ :variance
+ [2.4325204283960342E-17
+  (1.2125420076838905E-17 3.12366857085147E-17)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888887,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5039699283,
+ :lower-q
+ [3.553310671817772E-7 (3.553310671817772E-7 3.5566441186378727E-7)],
+ :warmup-executions 13880071,
+ :sample-count 6,
+ :upper-q
+ [3.651828415175212E-7 (3.5810823994566976E-7 3.6559826042704477E-7)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc* (seq-of-n-rand-ints n) (dec n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Sequences",
+  :index 31,
+  :ns "fn-in.performance.assoc-benchmarks",
+  :UUIDv4 #uuid "2b27ce86-021f-47dd-83af-5c2e1a84697e",
+  :name "test-assoc*-seq",
+  :testing-thoroughness :quick,
+  :arg 1000000,
+  :version "4",
+  :parallel? false},
+ :total-time 0.602087556,
+ :sample-variance [2.134694663874437E-17 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.6382712867628493E-9},
+ :sample-mean
+ [3.5962616025287247E-7 (3.4576533344677247E-7 3.7348698705897247E-7)],
+ :results :fastester/benchmark-fn-results-elided}

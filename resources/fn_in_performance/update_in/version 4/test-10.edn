@@ -1,0 +1,61 @@
+{:overhead 1.964192159553168E-9,
+ :samples (101391342 101769881 101914780 101850350 99983610 100671559),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [6.074862286144012E-7 (6.02392746996916E-7 6.103944650450213E-7)],
+ :final-gc-time 417565212,
+ :execution-count 166662,
+ :variance
+ [2.4281145206187494E-17
+  (7.758662656990854E-18 4.0279965390602386E-17)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888878,
+ :outliers {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 0},
+ :warmup-time 5200682515,
+ :lower-q
+ [5.999184577168161E-7 (5.999184577168161E-7 6.040462672954843E-7)],
+ :warmup-executions 8166896,
+ :sample-count 6,
+ :upper-q
+ [6.113971248694964E-7 (6.103524716192054E-7 6.115058021624606E-7)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (update-in (narrow-deep-vec n) (path-narrow-deep-vec n) inc))",
+  :date {:year 2025, :month "September", :day 22},
+  :group "Vectors",
+  :index 10,
+  :ns "fn-in.performance.update-in-benchmarks",
+  :UUIDv4 #uuid "5ae55c6b-eddb-4f4e-9834-c86663a48097",
+  :name "test-update-in-vec-2",
+  :testing-thoroughness :quick,
+  :arg 10000,
+  :version "4",
+  :parallel? false},
+ :total-time 0.607581522,
+ :sample-variance [2.181604353951679E-17 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.964192159553168E-9},
+ :sample-mean
+ [6.075985347589733E-7 (5.935862404480602E-7 6.216108290698865E-7)],
+ :results :fastester/benchmark-fn-results-elided}

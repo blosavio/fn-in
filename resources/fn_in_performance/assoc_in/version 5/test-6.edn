@@ -1,0 +1,60 @@
+{:overhead 1.903472241458587E-9,
+ :samples (99793125 100111999 100261068 100069302 100052378 99988393),
+ :runtime-details
+ {:spec-vendor "Oracle Corporation",
+  :spec-name "Java Virtual Machine Specification",
+  :clojure-version-string "1.12.2",
+  :java-version "11.0.28",
+  :vm-name "OpenJDK 64-Bit Server VM",
+  :vm-vendor "Ubuntu",
+  :clojure-version
+  {:major 1, :minor 12, :incremental 2, :qualifier nil},
+  :spec-version "11",
+  :sun-arch-data-model "64"},
+ :mean
+ [7.25798088991751E-7 (7.249187688482924E-7 7.264568547928775E-7)],
+ :final-gc-time 405428202,
+ :execution-count 137833,
+ :variance
+ [1.652069271317012E-18 (4.338754897809575E-19 2.835735279235946E-18)],
+ :os-details
+ {:arch "amd64",
+  :available-processors 1,
+  :name "Linux",
+  :version "5.15.0-153-generic"},
+ :tail-quantile 0.025,
+ :outlier-variance 0.13888888888888878,
+ :outliers {:low-severe 0, :low-mild 1, :high-mild 0, :high-severe 0},
+ :warmup-time 5059343271,
+ :lower-q
+ [7.240147497333731E-7 (7.240147497333731E-7 7.254314496528408E-7)],
+ :warmup-executions 6790918,
+ :sample-count 6,
+ :upper-q
+ [7.272358379343119E-7 (7.260031088346043E-7 7.274097494794426E-7)],
+ :fastester/metadata
+ {:fexpr
+  "(fn [n] (assoc-in* (narrow-deep-vec n) (path-narrow-deep-vec n) :benchmark-sentinel))",
+  :date {:year 2025, :month "September", :day 29},
+  :group "Vectors",
+  :index 6,
+  :ns "fn-in.performance.assoc-in-benchmarks",
+  :UUIDv4 #uuid "9aea11d6-6bd8-4904-836b-1c298032ffac",
+  :name "test-assoc-in*-vec-2",
+  :testing-thoroughness :quick,
+  :arg 1,
+  :version "5",
+  :parallel? false},
+ :total-time 0.600276265,
+ :sample-variance [1.2470627943472806E-18 (0.0 0.0)],
+ :options
+ {:max-gc-attempts 100,
+  :samples 6,
+  :target-execution-time 100000000,
+  :warmup-jit-period 5000000000,
+  :tail-quantile 0.025,
+  :bootstrap-size 500,
+  :overhead 1.903472241458587E-9},
+ :sample-mean
+ [7.258497178953276E-7 (7.224995589216182E-7 7.29199876869037E-7)],
+ :results :fastester/benchmark-fn-results-elided}
