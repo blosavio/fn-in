@@ -1,7 +1,7 @@
 
   <body>
     <h1>
-      `dissoc` performance
+      dissoc* performance
     </h1>
     <div>
       <a href="#group-0">Hashmaps</a><br>
@@ -11,7 +11,12 @@
     </div>
     <div>
       <p>
-        `dissoc` preamble
+        Compared to version&nbsp;4, <code>dissoc*</code> version&nbsp;5 notably improved performance handling hashmaps. Handling other collection types
+        remained constant.
+      </p>
+      <p>
+        See the <a href="https://blosavio.github.io/fn-in/performance_summary.html">overall summary</a> for benchmarking details. The benchmarks displayed in
+        this document are defined <a href="https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/dissoc_benchmarks.clj">here</a>.
       </p>
     </div>
     <section>
@@ -20,7 +25,7 @@
       </h3>
       <div>
         <p>
-          Comments for hashmaps...
+          Version&nbsp;5 improves performance on hashmaps by 40 to 60% compared to version&nbsp;4.
         </p>
       </div>
       <div>
@@ -227,8 +232,7 @@
       </h3>
       <div>
         <p>
-          This is unfair to <code>get*</code>: <code>clojure.core/get</code> always returns <code>nil</code> when given a list, whereas <code>get*</code>
-          actually retrieves the element.
+          Performance did not notably change from version&nbsp;4 to version&nbsp;5.
         </p>
       </div>
       <div>
@@ -310,7 +314,7 @@
       </h3>
       <div>
         <p>
-          Comments for sequences...
+          Performance did not notably change from version&nbsp;4 to version&nbsp;5.
         </p>
       </div>
       <div>
@@ -419,7 +423,7 @@
       </h3>
       <div>
         <p>
-          Comments for vectors...
+          Performance did not notably change from version&nbsp;4 to version&nbsp;5.
         </p>
       </div>
       <div>
@@ -526,7 +530,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 September 30.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 October 01.<span id="uuid"><br>
       93d36b21-7d1e-4785-b732-a8c41ab7e748</span>
     </p>
   </body>

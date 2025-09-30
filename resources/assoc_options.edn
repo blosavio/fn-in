@@ -1,5 +1,5 @@
 (->>
- {:title "`assoc` performance"
+ {:title "assoc* performance"
 
   :fastester-UUID #uuid "950a5376-ea22-474d-a95e-cac23b4179bc"
 
@@ -18,32 +18,42 @@
   :results-directory "resources/fn_in_performance/assoc/"
 
   :preamble [:div
-             [:p "`assoc` preamble"]]
+             [:p [:code "assoc*"]
+              " version 5 performance improved across the board, closing the gap
+ with "
+              [:code "clojure.core/get"]
+              "."]
+
+             [:p "See the "
+              [:a {:href "https://blosavio.github.io/fn-in/performance_summary.html"} "overall summary"]
+              " for benchmarking details. The benchmarks displayed in this
+ document are defined "
+              [:a {:href "https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/assoc_benchmarks.clj"} "here"]
+              "."]]
 
   :comments
   {"Sequences"
    [:div
-    [:p "Comments for sequences..."]]
+    [:p "Version 5 handles sequences 40% faster than version 4."]]
 
    "Hashmaps"
    [:div
-    [:p "Comments for hashmaps..."]]
+    [:p "While version 5 of "
+     [:code "assoc*"]
+     " is 4 to 17% slower than "
+     [:code "clojure.core/get"]
+     " when handling hashmaps, it substantially closed the performance gap from
+ version 4."]]
 
    "Lists"
    [:div
-    [:p "This is unfair to "
-     [:code "get*"]
-     ": "
-     [:code "clojure.core/get"]
-     " always returns "
-     [:code "nil"]
-     " when given a list, whereas "
-     [:code "get*"]
-     " actually retrieves the element."]]
+    [:p "Handling lists is indistinguishable between version 4 to version 5."]]
 
    "Vectors"
    [:div
-    [:p "Comments for vectors..."]]}
+    [:p "Version 5 performance improved noticeably, but still lags "
+     [:code "clojure.core/assoc"]
+     " by a factor of two."]]}
 
 
   :chart-settings

@@ -2,17 +2,17 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2025-09-30 09:22:13" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2025-10-01 05:49:15" content="width=device-width, initial-scale=1" name="viewport">
     <script src="jquery-3.7.1.min.js" type="text/javascript"></script>
     <script src="fastester.js" type="text/javascript"></script>
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
-      `update-in` performance
+      update-in* performance
     </title>
   </head>
   <body>
     <h1>
-      `update-in` performance
+      update-in* performance
     </h1>
     <div>
       <a href="#group-0">Hashmaps</a><br>
@@ -22,7 +22,11 @@
     </div>
     <div>
       <p>
-        `update-in` preamble
+        <code>update-in*</code> version&nbsp;5 offers notable performance improvements for nested hashmaps and nested vectors.
+      </p>
+      <p>
+        See the <a href="https://blosavio.github.io/fn-in/performance_summary.html">overall summary</a> for benchmarking details. The benchmarks displayed in
+        this document are defined <a href="https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/update_in_benchmarks.clj">here</a>.
       </p>
     </div>
     <section>
@@ -31,7 +35,7 @@
       </h3>
       <div>
         <p>
-          Comments for hashmaps...
+          Version&nbsp;5 improves performance to within 18% of <code>clojure.core/update-in</code> when handling hashmaps.
         </p>
       </div>
       <div>
@@ -220,8 +224,7 @@
       </h3>
       <div>
         <p>
-          This is unfair to <code>get*</code>: <code>clojure.core/get</code> always returns <code>nil</code> when given a list, whereas <code>get*</code>
-          actually retrieves the element.
+          Version&nbsp;5 improves performance 5 to 15% when handling lists.
         </p>
       </div>
       <div>
@@ -303,7 +306,7 @@
       </h3>
       <div>
         <p>
-          Comments for sequences...
+          Version&nbsp;5 provides slightly improved performance when handling nested lists.
         </p>
       </div>
       <div>
@@ -403,7 +406,7 @@
       </h3>
       <div>
         <p>
-          Comments for vectors...
+          Version&nbsp;5 performs about twice as fast as version&nbsp;4 on nested vectors.
         </p>
       </div>
       <div>
@@ -768,7 +771,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/fastester">Fastester</a> on 2025 September 30.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/fastester">Fastester</a> on 2025 October 01.<span id="uuid"><br>
       ffaad48e-c77b-48dc-bd5f-8c4af5332cf5</span>
     </p>
   </body>

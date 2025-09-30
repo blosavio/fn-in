@@ -1,7 +1,7 @@
 
   <body>
     <h1>
-      `get-in` performance
+      get-in* performance
     </h1>
     <div>
       <a href="#group-0">Hashmaps</a><br>
@@ -11,7 +11,11 @@
     </div>
     <div>
       <p>
-        `get-in` preamble
+        <code>get-in*</code> performance improved substantially across many conditions with version&nbsp;5.
+      </p>
+      <p>
+        See the <a href="https://blosavio.github.io/fn-in/performance_summary.html">overall summary</a> for benchmarking details. The benchmarks displayed in
+        this document are defined <a href="https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/get_in_benchmarks.clj">here</a>.
       </p>
     </div>
     <section>
@@ -20,7 +24,7 @@
       </h3>
       <div>
         <p>
-          Comments for hashmaps...
+          Version&nbsp;5&apos;s <code>get-in*</code> performs 43‑49% <em>faster</em> than <code>clojure.core/get-in</code> for this hashmap scenario.
         </p>
       </div>
       <div>
@@ -209,8 +213,7 @@
       </h3>
       <div>
         <p>
-          This is unfair to <code>get*</code>: <code>clojure.core/get</code> always returns <code>nil</code> when given a list, whereas <code>get*</code>
-          actually retrieves the element.
+          Version&nbsp;5&apos;s <code>get-in*</code> with protocol type dispatch performs about 35% faster than version&nbsp;4 on lists.
         </p>
       </div>
       <div>
@@ -292,7 +295,7 @@
       </h3>
       <div>
         <p>
-          Comments for sequences...
+          Version&nbsp;5 performs about 36% faster for sequences.
         </p>
       </div>
       <div>
@@ -392,7 +395,13 @@
       </h3>
       <div>
         <p>
-          Comments for vectors...
+          The top two panels are curious: while the <code>clojure.core/get</code> implementation didn&apos;t change, the benchmarks run after the
+          library&apos;s bump to version&nbsp;5 showed up to 14% slower performance. One possible interpretation is that the performance improvements
+          demonstrated by <code>get-in*</code> is understated.
+        </p>
+        <p>
+          Regardless, <code>get-in*</code> performance substantially improved for both patterns of nested vectors, improving by about 70% relative to
+          version&nbsp;4, and narrowing the performance gap with <code>clojure.core/get-in</code> in the worst case, and bettering it in the best case.
         </p>
       </div>
       <div>
@@ -757,7 +766,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 September 30.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 October 01.<span id="uuid"><br>
       92b0f169-76db-41cc-9e5d-23b98d6545f5</span>
     </p>
   </body>

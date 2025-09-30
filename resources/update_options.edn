@@ -1,5 +1,5 @@
 (->>
- {:title "`update` performance"
+ {:title "update* performance"
 
   :fastester-UUID #uuid "f6698382-3d68-4305-8210-41942be1724d"
 
@@ -18,32 +18,37 @@
   :results-directory "resources/fn_in_performance/update/"
 
   :preamble [:div
-             [:p "`update` preamble"]]
+             [:p "Aside from lists, "
+              [:code "update*"]
+              " version 5 is about 50% faster than version 4."]
+
+             [:p "See the "
+              [:a {:href "https://blosavio.github.io/fn-in/performance_summary.html"} "overall summary"]
+              " for benchmarking details. The benchmarks displayed in this
+ document are defined "
+              [:a {:href "https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/update_benchmarks.clj"} "here"]
+              "."]]
 
   :comments
   {"Sequences"
    [:div
-    [:p "Comments for sequences..."]]
+    [:p [:code "update*"]
+     " version 5 performance handling sequences improved by a factor of two."]]
 
    "Hashmaps"
    [:div
-    [:p "Comments for hashmaps..."]]
+    [:p [:code "update*"]
+     " version 5 performance improved to within 8% that of "
+     [:code "clojure.core/update"]
+     "."]]
 
    "Lists"
    [:div
-    [:p "This is unfair to "
-     [:code "get*"]
-     ": "
-     [:code "clojure.core/get"]
-     " always returns "
-     [:code "nil"]
-     " when given a list, whereas "
-     [:code "get*"]
-     " actually retrieves the element."]]
+    [:p "Performance on lists did not perceptibly change between versions."]]
 
    "Vectors"
    [:div
-    [:p "Comments for vectors..."]]}
+    [:p "Version 5 performance improved by about 50%."]]}
 
 
   :chart-settings

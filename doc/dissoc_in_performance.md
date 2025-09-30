@@ -1,7 +1,7 @@
 
   <body>
     <h1>
-      `dissoc-in` performance
+      dissoc-in* performance
     </h1>
     <div>
       <a href="#group-0">Hashmaps</a><br>
@@ -11,7 +11,12 @@
     </div>
     <div>
       <p>
-        `dissoc-in` preamble
+        <code>dissoc-in*</code> version&nbsp;5 handles nested hashmaps and some nested vectors notably faster than version_4, while maintaining the performance
+        of sequences and lists.
+      </p>
+      <p>
+        See the <a href="https://blosavio.github.io/fn-in/performance_summary.html">overall summary</a> for benchmarking details. The benchmarks displayed in
+        this document are defined <a href="https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/dissoc_in_benchmarks.clj">here</a>.
       </p>
     </div>
     <section>
@@ -20,7 +25,7 @@
       </h3>
       <div>
         <p>
-          Comments for hashmaps...
+          Version&nbsp;5 handles hashmaps twice as fast a version&nbsp;4.
         </p>
       </div>
       <div>
@@ -120,8 +125,7 @@
       </h3>
       <div>
         <p>
-          This is unfair to <code>get*</code>: <code>clojure.core/get</code> always returns <code>nil</code> when given a list, whereas <code>get*</code>
-          actually retrieves the element.
+          Version&nbsp;5 handles lists somewhat faster than version&nbsp;4.
         </p>
       </div>
       <div>
@@ -203,7 +207,7 @@
       </h3>
       <div>
         <p>
-          Comments for sequences...
+          Version&nbsp;5 performs about the same as version&nbsp;4 when handling sequences.
         </p>
       </div>
       <div>
@@ -303,7 +307,8 @@
       </h3>
       <div>
         <p>
-          Comments for vectors...
+          Version&nbsp;5 handles some nested vectors with 24 to 40% speedup compared to version&nbsp;4, while other patterns of nested vectors are handled
+          similarly.
         </p>
       </div>
       <div>
@@ -490,7 +495,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 September 30.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 October 01.<span id="uuid"><br>
       abd643c6-c697-4d28-b491-837e69bfa3e0</span>
     </p>
   </body>

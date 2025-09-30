@@ -1,7 +1,7 @@
 
   <body>
     <h1>
-      `update` performance
+      update* performance
     </h1>
     <div>
       <a href="#group-0">Hashmaps</a><br>
@@ -11,7 +11,11 @@
     </div>
     <div>
       <p>
-        `update` preamble
+        Aside from lists, <code>update*</code> version&nbsp;5 is about 50% faster than version&nbsp;4.
+      </p>
+      <p>
+        See the <a href="https://blosavio.github.io/fn-in/performance_summary.html">overall summary</a> for benchmarking details. The benchmarks displayed in
+        this document are defined <a href="https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/update_benchmarks.clj">here</a>.
       </p>
     </div>
     <section>
@@ -20,7 +24,7 @@
       </h3>
       <div>
         <p>
-          Comments for hashmaps...
+          <code>update*</code> version&nbsp;5 performance improved to within 8% that of <code>clojure.core/update</code>.
         </p>
       </div>
       <div>
@@ -227,8 +231,7 @@
       </h3>
       <div>
         <p>
-          This is unfair to <code>get*</code>: <code>clojure.core/get</code> always returns <code>nil</code> when given a list, whereas <code>get*</code>
-          actually retrieves the element.
+          Performance on lists did not perceptibly change between versions.
         </p>
       </div>
       <div>
@@ -310,7 +313,7 @@
       </h3>
       <div>
         <p>
-          Comments for sequences...
+          <code>update*</code> version&nbsp;5 performance handling sequences improved by a factor of two.
         </p>
       </div>
       <div>
@@ -517,7 +520,7 @@
       </h3>
       <div>
         <p>
-          Comments for vectors...
+          Version&nbsp;5 performance improved by about 50%.
         </p>
       </div>
       <div>
@@ -722,7 +725,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 September 30.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 October 01.<span id="uuid"><br>
       f6698382-3d68-4305-8210-41942be1724d</span>
     </p>
   </body>

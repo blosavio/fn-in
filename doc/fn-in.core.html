@@ -38,7 +38,7 @@
 ;; associating a non-existent key-val in a map merely expands the map
 (assoc-in* {:a 11 :b {:c 22}} [:b :d] 99) ;; =&gt; {:a 11, :b {:c 22, :d 99}}
 </code></pre>
-</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/main/src/fn_in/core.clj#L357">view source</a></div></div><div class="public anchor" id="var-dissoc-in*"><h3>dissoc-in*</h3><div class="usage"><code>(dissoc-in* c [i &amp; i_s])</code></div><div class="doc"><div class="markdown"><p>Remove element located at <code>i</code> from an arbitrarily-nested collection <code>c</code>. Any containing collections are preserved if <code>i</code> addresses a single scalar. If <code>i</code> addresses a nested collection, all children are removed.</p>
+</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/master/src/fn_in/core.clj#L357">view source</a></div></div><div class="public anchor" id="var-dissoc-in*"><h3>dissoc-in*</h3><div class="usage"><code>(dissoc-in* c [i &amp; i_s])</code></div><div class="doc"><div class="markdown"><p>Remove element located at <code>i</code> from an arbitrarily-nested collection <code>c</code>. Any containing collections are preserved if <code>i</code> addresses a single scalar. If <code>i</code> addresses a nested collection, all children are removed.</p>
 <p>Examples:</p>
 <pre><code class="language-clojure">(dissoc-in* [11 [22 [33 44]]] [1 1 0]) ;; =&gt; [11 [22 [44]]]
 (dissoc-in* {:a 11 :b {:c 22 :d 33}} [:b :c]) ;; =&gt; {:a 11, :b {:d 33}}
@@ -67,7 +67,7 @@
 <li><a href="https://weavejester.github.io/medley/medley.core.html#var-dissoc-in"><code>medley.core/dissoc-in</code></a></li>
 <li><a href="http://plumatic.github.io/plumbing/plumbing.core.html#var-dissoc-in"><code>plumbing.core/dissoc-in</code></a></li>
 </ul>
-</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/main/src/fn_in/core.clj#L434">view source</a></div></div><div class="public anchor" id="var-FnIn"><h3>FnIn</h3><h4 class="type">protocol</h4><div class="usage"></div><div class="doc"><div class="markdown"><p>This protocol declares a trio of methods that are supported on all Clojure collections.</p>
+</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/master/src/fn_in/core.clj#L434">view source</a></div></div><div class="public anchor" id="var-FnIn"><h3>FnIn</h3><h4 class="type">protocol</h4><div class="usage"></div><div class="doc"><div class="markdown"><p>This protocol declares a trio of methods that are supported on all Clojure collections.</p>
 </div></div><div class="members"><h4>members</h4><div class="inner"><div class="public anchor" id="var-assoc*"><h3>assoc*</h3><div class="usage"><code>(assoc* c i x)</code></div><div class="doc"><div class="markdown"><p>Returns a new collection <code>c</code> with the key/index <code>i</code> associated with the supplied value <code>x</code>. Similar to <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/assoc"><code>clojure.core/assoc</code></a> , but operates on all Clojure collections. Indexes beyond the end of a sequence are padded with <code>nil</code>.</p>
 <p>Note: Because set members are addressed by their value, the <code>assoc*</code>-ed value may match a pre-existing set member, and the returned set may have one fewer members.</p>
 <p>Examples:</p>
@@ -111,7 +111,7 @@
 ;; non-keyword key
 (get* {[11 22 33] 'val-1 99 'val-2} 99) ;; =&gt; val-2
 </code></pre>
-</div></div></div></div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/main/src/fn_in/core.clj#L138">view source</a></div></div><div class="public anchor" id="var-get-in*"><h3>get-in*</h3><div class="usage"><code>(get-in* c path)</code></div><div class="doc"><div class="markdown"><p>Inspects the value in heterogeneous, arbitrarily-nested collection <code>c</code> at <code>path</code>, a vector of indexes/keys. This version of <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/get-in"><code>clojure.core/get-in</code></a> operates on all Clojure collections. An empty <code>path</code> vector returns the original collection <code>c</code>. Performance is not optimized, so it might steal your lunch money.</p>
+</div></div></div></div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/master/src/fn_in/core.clj#L138">view source</a></div></div><div class="public anchor" id="var-get-in*"><h3>get-in*</h3><div class="usage"><code>(get-in* c path)</code></div><div class="doc"><div class="markdown"><p>Inspects the value in heterogeneous, arbitrarily-nested collection <code>c</code> at <code>path</code>, a vector of indexes/keys. This version of <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/get-in"><code>clojure.core/get-in</code></a> operates on all Clojure collections. An empty <code>path</code> vector returns the original collection <code>c</code>. Performance is not optimized, so it might steal your lunch money.</p>
 <p>Examples:</p>
 <pre><code class="language-clojure">(get-in* [11 22 33 [44 [55]]] [3 1 0]) ;; =&gt; 55
 (get-in* {:a 11 :b {:c 22 :d {:e 33}}} [:b :d :e]) ;; =&gt; 33
@@ -136,7 +136,7 @@
 ;; nested non-terminating sequences
 (get-in* (repeat (cycle [:a :b :c])) [99 5]) ;; =&gt; :c
 </code></pre>
-</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/main/src/fn_in/core.clj#L319">view source</a></div></div><div class="public anchor" id="var-update*"><h3>update*</h3><div class="usage"><code>(update* c i f)</code><code>(update* c i f arg1)</code><code>(update* c i f arg1 arg2)</code><code>(update* c i f arg1 arg2 arg3)</code><code>(update* c i f arg1 arg2 arg3 &amp; more)</code></div><div class="doc"><div class="markdown"><p>Returns a new collection <code>c</code> with function <code>f</code> applied to the value at location <code>i</code>. If the location doesn’t exist, <code>nil</code> is passed to <code>f</code>. Additional arguments <code>args</code> may be supplied trailing <code>f</code>. Similar to <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/update"><code>clojure.core/update</code></a> , but operates on all Clojure collections.</p>
+</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/master/src/fn_in/core.clj#L319">view source</a></div></div><div class="public anchor" id="var-update*"><h3>update*</h3><div class="usage"><code>(update* c i f)</code><code>(update* c i f arg1)</code><code>(update* c i f arg1 arg2)</code><code>(update* c i f arg1 arg2 arg3)</code><code>(update* c i f arg1 arg2 arg3 &amp; more)</code></div><div class="doc"><div class="markdown"><p>Returns a new collection <code>c</code> with function <code>f</code> applied to the value at location <code>i</code>. If the location doesn’t exist, <code>nil</code> is passed to <code>f</code>. Additional arguments <code>args</code> may be supplied trailing <code>f</code>. Similar to <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/update"><code>clojure.core/update</code></a> , but operates on all Clojure collections.</p>
 <p>Note: Because set members are addressed by their value, the <code>update*</code>-ed value may match a pre-existing set member, and the returned set may have one fewer members.</p>
 <p>Examples:</p>
 <pre><code class="language-clojure">(update* [10 20 30] 1 dec) ;; =&gt; [10 19 30]
@@ -153,7 +153,7 @@
 ;; update absorbs existing set member resulting in a smaller set
 (update* #{32 33} 33 dec) ;; =&gt; #{32}
 </code></pre>
-</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/main/src/fn_in/core.clj#L284">view source</a></div></div><div class="public anchor" id="var-update-in*"><h3>update-in*</h3><div class="usage"><code>(update-in* m ks f &amp; args)</code></div><div class="doc"><div class="markdown"><p>Returns a new collection <code>c</code> with the value at path vector <code>ks</code> updated by applying function <code>f</code> to the previous value. Similar to <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/update-in"><code>clojure.core/update-in</code></a> , but operates on any heterogeneous, arbitrarily-nested collection. Additional arguments <code>args</code> may be supplied trailing <code>f</code>. If location <code>ks</code> does not exist, <code>f</code> must handle <code>nil</code>.</p>
+</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/master/src/fn_in/core.clj#L284">view source</a></div></div><div class="public anchor" id="var-update-in*"><h3>update-in*</h3><div class="usage"><code>(update-in* m ks f &amp; args)</code></div><div class="doc"><div class="markdown"><p>Returns a new collection <code>c</code> with the value at path vector <code>ks</code> updated by applying function <code>f</code> to the previous value. Similar to <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/update-in"><code>clojure.core/update-in</code></a> , but operates on any heterogeneous, arbitrarily-nested collection. Additional arguments <code>args</code> may be supplied trailing <code>f</code>. If location <code>ks</code> does not exist, <code>f</code> must handle <code>nil</code>.</p>
 <p>Note: Updating a set member to another previously-existing set member will decrease the size of the set.</p>
 <p>Examples:</p>
 <pre><code class="language-clojure">(update-in* [11 [22 [33]]] [1 1 0] inc) ;; =&gt; [11 [22 [34]]]
@@ -179,4 +179,4 @@
 ;; additional args
 (update-in* [11 [22 [99]]] [1 1 0] #(/ %1 %2) 3) ;; =&gt; [11 [22 [33]]]
 </code></pre>
-</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/main/src/fn_in/core.clj#L388">view source</a></div></div></div></body></html>
+</div></div><div class="src-link"><a href="https://github.com/blosavio/fn-in/blob/master/src/fn_in/core.clj#L388">view source</a></div></div></div></body></html>

@@ -1,5 +1,5 @@
 (->>
- {:title "`get-in` performance"
+ {:title "get-in* performance"
 
   :fastester-UUID #uuid "92b0f169-76db-41cc-9e5d-23b98d6545f5"
 
@@ -19,32 +19,55 @@
   :results-directory "resources/fn_in_performance/get_in/"
 
   :preamble [:div
-             [:p "`get-in` preamble"]]
+             [:p [:code "get-in*"]
+              " performance improved substantially across many conditions with
+ version 5."]
+
+             [:p "See the "
+              [:a {:href "https://blosavio.github.io/fn-in/performance_summary.html"} "overall summary"]
+              " for benchmarking details. The benchmarks displayed in this
+ document are defined "
+              [:a {:href "https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/get_in_benchmarks.clj"} "here"]
+              "."]]
 
   :comments
   {"Sequences"
    [:div
-    [:p "Comments for sequences..."]]
+    [:p "Version 5 performs about 36% faster for sequences."]]
 
    "Hashmaps"
    [:div
-    [:p "Comments for hashmaps..."]]
+    [:p "Version 5's "
+     [:code "get-in*"]
+     " performs 43‑49% "
+     [:em "faster"]
+     " than "
+     [:code "clojure.core/get-in"]
+     " for this hashmap scenario."]]
 
    "Lists"
    [:div
-    [:p "This is unfair to "
-     [:code "get*"]
-     ": "
-     [:code "clojure.core/get"]
-     " always returns "
-     [:code "nil"]
-     " when given a list, whereas "
-     [:code "get*"]
-     " actually retrieves the element."]]
+    [:p "Version 5's "
+     [:code "get-in*"]
+     " with protocol type dispatch performs about 35% faster than version 4 on
+ lists."]]
 
    "Vectors"
    [:div
-    [:p "Comments for vectors..."]]}
+    [:p "The top two panels are curious: while the "
+     [:code "clojure.core/get"]
+     " implementation didn't change, the benchmarks run after the library's bump
+ to version 5 showed up to 14% slower performance. One possible interpretation
+ is that the performance improvements demonstrated by "
+     [:code "get-in*"]
+     " is understated."]
+    [:p "Regardless, "
+     [:code "get-in*"]
+     " performance substantially improved for both patterns of nested vectors,
+ improving by about 70% relative to version 4, and narrowing the performance gap
+ with "
+     [:code "clojure.core/get-in"]
+     " in the worst case, and bettering it in the best case."]]}
 
 
   :chart-settings

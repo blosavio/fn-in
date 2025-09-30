@@ -1,7 +1,7 @@
 
   <body>
     <h1>
-      `get` performance
+      get* performance
     </h1>
     <div>
       <a href="#group-0">Hashmaps</a><br>
@@ -11,7 +11,12 @@
     </div>
     <div>
       <p>
-        `get` preamble
+        <code>get*</code> delegates to <code>clojure.core/get</code> or <code>clojure.core/nth</code> as appropriate, so its performance ought to be similar,
+        aside from some minimal overhead for dispatching.
+      </p>
+      <p>
+        See the <a href="https://blosavio.github.io/fn-in/performance_summary.html">overall summary</a> for benchmarking details. The benchmarks displayed in
+        this document are defined <a href="https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/get_benchmarks.clj">here</a>.
       </p>
     </div>
     <section>
@@ -20,7 +25,7 @@
       </h3>
       <div>
         <p>
-          Comments for hashmaps...
+          Version&nbsp;5 <code>get*</code> for a hashmap is very similar, even replicating the anomalous dip at <code>100</code>.
         </p>
       </div>
       <div>
@@ -227,8 +232,8 @@
       </h3>
       <div>
         <p>
-          This is unfair to <code>get*</code>: <code>clojure.core/get</code> always returns <code>nil</code> when given a list, whereas <code>get*</code>
-          actually retrieves the element.
+          This benchmark is unfair to <code>get*</code>: <code>clojure.core/get</code> always returns <code>nil</code> when given a list, whereas
+          <code>get*</code> actually retrieves the <em>nth</em> element. The logarithmic behavior is expected for linked lists constructed from the head.
         </p>
       </div>
       <div>
@@ -399,7 +404,7 @@
       </h3>
       <div>
         <p>
-          Comments for sequences...
+          Version&nbsp;5 <code>get*</code> very closely provides the performance of <code>clojure.core/nth</code>, a notable improvement from version&nbsp;4.
         </p>
       </div>
       <div>
@@ -606,8 +611,9 @@
       </h3>
       <div>
         <p>
-          Comments for vectors...
-        </p>
+          Version&nbsp;5
+        </p><code>get*</code> approaches <code>clojure.core/get</code>, being 19% slower for one-element vectors and linearly improving to matching the
+        performance for one-million-element vectors.
       </div>
       <div>
         <h4 id="group-3-fexpr-0">
@@ -811,7 +817,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 September 30.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 October 01.<span id="uuid"><br>
       7b038e60-63f1-4f13-b6f0-b3a168d4242d</span>
     </p>
   </body>

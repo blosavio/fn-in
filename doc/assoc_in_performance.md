@@ -1,7 +1,7 @@
 
   <body>
     <h1>
-      `assoc-in` performance
+      assoc-in* performance
     </h1>
     <div>
       <a href="#group-0">Hashmaps</a><br>
@@ -13,6 +13,10 @@
       <p>
         `assoc-in` preamble
       </p>
+      <p>
+        See the <a href="https://blosavio.github.io/fn-in/performance_summary.html">overall summary</a> for benchmarking details. The benchmarks displayed in
+        this document are defined <a href="https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/assoc_in_benchmarks.clj">here</a>.
+      </p>
     </div>
     <section>
       <h3 id="group-0">
@@ -20,7 +24,7 @@
       </h3>
       <div>
         <p>
-          Comments for hashmaps...
+          <code>assoc-in*</code> version&nbsp;5 improves the performance on hashmaps to near parity with <code>clojure.core/assoc-in</code>.
         </p>
       </div>
       <div>
@@ -209,8 +213,7 @@
       </h3>
       <div>
         <p>
-          This is unfair to <code>get*</code>: <code>clojure.core/get</code> always returns <code>nil</code> when given a list, whereas <code>get*</code>
-          actually retrieves the element.
+          Version&nbsp;5 offers a bit of improved performance for nested lists.
         </p>
       </div>
       <div>
@@ -292,7 +295,7 @@
       </h3>
       <div>
         <p>
-          Comments for sequences...
+          Version&nbsp;5 offers a bit of improved performance for nested sequences.
         </p>
       </div>
       <div>
@@ -392,7 +395,8 @@
       </h3>
       <div>
         <p>
-          Comments for vectors...
+          The top two panels display strange behavior, suggesting that <code>clojure.core/get</code> changed performance. Discounting that spurious change,
+          compared to itself, <code>assoc-in*</code> version&nbsp;5 performed 33 to 67% faster than version&nbsp;4.
         </p>
       </div>
       <div>
@@ -757,7 +761,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 September 30.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/Fastester">Fastester</a> on 2025 October 01.<span id="uuid"><br>
       c5f40541-5057-4758-bc7e-5ae7f867b439</span>
     </p>
   </body>

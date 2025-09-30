@@ -1,5 +1,5 @@
 (->>
- {:title "`get` performance"
+ {:title "get* performance"
 
   :fastester-UUID #uuid "7b038e60-63f1-4f13-b6f0-b3a168d4242d"
 
@@ -19,20 +19,41 @@
   :results-directory "resources/fn_in_performance/get/"
 
   :preamble [:div
-             [:p "`get` preamble"]]
+             [:p [:code "get*"]
+              " delegates to "
+              [:code "clojure.core/get"]
+              " or "
+              [:code "clojure.core/nth"]
+              " as appropriate, so its performance ought to be similar, aside
+ from some minimal overhead for dispatching."]
+
+             [:p "See the "
+              [:a {:href "https://blosavio.github.io/fn-in/performance_summary.html"} "overall summary"]
+              " for benchmarking details. The benchmarks displayed in this
+ document are defined "
+              [:a {:href "https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/get_benchmarks.clj"} "here"]
+              "."]]
 
   :comments
   {"Sequences"
    [:div
-    [:p "Comments for sequences..."]]
+    [:p "Version 5 "
+     [:code "get*"]
+     " very closely provides the performance of "
+     [:code "clojure.core/nth"]
+     ", a notable improvement from version 4."]]
 
    "Hashmaps"
    [:div
-    [:p "Comments for hashmaps..."]]
+    [:p "Version 5 "
+     [:code "get*"]
+     " for a hashmap is very similar, even replicating the anomalous dip at "
+     [:code "100"]
+     "."]]
 
    "Lists"
    [:div
-    [:p "This is unfair to "
+    [:p "This benchmark is unfair to "
      [:code "get*"]
      ": "
      [:code "clojure.core/get"]
@@ -40,11 +61,19 @@
      [:code "nil"]
      " when given a list, whereas "
      [:code "get*"]
-     " actually retrieves the element."]]
+     " actually retrieves the "
+     [:em "nth"]
+     " element. The logarithmic behavior is expected for linked lists
+ constructed from the head."]]
 
    "Vectors"
    [:div
-    [:p "Comments for vectors..."]]}
+    [:p "Version 5 "]
+    [:code "get*"]
+    " approaches "
+    [:code "clojure.core/get"]
+    ", being 19% slower for one-element vectors and linearly improving to
+ matching the performance for one-million-element vectors."]}
 
 
   :chart-settings

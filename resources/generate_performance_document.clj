@@ -80,7 +80,7 @@
     " replaces the "
     [:code "37"]
     " at the end of the test vector with "
-    [:code ":benchmark-sentinal"]
+    [:code ":benchmark-sentinel"]
     " in about 151 nanoseconds."]
 
    [:p "The benchmarks for the 'plain' functions (i.e., "
