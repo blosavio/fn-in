@@ -7,7 +7,7 @@
 
  :html-directory "doc/"
  :markdown-directory "doc/"
- :results-url "https://github.com/blosavio/fn_in/blob/main/"
+ :results-url "https://github.com/blosavio/fn-in/blob/master/"
 
  :verbose? true
  :testing-thoroughness :quick
