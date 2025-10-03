@@ -21,11 +21,11 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevisuals/fn-in &quot;5-SNAPSHOT1&quot;]</code></pre>
+      <pre><code>[com.sagevisuals/fn-in &quot;5&quot;]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevisuals/fn-in {:mvn/version &quot;5-SNAPSHOT1&quot;}</code></pre>
+      <pre><code>com.sagevisuals/fn-in {:mvn/version &quot;5&quot;}</code></pre>
       <h3>
         Require
       </h3>
