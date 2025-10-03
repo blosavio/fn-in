@@ -17,7 +17,8 @@
       </p>
       <p></p>
       <div>
-        <em>altered functions:</em> <code>get*</code>, <code>get-in*</code>
+        <em>altered functions:</em> <code>assoc*</code>, <code>assoc-in*</code>, <code>dissoc*</code>, <code>dissoc-in*</code>, <code>get*</code>,
+        <code>get-in*</code>, <code>update*</code>, <code>update-in*</code>
       </div>
       <p></p>
       <div>
@@ -38,6 +39,16 @@
           <li>
             <div>
               `get*` and `get-in*` now support &apos;not-found&apos; arity.
+            </div>
+          </li>
+          <li>
+            <div>
+              `assoc-in*` now correctly throws an exception when given an empty path.
+            </div>
+          </li>
+          <li>
+            <div>
+              All core functions upgraded to handle records.
             </div>
           </li>
         </ul>
@@ -223,7 +234,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 01.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 02.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

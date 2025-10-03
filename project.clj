@@ -4,11 +4,11 @@
   :license {:name "MIT License"
             :url "https://opensource.org/license/mit"
             :distribution :repo}
-  :dependencies [[org.clojure/clojure "1.12.2"]
-                 [com.clojure-goes-fast/clj-async-profiler "1.6.2"]]
+  :dependencies [[org.clojure/clojure "1.12.3"]]
   :repl-options {:init-ns fn-in.core}
   :plugins []
-  :profiles {:dev {:dependencies [[com.sagevisuals/chlog "1"]
+  :profiles {:dev {:dependencies [[com.clojure-goes-fast/clj-async-profiler "1.6.2"]
+                                  [com.sagevisuals/chlog "1"]
                                   [com.sagevisuals/fastester "0"]
                                   [com.sagevisuals/readmoi "4"]
                                   [hiccup "2.0.0-RC3"]]

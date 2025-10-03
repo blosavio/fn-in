@@ -29,13 +29,6 @@
 
 
 (defbench
-  test-assoc-seq
-  "Sequences"
-  (fn [n] (assoc (seq-of-n-rand-ints n) (dec n) :benchmark-sentinel))
-  (range-pow-10 max-seq-length))
-
-
-(defbench
   test-assoc*-seq
   "Sequences"
   (fn [n] (assoc* (seq-of-n-rand-ints n) (dec n) :benchmark-sentinel))
@@ -108,7 +101,6 @@
 (deftest assoc-assoc*-benchmark-tests
   (are [benchmark-name target-sequence]
       (every? true? (map #(= :benchmark-sentinel (fn-then-get* (benchmark-name   :f) %)) target-sequence))
-    test-assoc-seq (range-pow-10 max-seq-length)
     test-assoc*-seq (range-pow-10 max-seq-length)
     test-assoc-vec (range-pow-10 max-seq-length)
     test-assoc*-vec (range-pow-10 max-seq-length)

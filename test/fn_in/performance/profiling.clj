@@ -86,7 +86,7 @@
   (do
     (println "get* profiling")
     (profile-benchmark-fn test-get*-vec 1E6 30)
-    (profile-benchmark-fn test-get*-seq 1E6 30)
+    (profile-benchmark-fn test-get*-seq 5E1 30)
     (profile-benchmark-fn test-get*-map 1E6 30)
     (profile-benchmark-fn test-get*-list 1E3 2)
 
@@ -112,7 +112,7 @@
 
     (println "update* profiling")
     (profile-benchmark-fn test-update*-vec 1E2 10)
-    (profile-benchmark-fn test-update*-seq 1E6 10)
+    (profile-benchmark-fn test-update*-seq 1E2 10)
     (profile-benchmark-fn test-update*-map 1E6 10)
     (profile-benchmark-fn test-update*-list 1E2 0.005)
 
@@ -125,7 +125,7 @@
 
     (println "dissoc* profiling")
     (profile-benchmark-fn test-dissoc*-vec 1E2 0.5)
-    (profile-benchmark-fn test-dissoc*-seq 1E6 0.000025)
+    (profile-benchmark-fn test-dissoc*-seq 1E6 10)
     (profile-benchmark-fn test-dissoc*-map 1E6 10)
     (profile-benchmark-fn test-dissoc*-list 1E2 0.003)
 

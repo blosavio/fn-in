@@ -20,6 +20,7 @@
           :day 27}
    :change-type :performance-improvement
    :breaking? false}
+
   {:description "`get*` and `get-in*` now support 'not-found' arity."
    :date {:year 2025
           :month "September"
@@ -27,5 +28,29 @@
    :change-type :function-arguments
    :altered-functions ['get*
                        'get-in*]
+   :breaking? false}
+
+  {:description "`assoc-in*` now correctly throws an exception when given an
+ empty path."
+   :date {:year 2025
+          :month "October"
+          :day 2}
+   :change-type :bug-fix
+   :altered-functions ['assoc-in*]
+   :breaking? false}
+
+  {:description "All core functions upgraded to handle records."
+   :date {:year 2025
+          :month "October"
+          :day 2}
+   :change-type :relaxed-input-requirements
+   :altered-functions ['get*
+                       'get-in*
+                       'assoc*
+                       'assoc-in*
+                       'update*
+                       'update-in*
+                       'dissoc*
+                       'dissoc-in*]
    :breaking? false}]}
 

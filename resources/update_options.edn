@@ -9,7 +9,6 @@
                  'test-update*-seq
                  'test-update*-vec
                  'test-update-map
-                 'test-update-seq
                  'test-update-vec}}
 
   :html-filename "update_performance.html"

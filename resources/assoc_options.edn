@@ -9,7 +9,6 @@
                  'test-assoc*-seq
                  'test-assoc*-vec
                  'test-assoc-map
-                 'test-assoc-seq
                  'test-assoc-vec}}
 
   :html-filename "assoc_performance.html"

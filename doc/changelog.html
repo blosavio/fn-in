@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2025-10-01 07:04:05" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2025-10-02 17:40:02" content="width=device-width, initial-scale=1" name="viewport">
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
       fn-in library changelog
@@ -26,7 +26,8 @@
       </p>
       <p></p>
       <div>
-        <em>altered functions:</em> <code>get*</code>, <code>get-in*</code>
+        <em>altered functions:</em> <code>assoc*</code>, <code>assoc-in*</code>, <code>dissoc*</code>, <code>dissoc-in*</code>, <code>get*</code>,
+        <code>get-in*</code>, <code>update*</code>, <code>update-in*</code>
       </div>
       <p></p>
       <div>
@@ -47,6 +48,16 @@
           <li>
             <div>
               `get*` and `get-in*` now support 'not-found' arity.
+            </div>
+          </li>
+          <li>
+            <div>
+              `assoc-in*` now correctly throws an exception when given an empty path.
+            </div>
+          </li>
+          <li>
+            <div>
+              All core functions upgraded to handle records.
             </div>
           </li>
         </ul>
@@ -232,7 +243,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 01.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 02.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

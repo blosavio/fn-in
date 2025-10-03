@@ -18,7 +18,7 @@
   [max-len]
   (persistent!
    (reduce
-    (fn [m k] (assoc! m k (vec (repeatedly k #(rand-int 99)))))
+    (fn [m k] (assoc! m k (doall (repeatedly k #(rand-int 99)))))
     (transient {})
     (range-pow-10 max-len))))
 
@@ -26,9 +26,10 @@
 (defn create-vec-of-n-rand-ints
   [max-len]
   (persistent!
-   (reduce (fn [m [k v]] (assoc! m k (vec v)))
-           (transient {})
-           (create-seq-of-n-rand-ints max-len))))
+   (reduce
+    (fn [m [k v]] (assoc! m k (vec v)))
+    (transient {})
+    (create-seq-of-n-rand-ints max-len))))
 
 
 (defn create-list-of-n-rand-ints

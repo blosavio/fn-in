@@ -29,13 +29,6 @@
 
 
 (defbench
-  test-update-seq
-  "Sequences"
-  (fn [n] (update (seq-of-n-rand-ints n) (dec n) inc))
-  (range-pow-10 max-seq-length))
-
-
-(defbench
   test-update*-seq
   "Sequences"
   (fn [n] (update* (seq-of-n-rand-ints n) (dec n) inc))
@@ -108,7 +101,6 @@
 (deftest update-update*-benchmark-tests
   (are [structure benchmark-name n]
       (every? true? (map #(= (inc (get* (structure %) (dec %))) (fn-then-get* (benchmark-name :f) %)) n))
-    seq-of-n-rand-ints test-update-seq (range-pow-10 max-seq-length)
     seq-of-n-rand-ints test-update*-seq (range-pow-10 max-seq-length)
     vec-of-n-rand-ints test-update-vec (range-pow-10 max-seq-length)
     vec-of-n-rand-ints test-update*-vec (range-pow-10 max-seq-length)

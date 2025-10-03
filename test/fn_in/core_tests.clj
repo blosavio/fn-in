@@ -10,10 +10,15 @@
    [clojure.string :as string]))
 
 
+(defrecord TestRec [field-1 field-2])
+
+(def test-record (->TestRec 33 {:nested-key "nested-val"}))
+
+
 (deftest get*-test
   (testing "`nil`"
     (is (nil? (get* nil :foo))))
-  
+
   (testing "empty collections"
     (are [x] (= nil x)
       (get* '() 0)
@@ -67,7 +72,8 @@
       (get* (lazy-cat [11 22 33] [44 55 66]) 2)
       (get* (mapcat reverse [[33 22 11] [66 55 44] [99 88 77]]) 2)
       (get* (zipmap [:a :b :c] [11 22 33]) :c)
-      (get* (subvec [11 22 33 44 55] 0 5) 2)))
+      (get* (subvec [11 22 33 44 55] 0 5) 2)
+      (get* test-record :field-1)))
 
   (testing "not-found"
     (are [x] (= :foo x)
@@ -88,7 +94,8 @@
       (get* (lazy-cat [11 22 33] [44 55 66]) 6 :foo)
       (get* (mapcat reverse [[33 22 11] [66 55 44] [99 88 77]]) 9 :foo)
       (get* (zipmap [:a :b :c] [11 22 33]) :d :foo)
-      (get* (subvec [11 22 33 44 55] 0 5) 5 :foo)))
+      (get* (subvec [11 22 33 44 55] 0 5) 5 :foo)
+      (get* test-record :blah :foo)))
 
   (testing "composite keys on maps"
     (are [x y] (= x y)
@@ -141,7 +148,7 @@
       (get-in* (zipmap [] []) [:a])
       (get-in* (subvec [] 0 0) [1 2])))
 
-  (testing "key/index not found"
+  (testing "key/index not existing"
     (are [x] (= nil x)
       (get-in* [11 22 33 44 55] [5])
       (get-in* '(11 22 33 44 55) [5])
@@ -149,7 +156,8 @@
       (get-in* #{11 22 33 44 55} [66])
       (get-in* (lazy-seq [11 22 33 44 55]) [5])
       (get-in* (cons 11 '(22 33 44 55)) [5])
-      (get-in* (subvec [11 22 33 44 55] 0 5) [5])))
+      (get-in* (subvec [11 22 33 44 55] 0 5) [5])
+      (get-in* test-record [:blah])))
 
   (testing "empty path vectors addresses the whole input collection"
     (are [x y] (= x y)
@@ -225,7 +233,17 @@
       (get-in* #{#{#{11 22 33 #{77}} 44 55} 66} [#{#{11 22 33 #{77}} 44 55}
                                                  #{11 22 33 #{77}}
                                                  #{77}
-                                                 77]))))
+                                                 77])))
+
+  (testing "not-found"
+    (are [x] (= x :not-found)
+      (get-in* [11 [22 [33]]] [1 1 1] :not-found)
+      (get-in* {:a {:b {:c 99}}} [:a :b :d] :not-found)
+      (get-in* '(11 (22 (33))) [1 1 1] :not-found)
+      (get-in* #{11 #{22 #{33}}} [#{22 #{33}} #{33} 99] :not-found)
+      (get-in* (repeat 3 (range 3)) [2 99] :not-found)
+      (get-in* test-record [:blah] :not-found))))
+
 
 (deftest concat-list-tests
   (testing "one or two lists"
@@ -379,6 +397,25 @@
       (take 10 (non-term-assoc (repeat 11) 3 99)) '(11 11 11 99 11 11 11 11 11 11))))
 
 
+(deftest set-assoc-tests
+  (testing "empty sets"
+    (are [x y] (= x y)
+      #{:foo} (set-assoc #{} :foo :foo)
+      #{[:foo]} (set-assoc #{} [:foo] [:foo])))
+  (testing "non-empty sets"
+    (are [x y] (= x y)
+      #{11 :foo 33} (set-assoc #{11 22 33} 22 :foo)))
+  (testing "associating non-existing val"
+    (are [x y] (= x y)
+      #{11 22 33 :foo} (set-assoc #{11 22 33} :not-there :foo))))
+
+
+(deftest mult-asooc*-tests
+  (are [x y] (= x y)
+    {:a 1} (mult-assoc* {} :a 1)
+    {:a 1 :b 2} (mult-assoc* {} :a 1 :b 2)
+    {:a 1 :b 2 :c 3} (mult-assoc* {} :a 1 :b 2 :c 3)))
+
 
 (deftest assoc*-test
   (testing "empty collections"
@@ -528,7 +565,36 @@
   (testing "assoc-ing away non-unique set members"
     (are [x y] (= x y)
       #{11 33}
-      (assoc* #{11 22 33} 22 33))))
+      (assoc* #{11 22 33} 22 33)))
+
+  (testing "assoc-ing records"
+    (are [x y] (= x y)
+      (->TestRec 99 {:nested-key "nested-val"})
+      (assoc* test-record :field-1 99)
+
+      (->TestRec 99 101)
+      (assoc* test-record :field-1 99 :field-2 101)))
+
+  (testing "extra key/index-vals"
+    (are [x y] (= x y)
+      [:foo :bar 33] (assoc* [11 22 33] 0 :foo 1 :bar)
+      [:foo :bar :baz] (assoc* [11 22 33] 0 :foo 1 :bar 2 :baz)
+      {:a 11 :b 22} (assoc* {} :a 11 :b 22)
+      {:a 11 :b 22 :c 33} (assoc* {} :a 11 :b 22 :c 33)
+      [:foo :bar 2] (assoc* (range 3) 0 :foo 1 :bar)
+      [:foo :bar :baz] (assoc* (range 3) 0 :foo 1 :bar 2 :baz)
+      #{:foo :bar 33} (assoc* #{11 22 33} 11 :foo 22 :bar)
+      #{:foo :bar :baz} (assoc* #{11 22 33} 11 :foo 22 :bar 33 :baz)
+      '(:foo :bar 2) (assoc* (range 3) 0 :foo 1 :bar)
+      '(:foo :bar :baz) (assoc* (range 3) 0 :foo 1 :bar 2 :baz)
+      '(:foo :bar) (assoc* '() 0 :foo 1 :bar)
+      '(:foo :bar 33) (assoc* '(11 22 33) 0 :foo 1 :bar)
+      '(:foo :bar :baz) (assoc* '(11 22 33) 0 :foo 1 :bar 2 :baz)
+      '(:foo :bar 33) (assoc* (cons 11 '(22 33)) 0 :foo 1 :bar)
+      '(:foo :bar :baz) (assoc* (cons 11 '(22 33)) 0 :foo 1 :bar 2 :baz)
+      nil (assoc* nil :foo :bar)
+      nil (assoc* nil :foo :bar :baz :boz)
+      nil (assoc* nil :foo :bar :baz :boz :qux :quz))))
 
 
 (deftest update*-test
@@ -583,7 +649,10 @@
       {:a 'foo, :b 2, :c 3}
 
       [11 22 330 44 55]
-      (update* (subvec [11 22 33 44 55] 0 5) 2 #(* % 10))))
+      (update* (subvec [11 22 33 44 55] 0 5) 2 #(* % 10))
+
+      (->TestRec 34 {:nested-key "nested-val"})
+      (update* test-record :field-1 inc)))
 
   (testing "'updated' values beyond bounds; update function must accept nil"
     (are [x y] (= x y)
@@ -677,7 +746,10 @@
       '(11 22 33 [44 55 :foo] 77 88 99)
 
       (assoc-in* (subvec [11 (subvec [22 (subvec [33] 0 1)] 0 2)] 0 2) [1 1 0] 99)
-      [11 [22 [99]]]))
+      [11 [22 [99]]]
+
+      (assoc-in* test-record [:field-2 :nested-key] "new-val")
+      (->TestRec 33 {:nested-key "new-val"})))
 
   (testing "heterogeneous nested collection"
     (are [x y] (= x y)
@@ -730,7 +802,10 @@
       (take 3 (assoc-in* (repeat [11 22 33]) [2 1] 99))
 
       (assoc-in* (subvec [11 22 {:a 33 :b (subvec [44 55 66] 0 3)}] 0 3) [2 :b 1] 99)
-      [11 22 {:a 33, :b [44 99 66]}])))
+      [11 22 {:a 33, :b [44 99 66]}]))
+
+  (testing "throwing when supplied with empty path"
+    (is (thrown? Exception (assoc-in* {:a 99} [] :foo)))))
 
 
 (deftest update-in*-test
@@ -764,7 +839,10 @@
       '(:a [11 22 33] :b [44 55 :bar] :c [77 88 99])
 
       (update-in* (subvec [11 22 33 (subvec [44 55 (subvec [66 77 88] 0 3)] 0 3)] 0 4) [3 2 2] #(- % 88))
-      [11 22 33 [44 55 [66 77 0]]]))
+      [11 22 33 [44 55 [66 77 0]]]
+
+      (update-in* test-record [:field-2 :nested-key] #(clojure.string/replace % #"nested" "new"))
+      (->TestRec 33 {:nested-key "new-val"})))
 
   (testing "heterogeneous collections"
     (are [x y] (= x y)
@@ -958,6 +1036,9 @@
   (testing "cons"
     (is (= (dissoc* (cons 11 '(22 33)) 1) '(11 33))))
 
+  (testing "records"
+    (is (= {:field-1 33} (dissoc* test-record :field-2))))
+
   (testing "other sequences"
     (are [x y] (= x y)
       (dissoc* (interleave [:a :b :c] [1 2 3]) 2)
@@ -1004,7 +1085,10 @@
       '(1 2 3 4 6 7 8 9)
 
       (dissoc-in* (subvec [11 22 33] 0 3) [1])
-      [11 33]))
+      [11 33]
+
+      (dissoc-in* test-record [:field-2 :nested-key])
+      (->TestRec 33 {})))
 
   (testing "preserve empty containing collections"
     (are [x y] (= x y)

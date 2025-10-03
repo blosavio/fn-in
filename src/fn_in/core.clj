@@ -1,17 +1,18 @@
 (ns fn-in.core
   "This namespace provides functions to:
 
-  * inspect an element (`get`)
-  * change an element (`assoc`)
-  * apply a function to an element (`update`)
-  * remove an element (`dissoc`)
+  * inspect an element ([[get*]] and [[get-in*]])
+  * change an element ([[assoc*]] and [[assoc-in*]])
+  * apply a function to an element ([[update*]] and [[update-in*]])
+  * remove an element ([[dissoc*]] and [[dissoc-in*]])
 
-  from **any** of Clojure's collection types (plus non-terminating sequences),
-  similarly to their `clojure.core` namesakes. The `...-in` variants operate on
-  any heterogeneous, arbitrarily-nested data structure.
+  contained inside **any** of Clojure's collection types (including
+  non-terminating sequences), similarly to their `clojure.core` namesakes. The
+  `...-in` variants operate on any heterogeneous, arbitrarily-nested data
+  structure.
 
-  * Elements contained in vectors, lists, and other sequences are addressed by
-    zero-indexed integers.
+  * Elements contained in vectors, lists, and other sequential collections are
+    addressed by zero-indexed integers.
   * Elements contained in maps are addressed by key, which may be any valid
     Clojure value, including a composite.
   * Elements contained in sets are addressed by the element's value, which may
@@ -23,17 +24,10 @@
   * `i` index/key
   * `x` value
   * `f` function
-  * `arg1`, `arg2`, `arg3` optional args to multi-arity function `f`.")
+  * `arg1`, `arg2`, `arg3` optional args to multi-arity function `f`.
 
-
-;; get* UUID
-;; {:UUIDv4 #uuid "4cbfffbd-b67c-4a22-b6ca-983e6b62e091"}
-
-;; assoc* UUID
-;; {:UUIDv4 #uuid "f73dc5d7-87e1-4bb7-8c36-6ec41fa38052"}
-
-;; dissoc* UUID
-;; {:UUIDv4 #uuid "7433bb55-ecfb-4ce8-bd10-bbf8a5dbd0ed"}
+  See also the [glossary](https://github.com/blosavio/fn-in#glossary) of
+  terms.")
 
 
 (defn concat-list
@@ -47,19 +41,22 @@
   (reverse (into '() (apply concat lists))))
 
 
+(declare assoc*)
+
+
 (defn list-assoc
   "Returns a new list with the element at index idx replaced with value x.
    If idx is beyond the end, nil entries are appended."
   {:UUIDv4 #uuid "f73dc5d7-87e1-4bb7-8c36-6ec41fa38052"
    :no-doc true}
-  [coll idx val]
-  ((fn assoc-sub [head tail k]
-     (if (zero? k)
-       (concat-list head (list val) (rest tail))
-       (assoc-sub (concat-list head (list (first tail)))
-                  (rest tail)
-                  (dec k))))
-   (empty coll) coll idx))
+  [c i x]
+  (let [f (fn assoc-sub [head tail k]
+            (if (zero? k)
+              (concat-list head (list x) (rest tail))
+              (assoc-sub (concat-list head (list (first tail)))
+                         (rest tail)
+                         (dec k))))]
+    (f (empty c) c i)))
 
 
 (defn vector-assoc
@@ -79,11 +76,7 @@
    :no-doc true
    :implementation-note "Inspired by built-in (assoc)."}
   ([c i x] (assoc c i x))
-  ([c i x & i_s]
-   (let [a (assoc c i x)]
-     (if i_s
-       (recur a (first i_s) (second i_s) (nnext i_s))
-       a))))
+  ([c i x & ixs] (apply assoc c i x ixs)))
 
 
 (defn non-term-assoc
@@ -96,8 +89,16 @@
    it might be infinite."
   {:UUIDv4 #uuid "fee4b366-b8e3-477c-bfe4-2e7b6defc014"
    :no-doc true}
-  [c i x]
-  (lazy-cat (take i c) (vector x) (nthrest c (inc i))))
+  [c i x] (lazy-cat (take i c) (vector x) (nthrest c (inc i))))
+
+
+(defn set-assoc
+  "Given set `s`, quasi-associates `x` to `i` by disjoining `i`, and  conjoining
+  `x`."
+  {:UUIDv4 #uuid "862f7fda-4e0c-45b0-b14c-ad492735c93f"
+   :no-doc true}
+  [s i x]
+  (conj (disj s i) x))
 
 
 (defn vector-dissoc
@@ -132,7 +133,18 @@
   (lazy-cat (take i c) (nthrest c (inc i))))
 
 
-;; codox requires the docstrings to be string literals
+(defn mult-assoc*
+  "`assoc*` pairs of `xs` and `ys` to collection `c`."
+  {:UUIDv4 #uuid "8fd6ea55-cb8f-4858-8fc5-da77bbce5363"
+   :no-doc true}
+  [c & xys]
+  (if xys
+    (apply mult-assoc* (assoc* c (first xys) (second xys)) (nnext xys))
+    c))
+
+
+;; codox requires the docstrings to be string literals.
+;; protocols cannot handle varargs, so must be explicit
 
 
 (defprotocol FnIn
@@ -141,7 +153,7 @@
   (get*
     [c i]
     [c i not-found]
-    "Returns the value at location `i` within a collection `c`. Similar to
+    "Returns the value at key/index `i` within a collection `c`. Similar to
   [`clojure.core/get`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/get)
   . Returns `nil` if index is out of bounds. If not found, returns `not-found`
  if provided, `nil` otherwise.
@@ -161,15 +173,14 @@
 
   (assoc*
     [c i x]
+    [c i1 x1 i2 x2]
+    [c i1 x1 i2 x2 i3 x3]
     "Returns a new collection `c` with the key/index `i` associated with the
   supplied value `x`. Similar to
   [`clojure.core/assoc`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/assoc)
   , but operates on all Clojure collections. Indexes beyond the end of a
   sequence are padded with `nil`.
 
-  Note: Because set members are addressed by their value, the `assoc*`-ed value
-  may match a pre-existing set member, and the returned set may have one fewer
-  members.
 
   Examples:
   ```clojure
@@ -180,13 +191,25 @@
   (assoc* (range 3) 1 99) ;; => (0 99 2)
   (assoc* (take 6 (iterate dec 10)) 3 99) ;; => (10 9 8 99 6 5)
 
-  ;; associating an existing set member reduces the size of the set
-  (assoc* #{11 22 33} 22 33) ;; => #{33 11}
-
   ;; associating a value into a non-terminating sequence
   (take 5 (assoc* (repeat 3) 2 99)) ;; => (3 3 99 3 3)
 
-  ;; associating a value beyond a sequence's bounds causes nil-padding
+  ;; associating multiple pairs of index+values
+  (assoc* [11 22 33 44 55] 0 :foo 2 :bar 4 :baz) ;; => [:foo 22 :bar 44 :baz]
+  ```
+
+  Note: Because set members are addressed by their value, the `assoc*`-ed value
+  may match a pre-existing set member, and the returned set may have one fewer
+  members.
+
+  ```clojure
+  ;; associating an existing set member reduces the size of the set
+  (assoc* #{11 22 33} 22 33) ;; => #{33 11}
+  ```
+
+  Note: Associating a value beyond a sequence's bounds causes `nil`-padding.
+
+  ```clojure
   (assoc* [11 22 33] 5 99) ;; => (11 22 33 nil nil 99)
   ```")
 
@@ -219,21 +242,30 @@
   (get*
     ([v idx] (get v idx nil))
     ([v idx not-found] (get v idx not-found)))
-  (assoc* [c i x] (vector-assoc c i x))
+  (assoc*
+    ([c i x] (vector-assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [c i] (vector-dissoc c i))
 
   clojure.lang.ASeq
   (get*
     ([s idx] (nth s idx nil))
     ([s idx not-found] (nth s idx not-found)))
-  (assoc* [c i x] (non-term-assoc c i x))
+  (assoc*
+    ([c i x] (non-term-assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [c i] (non-term-dissoc c i))
 
   clojure.lang.APersistentMap
   (get*
     ([m k] (get m k))
     ([m k not-found] (get m k not-found)))
-  (assoc* [c i x] (assoc c i x))
+  (assoc*
+    ([c i x] (assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [c i] (dissoc c i))
 
   clojure.lang.APersistentSet
@@ -242,42 +274,70 @@
     ([s x not-found] (if-let [found (s x)]
                        found
                        not-found)))
-  (assoc* [c i x] (conj (disj c i) x))
+  (assoc*
+    ([c i x] (set-assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [c i] (disj c i))
 
   clojure.lang.LazySeq
   (get*
     ([c idx] (nth c idx nil))
     ([c idx not-found] (nth c idx not-found)))
-  (assoc* [c i x] (non-term-assoc c i x))
+  (assoc*
+    ([c i x] (non-term-assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [c i] (non-term-dissoc c i))
 
   clojure.lang.PersistentList
   (get*
     ([s idx] (nth s idx nil))
     ([s idx not-found] (nth s idx not-found)))
-  (assoc* [c i x] (list-assoc c i x))
+  (assoc*
+    ([c i x] (list-assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [c i] (list-dissoc c i))
 
   clojure.lang.PersistentList$EmptyList
   (get*
     ([c idx] (nth c idx nil))
     ([c idx not-found] (nth c idx not-found)))
-  (assoc* [c i x] (list-assoc c i x))
+  (assoc*
+    ([c i x] (list-assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [c i] (list-dissoc c i))
 
   clojure.lang.Cons
   (get*
     ([s idx] (nth s idx nil))
     ([s idx not-found] (nth s idx not-found)))
-  (assoc* [c i x] (list-assoc c i x))
+  (assoc*
+    ([c i x] (list-assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [c i] (list-dissoc c i))
+
+  clojure.lang.IRecord
+  (get*
+    ([c i] (get c i))
+    ([c i not-found] (get c i not-found)))
+  (assoc*
+    ([c i x] (assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
+  (dissoc* [c i] (dissoc c i))
 
   nil
   (get*
     ([_ _] nil)
     ([_ _ _] nil))
-  (assoc* [_ _ _] nil)
+  (assoc*
+    ([_ _ _] nil)
+    ([_ _ _ _ _] nil)
+    ([_ _ _ _ _ _ _] nil))
   (dissoc* [_ _] nil))
 
 
@@ -321,8 +381,7 @@
   `path`, a vector of indexes/keys. This version of
   [`clojure.core/get-in`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/get-in)
   operates on all Clojure collections. An empty `path` vector returns the
-  original collection `c`. Performance is not optimized, so it might steal your
-  lunch money.
+  original collection `c`.
 
   Examples:
   ```clojure
@@ -348,16 +407,29 @@
 
   ;; nested non-terminating sequences
   (get-in* (repeat (cycle [:a :b :c])) [99 5]) ;; => :c
+
+  ;; element not found
+  (get-in* [11 [22 [33]]] [1 1 99] :not-here) ;; => :not-here
   ```"
   {:UUIDv4 #uuid "0e59acfb-ec3a-450c-99f6-8e1f8c01e4c5"}
-  [c path]
-  (reduce get* c path))
+  ([c path] (reduce get* c path))
+  ([c path not-found]
+   (loop [sentinel (Object.)
+          c c
+          path (seq path)]
+     (if path
+       (let [c (get* c (first path) sentinel)]
+         (if (identical? sentinel c)
+           not-found
+           (recur sentinel c (next path))))
+       c))))
 
 
 (defn assoc-in*
-  "Returns collection `c` with a new value `x` associated at path vector of
-  `i` elements. Similar to [`clojure.core/assoc-in`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/assoc-in)
-  , but operates on any heterogeneous, arbitrarily-nested collections. Supplying
+  "Returns a new collection `c` with a value `x` associated at path formed from
+  a sequence of `i` elements. Similar to
+  [`clojure.core/assoc-in`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/assoc-in)
+  , but operates on any heterogeneous, arbitrarily-nested collection. Supplying
   an empty path throws an exception. Associating beyond the end of sequence
   results in `nil`-padding.
 
@@ -380,13 +452,15 @@
   ```"
   {:UUIDv4 #uuid "e32d8f77-84d3-4830-82ad-369682e9eb9b"}
   [c [i & i_s] x]
-  (if i_s
-    (assoc* c i (assoc-in* (get* c i) i_s x))
-    (assoc* c i x)))
+  (if i
+    (if i_s
+      (assoc* c i (assoc-in* (get* c i) i_s x))
+      (assoc* c i x))
+    (throw (Exception. "Path must be a non-empty sequence."))))
 
 
 (defn update-in*
-  "Returns a new collection `c` with the value at path vector `ks` updated by
+  "Returns a new collection `c` with the value at path sequence `i_s` updated by
   applying function `f` to the previous value. Similar to
   [`clojure.core/update-in`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/update-in)
   , but operates on any heterogeneous, arbitrarily-nested collection. Additional
@@ -422,19 +496,20 @@
   (update-in* [11 [22 [99]]] [1 1 0] #(/ %1 %2) 3) ;; => [11 [22 [33]]]
   ```"
   {:UUIDv4 #uuid "cc817a8e-2ba4-433d-b085-74da32747e29"}
-  ([m ks f & args]
-   (let [up (fn up [m ks f args]
-              (let [[k & ks] ks]
-                (if ks
-                  (assoc* m k (up (get* m k) ks f args))
-                  (assoc* m k (apply f (get* m k) args)))))]
-     (up m ks f args))))
+  ([c i_s f & args]
+   (let [up (fn up [c i_s f args]
+              (let [[k & i_s] i_s]
+                (if i_s
+                  (assoc* c k (up (get* c k) i_s f args))
+                  (assoc* c k (apply f (get* c k) args)))))]
+     (up c i_s f args))))
 
 
 (defn dissoc-in*
-  "Remove element located at `i` from an arbitrarily-nested collection `c`. Any
-  containing collections are preserved if `i` addresses a single scalar. If `i`
-  addresses a nested collection, all children are removed.
+  "Returns a new arbitrarily-nested collection `c` after removing the element
+  located at path sequence formed from `i` elements. Any containing collections
+  are preserved if `i` addresses a single scalar. If `i` addresses a nested
+  collection, all children are removed.
 
   Examples:
   ```clojure

@@ -10,7 +10,6 @@
                  'test-get*-vec
                  'test-get-list
                  'test-get-map
-                 'test-get-seq
                  'test-get-vec}}
 
   :html-filename "get_performance.html"

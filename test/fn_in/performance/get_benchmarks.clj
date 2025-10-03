@@ -27,13 +27,6 @@
 
 
 (defbench
-  test-get-seq
-  "Sequences"
-  (fn [n] (get (seq-of-n-rand-ints n) (dec n)))
-  (range-pow-10 max-seq-length))
-
-
-(defbench
   test-get*-seq
   "Sequences"
   (fn [n] (get* (seq-of-n-rand-ints n) (dec n)))
@@ -113,7 +106,6 @@
 (deftest get-get*-benchmark-tests
   (are [value-fn benchmark-name n]
       (every? true? (map #(= (value-fn %) ((benchmark-name :f) %)) n))
-    #(last (seq-of-n-rand-ints %)) test-get-seq (range-pow-10 max-seq-length)
     #(last (seq-of-n-rand-ints %)) test-get*-seq (range-pow-10 max-seq-length)
     #(last (vec-of-n-rand-ints %)) test-get-vec (range-pow-10 max-seq-length)
     #(last (vec-of-n-rand-ints %)) test-get*-vec (range-pow-10 max-seq-length)
