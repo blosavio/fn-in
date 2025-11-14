@@ -18,6 +18,8 @@
  :project-description "A library for manipulating heterogeneous, arbitrarily-nested Clojure data structures"
  :project-name-formatted "fn-in"
 
+ :preferred-project-metadata :lein
+
  :readme-UUID #uuid "59ecaabc-1b75-4616-9f03-2ccde4bb8729"
 
  :readme-html-directory "doc/"
@@ -32,3 +34,4 @@
  :wrap-at 80
 
  :tidy-html? true}
+

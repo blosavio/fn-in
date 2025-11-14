@@ -4,7 +4,38 @@
       fn-in library changelog
     </h1><a href="https://github.com/blosavio/chlog">changelog info</a>
     <section>
-      <h3>
+      <h3 id="v6">
+        version 6
+      </h3>
+      <p>
+        2025 November 7<br>
+        Brad Losavio (blosavio@sagevisuals.com)<br>
+        <em>Description:</em> Added ability to handle Java arrays. Improved unit tests.<br>
+        <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
+        <em>Urgency:</em> medium<br>
+        <em>Breaking:</em> no
+      </p>
+      <p></p>
+      <div>
+        <h4>
+          Breaking changes
+        </h4>
+        <ul></ul>
+        <h4>
+          Non-breaking changes
+        </h4>
+        <ul>
+          <li>
+            <div>
+              Reorganized unit tests and added inline checks to verify the type of the collections being tested.
+            </div>
+          </li>
+        </ul>
+      </div>
+      <hr>
+    </section>
+    <section>
+      <h3 id="v5">
         version 5
       </h3>
       <p>
@@ -56,7 +87,7 @@
       <hr>
     </section>
     <section>
-      <h3>
+      <h3 id="v4">
         version 4
       </h3>
       <p>
@@ -98,7 +129,7 @@
       <hr>
     </section>
     <section>
-      <h3>
+      <h3 id="v3">
         version 3
       </h3>
       <p>
@@ -135,7 +166,7 @@
       <hr>
     </section>
     <section>
-      <h3>
+      <h3 id="v2">
         version 2
       </h3>
       <p>
@@ -177,7 +208,7 @@
       <hr>
     </section>
     <section>
-      <h3>
+      <h3 id="v1">
         version 1
       </h3>
       <p>
@@ -208,7 +239,7 @@
       <hr>
     </section>
     <section>
-      <h3>
+      <h3 id="v0">
         version 0
       </h3>
       <p>
@@ -234,7 +265,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 02.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 November 07.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

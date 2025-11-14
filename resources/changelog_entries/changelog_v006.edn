@@ -1,0 +1,20 @@
+{:date {:year 2025
+        :month "November"
+        :day 7}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 6
+ :comment "Added ability to handle Java arrays. Improved unit tests."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? false
+ :changes
+ [{:description "Reorganized unit tests and added inline checks to verify the
+ type of the collections being tested."
+   :date {:year 2025
+          :month "Novembery"
+          :day 7}
+   :change-type :tests
+   :breaking? false}]}
+

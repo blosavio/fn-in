@@ -1,4 +1,4 @@
-(defproject com.sagevisuals/fn-in "5"
+(defproject com.sagevisuals/fn-in "6-SNAPSHOT0"
   :description "A Clojure library for manipulating heterogeneous, arbitrarily-nested data structures."
   :url "https://github.com/blosavio/fn-in"
   :license {:name "MIT License"
@@ -8,9 +8,9 @@
   :repl-options {:init-ns fn-in.core}
   :plugins []
   :profiles {:dev {:dependencies [[com.clojure-goes-fast/clj-async-profiler "1.6.2"]
-                                  [com.sagevisuals/chlog "1"]
+                                  [com.sagevisuals/chlog "5"]
                                   [com.sagevisuals/fastester "0"]
-                                  [com.sagevisuals/readmoi "4"]
+                                  [com.sagevisuals/readmoi "6"]
                                   [hiccup "2.0.0-RC3"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]
                              [lein-codox "0.10.8"]]
@@ -21,6 +21,8 @@
              :benchmark {:jvm-opts ["-XX:+TieredCompilation"
                                     "-XX:TieredStopAtLevel=4"]}
              :repl {}}
+  :aliases {"readmoi" ["run" "-m" "readmoi-generator"]
+            "chlog" ["run" "-m" "chlog-generator"]}
   :codox {:metadata {:doc/format :markdown}
           :namespaces [#"^fn-in\.(?!scratch)"]
           :target-path "doc"
@@ -28,6 +30,6 @@
           :doc-files []
           :source-uri "https://github.com/blosavio/fn-in/blob/master/{filepath}#L{line}"
           :html {:transforms [[:div.sidebar.primary] [:append [:ul.index-link [:li.depth-1 [:a {:href "https://github.com/blosavio/fn-in"} "Project Home"]]]]]}
-          :project {:name "fn-in" :version "version 5"}}
+          :project {:name "fn-in" :version "version 6"}}
   :scm {:name "git" :url "https://github.com/blosavio/fn-in"})
 
