@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2025-10-27 10:45:16" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2025-11-15 13:58:12" content="width=device-width, initial-scale=1" name="viewport">
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
       fn-in — A library for manipulating heterogeneous, arbitrarily-nested Clojure data structures
@@ -30,11 +30,11 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevisuals/fn-in "5"]</code></pre>
+      <pre><code>[com.sagevisuals/fn-in "6-SNAPSHOT0"]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevisuals/fn-in {:mvn/version "5"}</code></pre>
+      <pre><code>com.sagevisuals/fn-in {:mvn/version "6-SNAPSHOT0"}</code></pre>
       <h3>
         Require
       </h3>
@@ -46,15 +46,15 @@
       </h2>
       <p>
         Most of the time, when someone hands us a Clojure collection, we know its type and how best to manipulate it. If we get handed a vector, we know that
-        <code>get</code> is effective at retrieving an element. Let's grab that <code>3</code>.
+        <code>get</code> is effective at retrieving an element. Let's grab that <code>2</code>.
       </p>
-      <pre><code>(get [0 1 2 3 4 5] 2) ;; =&gt; 2</code></pre>
+      <pre><code>(get [0 1 2 3] 2) ;; =&gt; 2</code></pre>
       <p>
         But sometimes, we won't know ahead of time what kind of collection someone might give us. Perhaps we made a commitment that our utility would handle
         <em>all</em> Clojure collection types. Instead of a vector, we might be given a lazy sequence, such as a <code>range</code>. Perhaps we want to pull
-        out the third element.
+        out the third element at index <code>2</code>.
       </p>
-      <pre><code>(get (range 6) 2) ;; =&gt; nil</code></pre>
+      <pre><code>(get (range 4) 2) ;; =&gt; nil</code></pre>
       <p>
         That's… not what we wanted. While <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/get"><code>get</code></a>, <a href=
         "https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/assoc"><code>assoc</code></a>, <a href=
@@ -71,9 +71,10 @@
         "#element">elements</a> contained in vectors, hashmaps, sequences, lists, and sets, at any arbitrary level of nesting.
       </p>
       <p>
-        Leaning on those extended capabilities, we can now retrieve that tenth element with a straightforward, drop-in replacement.
+        Leaning on those extended capabilities, we can now retrieve that third element located at index <code>2</code> with a straightforward, drop-in
+        replacement.
       </p>
-      <pre><code>(require '[fn-in.core :refer [get*]])</code><br><br><code>(get* (range 6) 2) ;; =&gt; 2</code></pre>
+      <pre><code>(require '[fn-in.core :refer [get*]])</code><br><br><code>(get* (range 4) 2) ;; =&gt; 2</code></pre>
       <p>
         <code>get*</code> behaves just like <code>clojure.core/get</code>, except that it succeeds in extracting the third element from our <code>range</code>
         argument.
@@ -349,7 +350,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 October 27.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 November 15.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

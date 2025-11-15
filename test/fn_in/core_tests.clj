@@ -111,7 +111,7 @@
       clojure.lang.IPersistentList (repeat 0 nil)
       clojure.lang.IPersistentList (sequence [])
 
-      ;;clojure.lang.PersistentQueue (get* (queue []) 0)
+      clojure.lang.PersistentQueue (queue [])
       clojure.lang.PersistentVector (Tuple/create)))
 
   (testing "empty associatives"
@@ -161,7 +161,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33])
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33])
 
-      #_(get* (queue [11 22 33]) 0)
+      clojure.lang.PersistentQueue (queue [11 22 33])
       clojure.lang.PersistentVector (Tuple/create 11 22 33)))
 
   #_(testing "zero-th indexes, arrays"
@@ -205,7 +205,7 @@
       clojure.lang.Repeat (repeat 3 33) 2
       clojure.lang.APersistentVector$RSeq (rseq [33 22 11]) 2
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33]) 2
+      clojure.lang.PersistentQueue (queue [11 22 33]) 2
       clojure.lang.PersistentVector (Tuple/create 11 22 33) 2))
 
   (testing "provided keys, associatives"
@@ -268,7 +268,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33])
       clojure.lang.LazySeq (subseq (sorted-set 11 22 33) >= 11 < 44)
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33])
+      clojure.lang.PersistentQueue (queue [11 22 33])
       clojure.lang.StringSeq (seq "abc")
       clojure.lang.PersistentVector (Tuple/create 11 22 33)
 
@@ -328,7 +328,7 @@
       clojure.lang.IPersistentList (range 0 0) 0 '(99)
       clojure.lang.IPersistentList (sequence []) 0 '(99)
 
-      ;;clojure.lang.PersistentQueue (queue []) 0 [99]
+      clojure.lang.PersistentQueue (queue []) 0 [99]
       clojure.lang.PersistentVector (Tuple/create) 0 [99]))
 
   (testing "non-terminating sequences"
@@ -359,7 +359,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33])
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33])
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33])
+      clojure.lang.PersistentQueue (queue [11 22 33])
       clojure.lang.PersistentVector (Tuple/create 11 22 33)))
 
   (testing "in the middle of a sequential"
@@ -381,7 +381,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33])
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33])
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33])
+      clojure.lang.PersistentQueue (queue [11 22 33])
       clojure.lang.PersistentVector (Tuple/create 11 22 33)))
 
   (testing "at the end of a sequential"
@@ -403,7 +403,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33])
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33])
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33])
+      clojure.lang.PersistentQueue (queue [11 22 33])
       clojure.lang.PersistentVector (Tuple/create 11 22 33)))
 
   (testing "beyond the end of a sequential"
@@ -425,7 +425,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33])
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33])
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33])
+      clojure.lang.PersistentQueue (queue [11 22 33])
       clojure.lang.PersistentVector (Tuple/create 11 22 33)))
 
   (testing "adding to a non-emtpy associative"
@@ -497,7 +497,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33])
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33])
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33])
+      clojure.lang.PersistentQueue (queue [11 22 33])
       clojure.lang.PersistentVector (Tuple/create 11 22 33)))
 
   (testing "updating set elements"
@@ -572,7 +572,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33]) [22 33]
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33]) [22 33]
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33]) [22 33]
+      clojure.lang.PersistentQueue (queue [11 22 33]) [22 33]
       clojure.lang.StringSeq (seq "abc") [\b \c]
       clojure.lang.PersistentVector (Tuple/create 11 22 33) [22 33]))
 
@@ -597,7 +597,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33]) [11 33]
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33]) [11 33]
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33]) [11 33]
+      clojure.lang.PersistentQueue (queue [11 22 33]) [11 33]
       clojure.lang.StringSeq (seq "abc") [\a \c]
       clojure.lang.PersistentVector (Tuple/create 11 22 33) [11 33]))
 
@@ -621,7 +621,7 @@
       clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33]) [11 22]
       clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33]) [11 22]
 
-      ;;clojure.lang.PersistentQueue (queue [11 22 33]) [11 22]
+      clojure.lang.PersistentQueue (queue [11 22 33]) [11 22]
       clojure.lang.StringSeq (seq "abc") [\a \b]
       clojure.lang.PersistentVector (Tuple/create 11 22 33) [11 22]))
 

@@ -101,6 +101,14 @@
   (conj (disj s i) x))
 
 
+(defn queue-assoc
+  "Given queue `q`, replaces element at index `idx` with value `x`."
+  {:UUIDv4 #uuid "2e27a2a5-372c-4809-83c1-92878c472505"
+   :no-doc true}
+  [q idx x]
+  (into (clojure.lang.PersistentQueue/EMPTY) (assoc (vec q) idx x)))
+
+
 (defn vector-dissoc
   "Remove element at index `i` from vector `v`"
   {:UUIDv4 #uuid "70e34715-9354-4614-9623-655c7378f769"
@@ -131,6 +139,14 @@
    :no-doc true}
   [c i]
   (lazy-cat (take i c) (nthrest c (inc i))))
+
+
+(defn queue-dissoc
+  "Given queue `q`, removes element at index `idx`."
+  {:UUIDv4 #uuid "74de4b39-e80b-4d8e-8503-b01cd6f74bc9"
+   :no-doc true}
+  [q idx]
+  (into (clojure.lang.PersistentQueue/EMPTY) (vector-dissoc (vec q) idx)))
 
 
 (defn mult-assoc*
@@ -329,6 +345,16 @@
     ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
     ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [c i] (dissoc c i))
+
+  clojure.lang.PersistentQueue
+  (get*
+    ([q idx] (get (vec q) idx))
+    ([q idx not-found] (get (vec q) idx not-found)))
+  (assoc*
+    ([q i x] (queue-assoc q i x))
+    ([q i1 x1 i2 x2] (mult-assoc* q i1 x1 i2 x2))
+    ([q i1 x1 i2 x2 i3 x3] (mult-assoc* q i1 x1 i2 x2 i3 x3)))
+  (dissoc* [q idx] (queue-dissoc q idx))
 
   nil
   (get*

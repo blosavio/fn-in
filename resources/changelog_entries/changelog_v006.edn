@@ -7,7 +7,7 @@
  :comment
  "Fixed `nil` handling.
  TODO: Added handling for Java arrays.
- TODO: Added handling for queues.
+ Added handling for queues.
  TODO: Added handling for `clojure.core.Vec` (created by `vector-of`).
  Improved unit tests. Added property tests."
  :project-status :active
@@ -33,6 +33,22 @@
 
   {:description "Fixed handling of `nil` so that functions properly replicate
  their core counterparts."
+   :date {:year 2025
+          :month "November"
+          :day 15}
+   :change-type :bug-fix
+   :altered-functions ['assoc*
+                       'assoc-in*
+                       'dissoc*
+                       'dissoc-in*
+                       'get*
+                       'get-in*
+                       'update*
+                       'update-in*]
+   :breaking? false}
+
+  {:description "Extended protocol to instances of
+ `clojure.lang.PersistentQueue`."
    :date {:year 2025
           :month "November"
           :day 15}

@@ -10,7 +10,7 @@
       <p>
         2025 November 7<br>
         Brad Losavio (blosavio@sagevisuals.com)<br>
-        <em>Description:</em> Fixed `nil` handling. TODO: Added handling for Java arrays. TODO: Added handling for queues. TODO: Added handling for
+        <em>Description:</em> Fixed `nil` handling. TODO: Added handling for Java arrays. Added handling for queues. TODO: Added handling for
         `clojure.core.Vec` (created by `vector-of`). Improved unit tests. Added property tests.<br>
         <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
         <em>Urgency:</em> medium<br>
@@ -44,6 +44,11 @@
           <li>
             <div>
               Fixed handling of `nil` so that functions properly replicate their core counterparts.
+            </div>
+          </li>
+          <li>
+            <div>
+              Extended protocol to instances of `clojure.lang.PersistentQueue`.
             </div>
           </li>
         </ul>

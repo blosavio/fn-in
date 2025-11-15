@@ -10,7 +10,8 @@
                          run-tests
                          run-test
                          testing]]
-   [fn-in.core :refer :all]))
+   [fn-in.core :refer :all]
+   [fn-in.core-tests :refer [queue]]))
 
 
 (deftest concat-list-tests
@@ -178,6 +179,23 @@
       #{11 22 33 :foo} (set-assoc #{11 22 33} :not-there :foo))))
 
 
+(deftest queue-assoc-tests
+  (testing "return type"
+    (are [x] (instance? clojure.lang.PersistentQueue x)
+      (queue-assoc (queue [11 22 33]) 2 99)))
+  (testing "empty queues"
+    (are [x y] (= x y)
+      [99] (queue-assoc (queue []) 0 99)))
+  (testing "non-empty queues"
+    (are [x y] (= x y)
+      [99 22 33] (queue-assoc (queue [11 22 33]) 0 99)
+      [11 99 33] (queue-assoc (queue [11 22 33]) 1 99)
+      [11 22 99] (queue-assoc (queue [11 22 33]) 2 99)))
+  (testing "multiple associations"
+    (are [x y] (= x y)
+      [99 111 222] (mult-assoc* (queue [11 22 33]) 0 99 1 111 2 222))))
+
+
 (deftest mult-asooc*-tests
   (are [x y] (= x y)
     {:a 1} (mult-assoc* {} :a 1)
@@ -242,6 +260,17 @@
       (take 5 (non-term-dissoc (range) 3)) '(0 1 2 4 5)
       (take 5 (non-term-dissoc (range 0 10) 3)) '(0 1 2 4 5)
       (take 5 (non-term-dissoc (repeat 3) 3)) '(3 3 3 3 3))))
+
+
+(deftest queue-dissoc-tests
+  (testing "return type"
+    (are [x] (instance? clojure.lang.PersistentQueue x)
+      (queue-dissoc (queue [11 22 33]) 1)))
+  (testing "various indexes"
+    (are [idx x] (= x (queue-dissoc (queue [11 22 33]) idx))
+      0 [22 33]
+      1 [11 33]
+      2 [11 22])))
 
 
 #_(run-tests)

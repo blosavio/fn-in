@@ -21,11 +21,11 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevisuals/fn-in &quot;5&quot;]</code></pre>
+      <pre><code>[com.sagevisuals/fn-in &quot;6-SNAPSHOT0&quot;]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevisuals/fn-in {:mvn/version &quot;5&quot;}</code></pre>
+      <pre><code>com.sagevisuals/fn-in {:mvn/version &quot;6-SNAPSHOT0&quot;}</code></pre>
       <h3>
         Require
       </h3>
@@ -37,15 +37,15 @@
       </h2>
       <p>
         Most of the time, when someone hands us a Clojure collection, we know its &nbsp;type and how best to manipulate it. If we get handed a vector, we know
-        that <code>get</code> is effective at retrieving an element. Let&apos;s grab that <code>3</code>.
+        that <code>get</code> is effective at retrieving an element. Let&apos;s grab that <code>2</code>.
       </p>
-      <pre><code>(get [0 1 2 3 4 5] 2) ;; =&gt; 2</code></pre>
+      <pre><code>(get [0 1 2 3] 2) ;; =&gt; 2</code></pre>
       <p>
         But sometimes, we won&apos;t know ahead of time what kind of collection &nbsp;someone might give us. Perhaps we made a commitment that our utility
         would &nbsp;handle <em>all</em> Clojure collection types. Instead of a vector, we might be given a lazy &nbsp;sequence, such as a <code>range</code>.
-        Perhaps we want to pull out the third element.
+        Perhaps we want to pull out the third element at index <code>2</code>.
       </p>
-      <pre><code>(get (range 6) 2) ;; =&gt; nil</code></pre>
+      <pre><code>(get (range 4) 2) ;; =&gt; nil</code></pre>
       <p>
         That&apos;s… not what we wanted. While <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/get"><code>get</code></a>,
         <a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/assoc"><code>assoc</code></a>, <a href=
@@ -62,9 +62,10 @@
         <a href="#element">elements</a> contained in vectors, hashmaps, sequences, lists, and sets, at any arbitrary &nbsp;level of nesting.
       </p>
       <p>
-        Leaning on those extended capabilities, we can now retrieve that tenth &nbsp;element with a straightforward, drop-in replacement.
+        Leaning on those extended capabilities, we can now retrieve that third &nbsp;element located at index <code>2</code> with a straightforward, drop-in
+        replacement.
       </p>
-      <pre><code>(require &apos;[fn-in.core :refer [get*]])</code><br><br><code>(get* (range 6) 2) ;; =&gt; 2</code></pre>
+      <pre><code>(require &apos;[fn-in.core :refer [get*]])</code><br><br><code>(get* (range 4) 2) ;; =&gt; 2</code></pre>
       <p>
         <code>get*</code> behaves just like <code>clojure.core/get</code>, except that it succeeds in extracting the third element from our <code>range</code>
         argument.
@@ -341,7 +342,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 October 27.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 November 15.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>
