@@ -332,13 +332,13 @@
 
   nil
   (get*
-    ([_ _] nil)
-    ([_ _ _] nil))
+    ([_ i] (get nil i))
+    ([_ i not-found] (get nil i not-found)))
   (assoc*
-    ([_ _ _] nil)
-    ([_ _ _ _ _] nil)
-    ([_ _ _ _ _ _ _] nil))
-  (dissoc* [_ _] nil))
+    ([_ i x] (assoc nil i x))
+    ([_ i1 x1 i2 x2] (mult-assoc* nil i1 x1 i2 x2))
+    ([_ i1 x1 i2 x2 i3 x3] (mult-assoc* nil i1 x1 i2 x2 i3 x3)))
+  (dissoc* [_ i] (dissoc nil i)))
 
 
 (defn update*

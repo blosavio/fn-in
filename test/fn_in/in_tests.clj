@@ -21,6 +21,12 @@
 
 
 (deftest get-in*-test
+  (testing "`nil`"
+    (are [f1 f2] (= (f1 nil [:a])
+                    (f2 nil [:a]))
+      get-in
+      get-in*))
+
   (testing "empty collections"
     (are [c-type coll] (and (instance? c-type coll)
                             (nil? (get-in* coll [1])))
@@ -104,6 +110,12 @@
 
 
 (deftest assoc-in*-test
+  (testing "`nil`"
+    (are [f1 f2] (= (f1 nil [:a] 99)
+                    (f2 nil [:a] 99))
+      assoc-in
+      assoc-in*))
+
   (testing "un-nested collections"
     (are [c-type coll path result] (and (instance? c-type coll)
                                         (= result (assoc-in* coll path 99)))
@@ -136,7 +148,14 @@
   (testing "throwing when supplied with empty path"
     (is (thrown? Exception (assoc-in* {:a 99} [] :foo)))))
 
+
 (deftest update-in*-test
+  (testing "`nil`"
+    (are [f1 f2] (= (f1 nil [:a] (constantly 99))
+                    (f2 nil [:a] (constantly 99)))
+      update-in
+      update-in*))
+
   (testing "un-nested collections"
     (are [c-type coll path result] (and (instance? c-type coll)
                                         (= result (update-in* coll path #(* % 10))))
@@ -193,6 +212,10 @@
 
 
 (deftest dissoc-in*-test
+  (testing "`nil`"
+    (are [x] (= (nil? x))
+      (dissoc-in* nil [:a])))
+
   (testing "un-nested"
     (are [c-type coll path result] (and (instance? c-type coll)
                                         (= result (dissoc-in* coll path)))

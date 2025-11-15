@@ -84,7 +84,9 @@
 
 (deftest get*-test
   (testing "`nil`"
-    (is (nil? (get* nil :foo))))
+    (are [x y] (= x y)
+      (get nil 0) (get* nil 0)
+      (get nil 0 :not-found) (get* nil 0 :not-found)))
 
   (testing "empty sequentials, cons, and sets"
     (are [c-type coll] (and (instance? c-type coll)
@@ -296,6 +298,11 @@
       #{66 77} (get* #{{:a 11} [22 33] '(44 55) #{66 77}} #{66 77}))))
 
 (deftest assoc*-test
+  (testing "`nil`"
+    (are [x y] (= x y)
+      (assoc nil :a 99) (assoc* nil :a 99)
+      (assoc nil :a 99 :b 101) (assoc* nil :a 99 :b 101)))
+
   (testing "empty collections"
     (are [c-type coll keydex result] (and (instance? c-type coll)
                                           (= result (assoc* coll keydex 99)))
@@ -461,12 +468,16 @@
       '(:foo :bar :baz) (assoc* '(11 22 33) 0 :foo 1 :bar 2 :baz)
       '(:foo :bar 33) (assoc* (cons 11 '(22 33)) 0 :foo 1 :bar)
       '(:foo :bar :baz) (assoc* (cons 11 '(22 33)) 0 :foo 1 :bar 2 :baz)
-      nil (assoc* nil :foo :bar)
-      nil (assoc* nil :foo :bar :baz :boz)
-      nil (assoc* nil :foo :bar :baz :boz :qux :quz))))
+      {:foo :bar} (assoc* nil :foo :bar)
+      {:foo :bar :baz :boz} (assoc* nil :foo :bar :baz :boz)
+      {:foo :bar :baz :boz :qux :quz} (assoc* nil :foo :bar :baz :boz :qux :quz))))
 
 
 (deftest update*-test
+  (testing "`nil`"
+    (are [x y] (= x y)
+      (update nil :a (constantly 99)) (update* nil :a (constantly 99))))
+
   (testing "updated values within bounds"
     (are [c-type coll] (and (instance? c-type coll)
                             (= [11 22 330] (update* coll 2 #(* % 10))))
@@ -536,6 +547,10 @@
       [0 1 2 33333 4 5] (update* (range 0 6) 3 + 30 300 3000 30000))))
 
 (deftest dissoc*-test
+  (testing "`nil`"
+    (are [x y] (= x y)
+      (dissoc nil :a) (dissoc* nil :a)))
+
   (testing "removing zero-th element, sequentials"
     (are [c-type coll result] (and (instance? c-type coll)
                                    (= result (dissoc* coll 0)))
@@ -633,11 +648,6 @@
 
 #_(run-tests)
 
-
-(get nil 0) ;; nil
-(assoc nil :a 99) ;; {:a 99}
-(update nil :a (constantly 99)) ;; {:a 99}
-(dissoc nil 0) ;; nil
 
 (get (int-array [11 22 33]) 2) ;; 33
 

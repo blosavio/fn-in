@@ -5,12 +5,11 @@
                :email "blosavio@sagevisuals.com"}
  :version 6
  :comment
- "TODO: Bugfix: Extended handling of `nil` to properly replicate behavior of
- core utilities.
+ "Fixed `nil` handling.
  TODO: Added handling for Java arrays.
  TODO: Added handling for queues.
  TODO: Added handling for `clojure.core.Vec` (created by `vector-of`).
- Improved unit tests; added property tests."
+ Improved unit tests. Added property tests."
  :project-status :active
  :stable false
  :urgency :medium
@@ -24,10 +23,27 @@
    :change-type :tests
    :breaking? false}
 
-  {:description "Added property tests."
+  {:description "Added property tests, including comparisons to core
+ counterparts."
    :date {:year 2025
           :month "November"
           :day 14}
    :change-type :tests
+   :breaking? false}
+
+  {:description "Fixed handling of `nil` so that functions properly replicate
+ their core counterparts."
+   :date {:year 2025
+          :month "November"
+          :day 15}
+   :change-type :bug-fix
+   :altered-functions ['assoc*
+                       'assoc-in*
+                       'dissoc*
+                       'dissoc-in*
+                       'get*
+                       'get-in*
+                       'update*
+                       'update-in*]
    :breaking? false}]}
 

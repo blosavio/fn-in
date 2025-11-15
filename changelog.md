@@ -10,12 +10,17 @@
       <p>
         2025 November 7<br>
         Brad Losavio (blosavio@sagevisuals.com)<br>
-        <em>Description:</em> TODO: Bugfix: Extended handling of `nil` to properly replicate behavior of core utilities. TODO: Added handling for Java arrays.
-        TODO: Added handling for queues. TODO: Added handling for `clojure.core.Vec` (created by `vector-of`). Improved unit tests; added property tests.<br>
+        <em>Description:</em> Fixed `nil` handling. TODO: Added handling for Java arrays. TODO: Added handling for queues. TODO: Added handling for
+        `clojure.core.Vec` (created by `vector-of`). Improved unit tests. Added property tests.<br>
         <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
         <em>Urgency:</em> medium<br>
         <em>Breaking:</em> no
       </p>
+      <p></p>
+      <div>
+        <em>altered functions:</em> <code>assoc*</code>, <code>assoc-in*</code>, <code>dissoc*</code>, <code>dissoc-in*</code>, <code>get*</code>,
+        <code>get-in*</code>, <code>update*</code>, <code>update-in*</code>
+      </div>
       <p></p>
       <div>
         <h4>
@@ -33,7 +38,12 @@
           </li>
           <li>
             <div>
-              Added property tests.
+              Added property tests, including comparisons to core counterparts.
+            </div>
+          </li>
+          <li>
+            <div>
+              Fixed handling of `nil` so that functions properly replicate their core counterparts.
             </div>
           </li>
         </ul>
