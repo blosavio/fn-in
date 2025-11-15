@@ -11,7 +11,8 @@
                                   [com.sagevisuals/chlog "5"]
                                   [com.sagevisuals/fastester "0"]
                                   [com.sagevisuals/readmoi "6"]
-                                  [hiccup "2.0.0-RC3"]]
+                                  [hiccup "2.0.0-RC3"]
+                                  [org.clojure/test.check "1.1.1"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]
                              [lein-codox "0.10.8"]]
                    :jvm-opts ["-Djdk.attach.allowAttachSelf"

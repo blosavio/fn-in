@@ -126,13 +126,6 @@
 
       [11 [22 [99]]] (assoc-in* (lazy-seq [11 (lazy-seq [22 (lazy-seq [33])])]) [1 1 0] 99)))
 
-
-  ;;                    path to `33`
-  [11 {:a '(22 #{33})}] [1 :a 1 33]
-  {:a '(11 [22 #{33}])} [:a 1 1 33]
-  '(11 [22 {:a #{33}}]) [1 1 :a 33]
-  #{[11 {:a '(22 33)}]} [[11 {:a '(22 33)}] 1 :a 1]
-
   (testing "heterogeneous nested collections"
     (are [coll path result] (= (assoc-in* coll path 99) result)
       [11 {:a '(22 #{33})}] [1 :a 1 33] [11 {:a '(22 #{99})}]

@@ -4,17 +4,30 @@
  :responsible {:name "Brad Losavio"
                :email "blosavio@sagevisuals.com"}
  :version 6
- :comment "Added ability to handle Java arrays. Improved unit tests."
+ :comment
+ "TODO: Bugfix: Extended handling of `nil` to properly replicate behavior of
+ core utilities.
+ TODO: Added handling for Java arrays.
+ TODO: Added handling for queues.
+ TODO: Added handling for `clojure.core.Vec` (created by `vector-of`).
+ Improved unit tests; added property tests."
  :project-status :active
  :stable false
  :urgency :medium
  :breaking? false
  :changes
- [{:description "Reorganized unit tests and added inline checks to verify the
- type of the collections being tested."
+ [{:description "Reorganized and streamlined unit tests and added inline checks
+ to verify the type of the collections being tested."
    :date {:year 2025
-          :month "Novembery"
+          :month "November"
           :day 7}
+   :change-type :tests
+   :breaking? false}
+
+  {:description "Added property tests."
+   :date {:year 2025
+          :month "November"
+          :day 14}
    :change-type :tests
    :breaking? false}]}
 

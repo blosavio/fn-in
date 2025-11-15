@@ -10,7 +10,8 @@
       <p>
         2025 November 7<br>
         Brad Losavio (blosavio@sagevisuals.com)<br>
-        <em>Description:</em> Added ability to handle Java arrays. Improved unit tests.<br>
+        <em>Description:</em> TODO: Bugfix: Extended handling of `nil` to properly replicate behavior of core utilities. TODO: Added handling for Java arrays.
+        TODO: Added handling for queues. TODO: Added handling for `clojure.core.Vec` (created by `vector-of`). Improved unit tests; added property tests.<br>
         <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
         <em>Urgency:</em> medium<br>
         <em>Breaking:</em> no
@@ -27,7 +28,12 @@
         <ul>
           <li>
             <div>
-              Reorganized unit tests and added inline checks to verify the type of the collections being tested.
+              Reorganized and streamlined unit tests and added inline checks to verify the type of the collections being tested.
+            </div>
+          </li>
+          <li>
+            <div>
+              Added property tests.
             </div>
           </li>
         </ul>
@@ -265,7 +271,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 November 07.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 November 15.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>
