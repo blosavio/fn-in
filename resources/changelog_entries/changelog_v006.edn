@@ -8,7 +8,7 @@
  "Fixed `nil` handling.
  TODO: Added handling for Java arrays.
  Added handling for queues.
- TODO: Added handling for `clojure.core.Vec` (created by `vector-of`).
+ Added handling for `clojure.core.Vec`.
  Improved unit tests. Added property tests."
  :project-status :active
  :stable false
@@ -16,7 +16,7 @@
  :breaking? false
  :changes
  [{:description "Reorganized and streamlined unit tests and added inline checks
- to verify the type of the collections being tested."
+ to verify the type of the input collections being tested."
    :date {:year 2025
           :month "November"
           :day 7}
@@ -52,6 +52,22 @@
    :date {:year 2025
           :month "November"
           :day 15}
+   :change-type :bug-fix
+   :altered-functions ['assoc*
+                       'assoc-in*
+                       'dissoc*
+                       'dissoc-in*
+                       'get*
+                       'get-in*
+                       'update*
+                       'update-in*]
+   :breaking? false}
+
+  {:description "Extended protocol to instances of
+ `clojure.core.Vec` (typically created with `vector-of`)."
+   :date {:year 2025
+          :month "November"
+          :day 17}
    :change-type :bug-fix
    :altered-functions ['assoc*
                        'assoc-in*

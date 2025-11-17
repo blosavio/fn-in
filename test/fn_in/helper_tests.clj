@@ -273,5 +273,16 @@
       2 [11 22])))
 
 
+(deftest gvec-dissoc-tests
+  (testing "return type"
+    (are [x y] (= x y)
+      clojure.core.Vec (type (gvec-dissoc (vector-of :int 11 22 33) 0))))
+  (testing "various indexes"
+    (are [x y] (= x y)
+      (vector-of :int 22 33) (gvec-dissoc (vector-of :int 11 22 33) 0)
+      (vector-of :int 11 33) (gvec-dissoc (vector-of :int 11 22 33) 1)
+      (vector-of :int 11 22) (gvec-dissoc (vector-of :int 11 22 33) 2))))
+
+
 #_(run-tests)
 

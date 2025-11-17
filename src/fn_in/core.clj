@@ -149,6 +149,16 @@
   (into (clojure.lang.PersistentQueue/EMPTY) (vector-dissoc (vec q) idx)))
 
 
+(defn gvec-dissoc
+  "Given `gv`, an instance of `clojure.core.Vec`, returns with element at index
+  `idx` removed."
+  {:UUIDv4 #uuid "5273bd48-d2c5-425b-8de6-7904150cc901"
+   :no-doc true}
+  [gv idx]
+  (reduce conj (into (empty gv)  (.subList gv 0 idx))
+          (.subList gv (inc idx) (count gv))))
+
+
 (defn mult-assoc*
   "`assoc*` pairs of `xs` and `ys` to collection `c`."
   {:UUIDv4 #uuid "8fd6ea55-cb8f-4858-8fc5-da77bbce5363"
@@ -355,6 +365,18 @@
     ([q i1 x1 i2 x2] (mult-assoc* q i1 x1 i2 x2))
     ([q i1 x1 i2 x2 i3 x3] (mult-assoc* q i1 x1 i2 x2 i3 x3)))
   (dissoc* [q idx] (queue-dissoc q idx))
+
+  clojure.core.Vec
+  (get*
+    ([v idx] (if (empty? v)
+               nil
+               (.nth v idx)))
+    ([v idx not-found] (.nth v idx not-found)))
+  (assoc*
+    ([c i x] (.assoc c i x))
+    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
+    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
+  (dissoc* [v idx] (gvec-dissoc v idx))
 
   nil
   (get*

@@ -93,7 +93,7 @@
                             (nil? (get* coll 0)))
       clojure.lang.PersistentVector (vector)
       clojure.lang.PersistentVector (subvec [11 22 33] 0 0)
-      ;; clojure.lang.Vec (vector-of :int)
+      clojure.core.Vec (vector-of :int)
 
       clojure.lang.IPersistentList (list)
 
@@ -141,7 +141,7 @@
                             (= 11 (get* coll 0)))
       clojure.lang.PersistentVector (vector 11 22 33)
       clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3)
-      ;;clojure.lang.Vec (vector-of :int 11 22 33)
+      clojure.core.Vec (vector-of :int 11 22 33)
       clojure.lang.PersistentVector (. clojure.lang.LazilyPersistentVector (create (cons 11 '(22 33))))
       clojure.lang.MapEntry (first {11 22})
 
@@ -182,7 +182,7 @@
                                 (= 33 (int (get* coll idx))))
       clojure.lang.PersistentVector (vector 11 22 33) 2
       clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3) 2
-      ;;clojure.lang.Vec (vector-of :int 11 22 33) 2
+      clojure.core.Vec (vector-of :int 11 22 33) 2
       clojure.lang.PersistentVector (. clojure.lang.LazilyPersistentVector (create (cons 11 '(22 33)))) 2
       clojure.lang.MapEntry (first {22 33}) 1
 
@@ -237,7 +237,7 @@
                             (= :not-found (get* coll 5 :not-found)))
       clojure.lang.PersistentVector (vector 11 22 33)
       clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3)
-      ;;clojure.core.Vec (vector-of :int 11 22 33)
+      clojure.core.Vec (vector-of :int 11 22 33)
       clojure.lang.PersistentVector (. clojure.lang.LazilyPersistentVector (create (cons 11 '(22 33))))
       clojure.lang.MapEntry (first {11 22})
 
@@ -308,7 +308,6 @@
                                           (= result (assoc* coll keydex 99)))
       clojure.lang.PersistentVector (vector) 2 [nil nil 99]
       clojure.lang.PersistentVector (subvec [] 0 0) 2  [nil nil 99]
-      ;;clojure.core.Vec (vector-of :int) 2 [nil nil 99]
 
       clojure.lang.IPersistentList (list) 2 '(nil nil 99)
 
@@ -345,7 +344,7 @@
                             (= [99 22 33] (assoc* coll 0 99)))
       clojure.lang.PersistentVector [11 22 33]
       clojure.lang.APersistentVector$SubVector(subvec [11 22 33] 0 3)
-      ;;clojure.core.Vec (vector-of :int 11 22 33)
+      clojure.core.Vec (vector-of :int 11 22 33)
 
       clojure.lang.PersistentList (list 11 22 33)
       clojure.lang.Cons (cons 11 '(22 33))
@@ -367,7 +366,7 @@
                             (= [11 99 33] (assoc* coll 1 99)))
       clojure.lang.PersistentVector [11 22 33]
       clojure.lang.APersistentVector$SubVector(subvec [11 22 33] 0 3)
-      ;;clojure.core.Vec (vector-of :int 11 22 33)
+      clojure.core.Vec (vector-of :int 11 22 33)
 
       clojure.lang.PersistentList (list 11 22 33)
       clojure.lang.Cons (cons 11 '(22 33))
@@ -389,7 +388,7 @@
                             (= [11 22 99] (assoc* coll 2 99)))
       clojure.lang.PersistentVector [11 22 33]
       clojure.lang.APersistentVector$SubVector(subvec [11 22 33] 0 3)
-      ;;clojure.core.Vec (vector-of :int 11 22 33)
+      clojure.core.Vec (vector-of :int 11 22 33)
 
       clojure.lang.PersistentList (list 11 22 33)
       clojure.lang.Cons (cons 11 '(22 33))
@@ -411,7 +410,7 @@
                             (= [11 22 33 99] (assoc* coll 3 99)))
       clojure.lang.PersistentVector [11 22 33]
       clojure.lang.APersistentVector$SubVector(subvec [11 22 33] 0 3)
-      ;;clojure.core.Vec (vector-of :int 11 22 33)
+      clojure.core.Vec (vector-of :int 11 22 33)
 
       clojure.lang.PersistentList (list 11 22 33)
       clojure.lang.Cons (cons 11 '(22 33))
@@ -483,7 +482,7 @@
                             (= [11 22 330] (update* coll 2 #(* % 10))))
       clojure.lang.PersistentVector (vector 11 22 33)
       clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3)
-      ;;clojure.core.Vec (vector-of :int 11 22 33)
+      clojure.core.Vec (vector-of :int 11 22 33)
 
       clojure.lang.PersistentList (list 11 22 33)
       clojure.lang.Cons (cons 11 '(22 33))
@@ -556,7 +555,7 @@
                                    (= result (dissoc* coll 0)))
       clojure.lang.PersistentVector (vector 11 22 33) [22 33]
       clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3) [22 33]
-      ;;clojure.core.Vec (vector-of :int 11 22 33) [22 33]
+      clojure.core.Vec (vector-of :int 11 22 33) [22 33]
       clojure.lang.MapEntry (first {11 22}) [22]
 
       clojure.lang.PersistentList (list 11 22 33) '(22 33)
@@ -581,7 +580,7 @@
                                    (= result (dissoc* coll 1)))
       clojure.lang.PersistentVector (vector 11 22 33) [11 33]
       clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3) [11 33]
-      ;;clojure.core.Vec (vector-of :int 11 22 33) [11 33]
+      clojure.core.Vec (vector-of :int 11 22 33) [11 33]
       clojure.lang.MapEntry (first {11 22}) [11]
 
       clojure.lang.PersistentList (list 11 22 33) '(11 33)
@@ -606,7 +605,7 @@
                                    (= result (dissoc* coll 2)))
       clojure.lang.PersistentVector (vector 11 22 33) [11 22]
       clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3) [11 22]
-      ;;clojure.core.Vec (vector-of :int 11 22 33) [11 22]
+      clojure.core.Vec (vector-of :int 11 22 33) [11 22]
 
       clojure.lang.PersistentList (list 11 22 33) '(11 22)
       clojure.lang.Cons (cons 11 '(22 33)) '(11 22)

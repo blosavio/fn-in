@@ -10,8 +10,8 @@
       <p>
         2025 November 7<br>
         Brad Losavio (blosavio@sagevisuals.com)<br>
-        <em>Description:</em> Fixed `nil` handling. TODO: Added handling for Java arrays. Added handling for queues. TODO: Added handling for
-        `clojure.core.Vec` (created by `vector-of`). Improved unit tests. Added property tests.<br>
+        <em>Description:</em> Fixed `nil` handling. TODO: Added handling for Java arrays. Added handling for queues. Added handling for `clojure.core.Vec`.
+        Improved unit tests. Added property tests.<br>
         <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
         <em>Urgency:</em> medium<br>
         <em>Breaking:</em> no
@@ -33,7 +33,7 @@
         <ul>
           <li>
             <div>
-              Reorganized and streamlined unit tests and added inline checks to verify the type of the collections being tested.
+              Reorganized and streamlined unit tests and added inline checks to verify the type of the input collections being tested.
             </div>
           </li>
           <li>
@@ -49,6 +49,11 @@
           <li>
             <div>
               Extended protocol to instances of `clojure.lang.PersistentQueue`.
+            </div>
+          </li>
+          <li>
+            <div>
+              Extended protocol to instances of `clojure.core.Vec` (typically created with `vector-of`).
             </div>
           </li>
         </ul>
@@ -286,7 +291,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 November 15.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 November 17.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>
