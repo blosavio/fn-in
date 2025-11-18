@@ -284,5 +284,40 @@
       (vector-of :int 11 22) (gvec-dissoc (vector-of :int 11 22 33) 2))))
 
 
+(deftest equal-arrays?-tests
+  (testing "equal arrays"
+    (are [x] (true? x)
+      (equal-arrays? (int-array [11 22 33]) (int-array [11 22 33]))
+      (equal-arrays? (object-array [true \b 99]) (object-array [true \b 99]))))
+  (testing "not equal arrays"
+    (are [x] (false? x)
+      (equal-arrays? (int-array [11 22 33]) (int-array [11 22 99]))
+      (equal-arrays? (int-array [11 22 33]) (int-array [11 22]))
+      (equal-arrays? (int-array [11 22 33]) (boolean-array [true false true]))
+      (equal-arrays? (object-array [true \b 99]) (object-array [true \b 101])))))
+
+
+(deftest array-assoc-tests
+  (are [x y] (equal-arrays? x y)
+    (int-array [99 22 33]) (array-assoc (int-array [11 22 33]) 0 99)
+    (int-array [11 99 33]) (array-assoc (int-array [11 22 33]) 1 99)
+    (int-array [11 22 99]) (array-assoc (int-array [11 22 33]) 2 99)))
+
+
+(deftest sub-array-tests
+  (are [x y] (equal-arrays? x y)
+    (int-array [11 22 33 44 55]) (sub-array (int-array [11 22 33 44 55]) 0 5)
+    (int-array [22 33 44]) (sub-array (int-array [11 22 33 44 55]) 1 4)
+    (int-array [33]) (sub-array (int-array [11 22 33 44 55]) 2 3)))
+
+
+(deftest array-dissoc-tests
+  (are [x y] (equal-arrays? x y)
+    (int-array [22 33 44 55]) (array-dissoc (int-array [11 22 33 44 55]) 0)
+    (int-array [11 22 44 55]) (array-dissoc (int-array [11 22 33 44 55]) 2)
+    (int-array [11 22 33 44]) (array-dissoc (int-array [11 22 33 44 55]) 4)
+    (object-array [true "foo"]) (array-dissoc (object-array [true \a "foo"]) 1)))
+
+
 #_(run-tests)
 

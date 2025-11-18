@@ -123,18 +123,18 @@
       clojure.lang.PersistentArrayMap (zipmap [] [])
       clojure.lang.PersistentStructMap (struct test-struct)))
 
-  #_(testing "arrays"
-      (are [c-type coll] (and (instance? c-type coll)
-                              (nil? (get* coll 0)))
-        boolean/1 (boolean-array [])
-        byte/1 (byte-array [])
-        char/1 (char-array [])
-        double/1 (double-array [])
-        float/1 (float-array [])
-        int/1 (int-array [])
-        long/1 (long-array [])
-        java.lang.Object/1 (object-array [])
-        short/1 (short-array [])))
+  (testing "arrays"
+    (are [c-type coll] (and (instance? c-type coll)
+                            (nil? (get* coll 0)))
+      boolean/1 (boolean-array [])
+      byte/1 (byte-array [])
+      char/1 (char-array [])
+      double/1 (double-array [])
+      float/1 (float-array [])
+      int/1 (int-array [])
+      long/1 (long-array [])
+      java.lang.Object/1 (object-array [])
+      short/1 (short-array [])))
 
   (testing "zero-th index, sequentials, cons, and sets"
     (are [c-type coll] (and (instance? c-type coll)
@@ -164,18 +164,18 @@
       clojure.lang.PersistentQueue (queue [11 22 33])
       clojure.lang.PersistentVector (Tuple/create 11 22 33)))
 
-  #_(testing "zero-th indexes, arrays"
-      (are [x y] (= x y)
-        \a (get* (seq "abc") 0)
-        true (boolean-array [true false true])
-        0x11 (byte-array [0x11 0x22 0x33])
-        \a (char-array [\a \b \c])
-        11 (double-array [11 22 33])
-        11.0 (float-array [11.0 22.0 33.0])
-        11 (int-array [11 22 33])
-        11 (long-array [11 22 33])
-        42 (object-array [42 \c true])
-        22 (short-array [11 22 33])))
+  (testing "zero-th indexes, arrays"
+    (are [x y] (= x (get* y 0))
+      \a (seq "abc")
+      true (boolean-array [true false true])
+      0x11 (byte-array [0x11 0x22 0x33])
+      \a (char-array [\a \b \c])
+      11.0 (double-array [11 22 33])
+      11.0 (float-array [11.0 22.0 33.0])
+      11 (int-array [11 22 33])
+      11 (long-array [11 22 33])
+      42 (object-array [42 \c true])
+      11 (short-array [11 22 33])))
 
   (testing "provided indexes, sequentials, cons, and sets"
     (are [c-type coll idx] (and (instance? c-type coll)
@@ -218,19 +218,19 @@
       clojure.lang.PersistentStructMap (struct test-struct 11 22 33)
       fn_in.core_tests.TestRecord (->TestRecord 11 22 33)))
 
-  #_(testing "provided indexes, arrays"
-      (are [c-type coll result] (and (instance? c-type coll)
-                                     (= result (get* coll 2)))
-        clojure.lang.StringSeq (seq "abcde") \c
-        boolean/1 (boolean-array [true false true]) true
-        byte/1 (byte-array [0x11 0x22 0x33]) 0x33
-        char/1 (char-array [\a \b \c]) \c
-        double/1 (double-array [11 22 33]) 33
-        float/1 (float-array [11.0 22.0 33.0]) 33.0
-        int/1 (int-array [11 22 33]) 33
-        long/1 (long-array [11 22 33]) 33
-        java.lang.Object/1 (object-array [42 \c true]) true
-        short/1 (short-array [11 22 33]) 33))
+  (testing "provided indexes, arrays"
+    (are [c-type coll result] (and (instance? c-type coll)
+                                   (= result (get* coll 2)))
+      clojure.lang.StringSeq (seq "abcde") \c
+      boolean/1 (boolean-array [true false true]) true
+      byte/1 (byte-array [0x11 0x22 0x33]) 0x33
+      char/1 (char-array [\a \b \c]) \c
+      double/1 (double-array [11 22 33]) 33.0
+      float/1 (float-array [11.0 22.0 33.0]) 33.0
+      int/1 (int-array [11 22 33]) 33
+      long/1 (long-array [11 22 33]) 33
+      java.lang.Object/1 (object-array [42 \c true]) true
+      short/1 (short-array [11 22 33]) 33))
 
   (testing "not-found"
     (are [c-type coll] (and (instance? c-type coll)
@@ -272,16 +272,15 @@
       clojure.lang.StringSeq (seq "abc")
       clojure.lang.PersistentVector (Tuple/create 11 22 33)
 
-      ;;boolean/1 (boolean-array [true false true])
-      ;;byte/1 (byte-array [0x11 0x22 0x33])
-      ;;char/1 (char-array [\a \b \c])
-      ;;double/1 (double-array [11 22 33])
-      ;;float/1 (float-array [11.0 22.0 33.0])
-      ;;int/1 (int-array [11 22 33])
-      ;;long/1 (long-array [11 22 33])
-      ;;java.lang.Object/1 (object-array [42 \c true])
-      ;;short/1 (short-array [11 22 33])
-      ))
+      boolean/1 (boolean-array [true false true])
+      byte/1 (byte-array [0x11 0x22 0x33])
+      char/1 (char-array [\a \b \c])
+      double/1 (double-array [11 22 33])
+      float/1 (float-array [11.0 22.0 33.0])
+      int/1 (int-array [11 22 33])
+      long/1 (long-array [11 22 33])
+      java.lang.Object/1 (object-array [42 \c true])
+      short/1 (short-array [11 22 33])))
 
   (testing "composite keys on maps"
     (are [x y] (= x y)
@@ -469,7 +468,20 @@
       '(:foo :bar :baz) (assoc* (cons 11 '(22 33)) 0 :foo 1 :bar 2 :baz)
       {:foo :bar} (assoc* nil :foo :bar)
       {:foo :bar :baz :boz} (assoc* nil :foo :bar :baz :boz)
-      {:foo :bar :baz :boz :qux :quz} (assoc* nil :foo :bar :baz :boz :qux :quz))))
+      {:foo :bar :baz :boz :qux :quz} (assoc* nil :foo :bar :baz :boz :qux :quz)))
+
+  (testing "assoc-ing arrays"
+    (are [c-type in-array x out-array] (and (instance? c-type in-array)
+                                            (equal-arrays? (assoc* in-array 1 x) out-array))
+      boolean/1 (boolean-array [true false true]) true (boolean-array [true true true])
+      byte/1 (byte-array [0x11 0x22 0x33]) (byte 0x44) (byte-array [0x11 0x44 0x33])
+      char/1 (char-array [\a \b \c]) \z (char-array [\a \z \c])
+      double/1 (double-array [11.0 22.0 33.0]) 99.0 (double-array [11.0 99.0 33.0])
+      float/1 (float-array [11.0 22.0 33.0]) (float 99.0) (float-array [11.0 99.0 33.0])
+      int/1 (int-array [11 22 33]) 99 (int-array [11 99 33])
+      long/1 (long-array [11 22 33]) 99 (long-array [11 99 33])
+      short/1 (short-array [11 22 33]) (short 99) (short-array [11 99 33])
+      java.lang.Object/1 (object-array [\a :foo "bar"]) 99 (object-array [\a 99 "bar"]))))
 
 
 (deftest update*-test
@@ -543,7 +555,20 @@
       [11 22 3333 44 55] (update* [11 22 33 44 55] 2 + 300 3000)
       [11 22 33333 44 55] (update* [11 22 33 44 55] 2 + 300 3000 30000)
       [11 22 333333 44 55] (update* [11 22 33 44 55] 2 + 300 3000 30000 300000)
-      [0 1 2 33333 4 5] (update* (range 0 6) 3 + 30 300 3000 30000))))
+      [0 1 2 33333 4 5] (update* (range 0 6) 3 + 30 300 3000 30000)))
+
+  (testing "assoc-ing arrays"
+    (are [c-type in-array x out-array] (and (instance? c-type in-array)
+                                            (equal-arrays? (update* in-array 1 (constantly x)) out-array))
+      boolean/1 (boolean-array [true false true]) true (boolean-array [true true true])
+      byte/1 (byte-array [0x11 0x22 0x33]) (byte 0x44) (byte-array [0x11 0x44 0x33])
+      char/1 (char-array [\a \b \c]) \z (char-array [\a \z \c])
+      double/1 (double-array [11.0 22.0 33.0]) 99.0 (double-array [11.0 99.0 33.0])
+      float/1 (float-array [11.0 22.0 33.0]) (float 99.0) (float-array [11.0 99.0 33.0])
+      int/1 (int-array [11 22 33]) 99 (int-array [11 99 33])
+      long/1 (long-array [11 22 33]) 99 (long-array [11 99 33])
+      short/1 (short-array [11 22 33]) (short 99) (short-array [11 99 33])
+      java.lang.Object/1 (object-array [\a :foo "bar"]) 99 (object-array [\a 99 "bar"]))))
 
 (deftest dissoc*-test
   (testing "`nil`"
@@ -638,15 +663,50 @@
       clojure.lang.PersistentHashMap (hash-map :a 11 :b 22 :c 33) :b {:a 11 :c 33}
       clojure.lang.PersistentTreeMap (sorted-map :a 11 :b 22 :c 33) :b {:a 11 :c 33}
       clojure.lang.PersistentArrayMap (zipmap [:a :b :c] [11 22 33]) :b {:a 11 :c 33}
-      ;;clojure.lang.PersistentStructMap (struct test-struct 11 22 33) :b {:a 11 :c 33}
       fn_in.core_tests.TestRecord (->TestRecord 11 22 33) :b {:a 11 :c 33}
 
       clojure.lang.PersistentHashSet (hash-set 11 22 33) 22 #{11 33}
-      clojure.lang.PersistentTreeSet (sorted-set 11 22 33) 22 #{11 33})))
+      clojure.lang.PersistentTreeSet (sorted-set 11 22 33) 22 #{11 33}))
+
+  (testing "removing first element, arrays"
+    (are [c-type in-array out-array] (and (instance? c-type in-array)
+                                          (equal-arrays? (dissoc* in-array 0) out-array))
+      boolean/1 (boolean-array [true false true]) (boolean-array [false true])
+      byte/1 (byte-array [0x11 0x22 0x33]) (byte-array [0x22 0x33])
+      char/1 (char-array [\a \b \c]) (char-array [\b \c])
+      double/1 (double-array [11.0 22.0 33.0]) (double-array [22.0 33.0])
+      float/1 (float-array [11.0 22.0 33.0]) (float-array [22.0 33.0])
+      int/1 (int-array [11 22 33]) (int-array [22 33])
+      long/1 (long-array [11 22 33]) (long-array [22 33])
+      short/1 (short-array [11 22 33]) (short-array [22 33])
+      java.lang.Object/1 (object-array [\a :foo "bar"]) (object-array [:foo "bar"])))
+
+  (testing "removing middle element, arrays"
+    (are [c-type in-array out-array] (and (instance? c-type in-array)
+                                          (equal-arrays? (dissoc* in-array 1) out-array))
+      boolean/1 (boolean-array [true false true]) (boolean-array [true true])
+      byte/1 (byte-array [0x11 0x22 0x33]) (byte-array [0x11 0x33])
+      char/1 (char-array [\a \b \c]) (char-array [\a \c])
+      double/1 (double-array [11.0 22.0 33.0]) (double-array [11.0 33.0])
+      float/1 (float-array [11.0 22.0 33.0]) (float-array [11.0 33.0])
+      int/1 (int-array [11 22 33]) (int-array [11 33])
+      long/1 (long-array [11 22 33]) (long-array [11 33])
+      short/1 (short-array [11 22 33]) (short-array [11 33])
+      java.lang.Object/1 (object-array [\a :foo "bar"]) (object-array [\a "bar"])))
+
+  (testing "removing last element, arrays"
+    (are [c-type in-array out-array] (and (instance? c-type in-array)
+                                          (equal-arrays? (dissoc* in-array 2) out-array))
+      boolean/1 (boolean-array [true false true]) (boolean-array [true false])
+      byte/1 (byte-array [0x11 0x22 0x33]) (byte-array [0x11 0x22])
+      char/1 (char-array [\a \b \c]) (char-array [\a \b])
+      double/1 (double-array [11.0 22.0 33.0]) (double-array [11.0 22.0])
+      float/1 (float-array [11.0 22.0 33.0]) (float-array [11.0 22.0])
+      int/1 (int-array [11 22 33]) (int-array [11 22])
+      long/1 (long-array [11 22 33]) (long-array [11 22])
+      short/1 (short-array [11 22 33]) (short-array [11 22])
+      java.lang.Object/1 (object-array [\a :foo "bar"]) (object-array [\a :foo]))))
 
 
 #_(run-tests)
-
-
-(get (int-array [11 22 33]) 2) ;; 33
 

@@ -169,6 +169,60 @@
     c))
 
 
+(defn equal-arrays?
+  "Given `array-1` and `array-2`, returns `true` if equal."
+  {:UUIDv4 #uuid "d15e4e5a-5014-4500-bb33-cb9eeaed5a7f"
+   :no-doc true}
+  [array-1 array-2]
+  (and (= (count array-1) (count array-2))
+       (= (type array-1) (type array-2))
+       (. java.util.Arrays equals array-1 array-2)))
+
+
+(defn array-assoc
+  "Given array `arr`, associates value `x` to index `idx`."
+  {:UUIDv4 #uuid "a9f6f663-26ed-4df8-8165-fcc5eb50e519"
+   :no-doc true}
+  [arr idx x]
+  (do
+    (aset arr idx x)
+    arr))
+
+
+(defn sub-array
+  "Given array `arr`, returns a copy from index `start` (inclusive), to `end`
+  (exclusive)."
+  {:UUIDv4 #uuid "b1e8d73a-bb1e-4aea-af9a-61d30404e5a1"
+   :no-doc true}
+  [arr start stop]
+  (. java.util.Arrays copyOfRange arr start stop))
+
+
+(defn array-dissoc
+  "Given primitive array `arr`, returns a copy with element at index `i`
+  removed."
+  {:UUIDv4 #uuid "ad458af6-1d6d-42ef-97c5-3b8e77d5b9a2"
+   :no-doc true
+   :implementation-note "`into-array` returns boxed arrays, e.g. `java.lang.Integer/1`, `java.lang.Long/1`. `int-array`, `long-array`, et al., return primitive arrays, e.g. `int/1`, `long/1`, etc."}
+  [arr idx]
+  (let [zeroth-type (type (aget arr 0))
+        same-types? (every? #(instance? zeroth-type %) arr)
+        head (sub-array arr 0 idx)
+        tail (sub-array arr (inc idx) (count arr))
+        array-creators {boolean/1 boolean-array
+                        byte/1 byte-array
+                        char/1 char-array
+                        double/1 double-array
+                        float/1 float-array
+                        int/1 int-array
+                        long/1 long-array
+                        short/1 short-array}
+        array-fn (if same-types?
+                   (array-creators (type arr))
+                   object-array)]
+    (array-fn (concat head tail))))
+
+
 ;; codox requires the docstrings to be string literals.
 ;; protocols cannot handle varargs, so must be explicit
 
@@ -377,6 +431,96 @@
     ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
     ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
   (dissoc* [v idx] (gvec-dissoc v idx))
+
+  boolean/1
+  (get*
+    ([arr idx] (get arr idx))
+    ([arr idx not-found] (get arr idx not-found)))
+  (assoc*
+    ([arr idx x] (array-assoc arr idx x))
+    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
+    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
+  (dissoc* [arr idx] (array-dissoc arr idx))
+
+  byte/1
+  (get*
+    ([arr idx] (get arr idx))
+    ([arr idx not-found] (get arr idx not-found)))
+  (assoc*
+    ([arr idx x] (array-assoc arr idx x))
+    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
+    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
+  (dissoc* [arr idx] (array-dissoc arr idx))
+
+  char/1
+  (get*
+    ([arr idx] (get arr idx))
+    ([arr idx not-found] (get arr idx not-found)))
+  (assoc*
+    ([arr idx x] (array-assoc arr idx x))
+    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
+    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
+  (dissoc* [arr idx] (array-dissoc arr idx))
+
+  double/1
+  (get*
+    ([arr idx] (get arr idx))
+    ([arr idx not-found] (get arr idx not-found)))
+  (assoc*
+    ([arr idx x] (array-assoc arr idx x))
+    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
+    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
+  (dissoc* [arr idx] (array-dissoc arr idx))
+
+  float/1
+  (get*
+    ([arr idx] (get arr idx))
+    ([arr idx not-found] (get arr idx not-found)))
+  (assoc*
+    ([arr idx x] (array-assoc arr idx x))
+    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
+    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
+  (dissoc* [arr idx] (array-dissoc arr idx))
+
+  int/1
+  (get*
+    ([arr idx] (get arr idx))
+    ([arr idx not-found] (get arr idx not-found)))
+  (assoc*
+    ([arr idx x] (array-assoc arr idx x))
+    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
+    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
+  (dissoc* [arr idx] (array-dissoc arr idx))
+
+  long/1
+  (get*
+    ([arr idx] (get arr idx))
+    ([arr idx not-found] (get arr idx not-found)))
+  (assoc*
+    ([arr idx x] (array-assoc arr idx x))
+    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
+    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
+  (dissoc* [arr idx] (array-dissoc arr idx))
+
+  short/1
+  (get*
+    ([arr idx] (get arr idx))
+    ([arr idx not-found] (get arr idx not-found)))
+  (assoc*
+    ([arr idx x] (array-assoc arr idx x))
+    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
+    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
+  (dissoc* [arr idx] (array-dissoc arr idx))
+
+  java.lang.Object/1
+  (get*
+    ([arr idx] (get arr idx))
+    ([arr idx not-found] (get arr idx not-found)))
+  (assoc*
+    ([arr idx x] (array-assoc arr idx x))
+    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
+    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
+  (dissoc* [arr idx] (array-dissoc arr idx))
 
   nil
   (get*

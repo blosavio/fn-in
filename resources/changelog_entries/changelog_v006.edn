@@ -4,12 +4,8 @@
  :responsible {:name "Brad Losavio"
                :email "blosavio@sagevisuals.com"}
  :version 6
- :comment
- "Fixed `nil` handling.
- TODO: Added handling for Java arrays.
- Added handling for queues.
- Added handling for `clojure.core.Vec`.
- Improved unit tests. Added property tests."
+ :comment "Fixed `nil` handling. Added handling for arrays, queues, and
+ `clojure.core.Vec`. Improved unit tests. Added property tests."
  :project-status :active
  :stable false
  :urgency :medium
@@ -63,11 +59,26 @@
                        'update-in*]
    :breaking? false}
 
-  {:description "Extended protocol to instances of
- `clojure.core.Vec` (typically created with `vector-of`)."
+  {:description "Extended protocol to instances of `clojure.core.Vec` (typically
+ created with `vector-of`)."
    :date {:year 2025
           :month "November"
           :day 17}
+   :change-type :bug-fix
+   :altered-functions ['assoc*
+                       'assoc-in*
+                       'dissoc*
+                       'dissoc-in*
+                       'get*
+                       'get-in*
+                       'update*
+                       'update-in*]
+   :breaking? false}
+
+  {:description "Extended protocol to primitive arrays."
+   :date {:year 2025
+          :month "November"
+          :day 18}
    :change-type :bug-fix
    :altered-functions ['assoc*
                        'assoc-in*
