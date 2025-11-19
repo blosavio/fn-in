@@ -41,22 +41,21 @@
   (reverse (into '() (apply concat lists))))
 
 
-(declare assoc*)
-
-
 (defn list-assoc
   "Returns a new list with the element at index idx replaced with value x.
    If idx is beyond the end, nil entries are appended."
   {:UUIDv4 #uuid "f73dc5d7-87e1-4bb7-8c36-6ec41fa38052"
    :no-doc true}
   [c i x]
-  (let [f (fn assoc-sub [head tail k]
-            (if (zero? k)
-              (concat-list head (list x) (rest tail))
-              (assoc-sub (concat-list head (list (first tail)))
-                         (rest tail)
-                         (dec k))))]
-    (f (empty c) c i)))
+  (with-meta
+    (let [f (fn assoc-sub [head tail k]
+              (if (zero? k)
+                (concat-list head (list x) (rest tail))
+                (assoc-sub (concat-list head (list (first tail)))
+                           (rest tail)
+                           (dec k))))]
+      (f (empty c) c i))
+    (meta c)))
 
 
 (defn vector-assoc
@@ -89,7 +88,8 @@
    it might be infinite."
   {:UUIDv4 #uuid "fee4b366-b8e3-477c-bfe4-2e7b6defc014"
    :no-doc true}
-  [c i x] (lazy-cat (take i c) (vector x) (nthrest c (inc i))))
+  [c i x]
+  (with-meta (lazy-cat (take i c) (vector x) (nthrest c (inc i))) (meta c)))
 
 
 (defn set-assoc
@@ -106,7 +106,9 @@
   {:UUIDv4 #uuid "2e27a2a5-372c-4809-83c1-92878c472505"
    :no-doc true}
   [q idx x]
-  (into (clojure.lang.PersistentQueue/EMPTY) (assoc (vec q) idx x)))
+  (with-meta
+    (into (clojure.lang.PersistentQueue/EMPTY) (assoc (vec q) idx x))
+    (meta q)))
 
 
 (defn vector-dissoc
@@ -114,7 +116,7 @@
   {:UUIDv4 #uuid "70e34715-9354-4614-9623-655c7378f769"
    :no-doc true}
   [v i]
-  (into [] (concat (subvec v 0 i) (subvec v (inc i)))))
+  (with-meta (into [] (concat (subvec v 0 i) (subvec v (inc i)))) (meta v)))
 
 
 (defn list-dissoc
@@ -122,13 +124,15 @@
   {:UUIDv4 #uuid "dc78c19c-8727-45e1-bcf2-bd17ad424b0b"
    :no-doc true}
   [lst i]
-  ((fn dissoc-sub [head tail k]
-     (if (zero? k)
-       (concat-list head (rest tail))
-       (dissoc-sub (concat-list head (list (first tail)))
-                   (rest tail)
-                   (dec k))))
-   (empty lst) lst i))
+  (with-meta
+    ((fn dissoc-sub [head tail k]
+       (if (zero? k)
+         (concat-list head (rest tail))
+         (dissoc-sub (concat-list head (list (first tail)))
+                     (rest tail)
+                     (dec k))))
+     (empty lst) lst i)
+    (meta lst)))
 
 
 (defn non-term-dissoc
@@ -138,7 +142,7 @@
   {:UUIDv4 #uuid "bdae0204-ea2b-4cc3-bae7-a24e4e50c336"
    :no-doc true}
   [c i]
-  (lazy-cat (take i c) (nthrest c (inc i))))
+  (with-meta (lazy-cat (take i c) (nthrest c (inc i))) (meta c)))
 
 
 (defn queue-dissoc
@@ -146,7 +150,9 @@
   {:UUIDv4 #uuid "74de4b39-e80b-4d8e-8503-b01cd6f74bc9"
    :no-doc true}
   [q idx]
-  (into (clojure.lang.PersistentQueue/EMPTY) (vector-dissoc (vec q) idx)))
+  (with-meta
+    (into (clojure.lang.PersistentQueue/EMPTY) (vector-dissoc (vec q) idx))
+    (meta q)))
 
 
 (defn gvec-dissoc
@@ -155,8 +161,13 @@
   {:UUIDv4 #uuid "5273bd48-d2c5-425b-8de6-7904150cc901"
    :no-doc true}
   [gv idx]
-  (reduce conj (into (empty gv)  (.subList gv 0 idx))
-          (.subList gv (inc idx) (count gv))))
+  (with-meta
+    (reduce conj (into (empty gv) (.subList gv 0 idx))
+            (.subList gv (inc idx) (count gv)))
+    (meta gv)))
+
+
+(declare assoc*)
 
 
 (defn mult-assoc*
@@ -314,6 +325,19 @@
   ;; non-existent entity
   (dissoc* #{11 22 33} 99) ;; => #{33 22 11}
   (dissoc* {:a 11 :b 22} :c) ;; => {:a 11, :b 22}
+  ```
+
+  Be cautious when serially dissociating multiple elements from a sequential.
+
+  ```clojure
+  ;; wrong way to remove 11, 33, and 55
+  (reduce (fn [v idx] (dissoc* v idx)) [11 22 33 44 55 66 77] [0 2 4]) ;; => [22 33 55 66]
+  ```
+
+  Order the indexes such that dissociation occurs from right-to-left.
+
+  ```clojure
+  (reduce (fn [v idx] (dissoc* v idx)) [11 22 33 44 55 66 77] (reverse (sort [0 2 4]))) ;; [22 44 66 77]
   ```"))
 
 

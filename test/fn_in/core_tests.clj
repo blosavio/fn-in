@@ -74,7 +74,7 @@
       boolean/1 (boolean-array [true false true])
       byte/1 (byte-array [0x11 0x22 0x33])
       char/1 (char-array [\a \b \c])
-      double/1 (double-array [11 22 33])
+      double/1 (double-array [11.0 22.0 33.0])
       float/1 (float-array [11.0 22.0 33.0])
       int/1 (int-array [11 22 33])
       long/1 (long-array [11 22 33])
@@ -170,7 +170,7 @@
       true (boolean-array [true false true])
       0x11 (byte-array [0x11 0x22 0x33])
       \a (char-array [\a \b \c])
-      11.0 (double-array [11 22 33])
+      11.0 (double-array [11.0 22.0 33.0])
       11.0 (float-array [11.0 22.0 33.0])
       11 (int-array [11 22 33])
       11 (long-array [11 22 33])
@@ -225,7 +225,7 @@
       boolean/1 (boolean-array [true false true]) true
       byte/1 (byte-array [0x11 0x22 0x33]) 0x33
       char/1 (char-array [\a \b \c]) \c
-      double/1 (double-array [11 22 33]) 33.0
+      double/1 (double-array [11.0 22.0 33.0]) 33.0
       float/1 (float-array [11.0 22.0 33.0]) 33.0
       int/1 (int-array [11 22 33]) 33
       long/1 (long-array [11 22 33]) 33
@@ -275,7 +275,7 @@
       boolean/1 (boolean-array [true false true])
       byte/1 (byte-array [0x11 0x22 0x33])
       char/1 (char-array [\a \b \c])
-      double/1 (double-array [11 22 33])
+      double/1 (double-array [11.0 22.0 33.0])
       float/1 (float-array [11.0 22.0 33.0])
       int/1 (int-array [11 22 33])
       long/1 (long-array [11 22 33])
@@ -706,6 +706,132 @@
       long/1 (long-array [11 22 33]) (long-array [11 22])
       short/1 (short-array [11 22 33]) (short-array [11 22])
       java.lang.Object/1 (object-array [\a :foo "bar"]) (object-array [\a :foo]))))
+
+
+(deftest metadata-tests
+  (testing "collections that do not implement `clojure.lang.IMeta`"
+    (are [c-type coll] (and (instance? c-type coll)
+                            (false? (instance? clojure.lang.IMeta coll)))
+      clojure.lang.MapEntry (first {11 22})
+
+      boolean/1 (boolean-array [true false true])
+      byte/1 (byte-array [0x11 0x22 0x33])
+      char/1 (char-array [\a \b \c])
+      double/1 (double-array [11.0 22.0 33.0])
+      float/1 (float-array [11.0 22.0 33.0])
+      int/1 (int-array [11 22 33])
+      long/1 (long-array [11 22 33])
+      java.lang.Object/1 (object-array [42 \c true])
+      short/1 (short-array [11 22 33])))
+
+  ;; Note: Metadata reader macro does not attach to evauated forms.
+  ;; (meta ^:meta? (vector 11 22 33)) ;; nil
+
+  ;; Use `with-meta` instead
+  ;; (meta (with-meta (vector 11 22 33) {:meta? true})) ;; {:meta? true}
+
+  (testing "metadata returned from assoc-ed collections"
+    (are [c-type coll keydex] (and (instance? c-type coll)
+                                   ((meta (assoc* (with-meta coll {:meta? true}) keydex 99)) :meta?))
+      clojure.lang.PersistentVector (vector 11 22 33) 2
+      clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3) 2
+      clojure.core.Vec (vector-of :int 11 22 33) 2
+
+      clojure.lang.PersistentList (list 11 22 33) 2
+      clojure.lang.Cons (cons 11 '(22 33)) 2
+
+      clojure.lang.PersistentArrayMap (array-map :a 11 :b 22 :c 33) :c
+      clojure.lang.PersistentHashMap (hash-map :a 11 :b 22 :c 33) :c
+      clojure.lang.PersistentTreeMap (sorted-map :a 11 :b 22 :c 33) :c
+      clojure.lang.PersistentStructMap (struct test-struct 11 22 33) :c
+      fn_in.core_tests.TestRecord (->TestRecord 11 22 33) :c
+
+      clojure.lang.PersistentHashSet (hash-set 11 22 33) 33
+      clojure.lang.PersistentTreeSet (sorted-set 11 22 33) 33
+
+      clojure.lang.Cycle (cycle [11 22 33]) 2
+      clojure.lang.LazySeq (interleave [11 22] [33 44]) 2
+      clojure.lang.LazySeq (interpose 22 [11 33]) 2
+      clojure.lang.LazySeq (lazy-cat [11 22] [33]) 2
+      clojure.lang.LazySeq (lazy-seq [11 22 33]) 2
+      clojure.lang.LazySeq (mapcat reverse [[22 11] [44 33]]) 3
+      clojure.lang.LongRange (range 0 4) 2
+      clojure.lang.Range (range 11.0 44.0 11.0) 2
+      clojure.lang.APersistentVector$RSeq (rseq [33 22 11]) 2
+      clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33]) 2
+      clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33]) 2
+
+      clojure.lang.PersistentQueue (queue [11 22 33]) 2
+      clojure.lang.StringSeq (seq "abc") 2
+      clojure.lang.PersistentVector (Tuple/create 11 22 33) 2))
+
+  (testing "metadata returned from updated collections"
+    (are [c-type coll keydex] (and (instance? c-type coll)
+                                   ((meta (update* (with-meta coll {:meta? true}) keydex (constantly 99))) :meta?))
+      clojure.lang.PersistentVector (vector 11 22 33) 2
+      clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3) 2
+      clojure.core.Vec (vector-of :int 11 22 33) 2
+
+      clojure.lang.PersistentList (list 11 22 33) 2
+      clojure.lang.Cons (cons 11 '(22 33)) 2
+
+      clojure.lang.PersistentArrayMap (array-map :a 11 :b 22 :c 33) :c
+      clojure.lang.PersistentHashMap (hash-map :a 11 :b 22 :c 33) :c
+      clojure.lang.PersistentTreeMap (sorted-map :a 11 :b 22 :c 33) :c
+      clojure.lang.PersistentStructMap (struct test-struct 11 22 33) :c
+      fn_in.core_tests.TestRecord (->TestRecord 11 22 33) :c
+
+      clojure.lang.PersistentHashSet (hash-set 11 22 33) 33
+      clojure.lang.PersistentTreeSet (sorted-set 11 22 33) 33
+
+      clojure.lang.Cycle (cycle [11 22 33]) 2
+      clojure.lang.LazySeq (interleave [11 22] [33 44]) 2
+      clojure.lang.LazySeq (interpose 22 [11 33]) 2
+      clojure.lang.LazySeq (lazy-cat [11 22] [33]) 2
+      clojure.lang.LazySeq (lazy-seq [11 22 33]) 2
+      clojure.lang.LazySeq (mapcat reverse [[22 11] [44 33]]) 3
+      clojure.lang.LongRange (range 0 4) 2
+      clojure.lang.Range (range 11.0 44.0 11.0) 2
+      clojure.lang.APersistentVector$RSeq (rseq [33 22 11]) 2
+      clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33]) 2
+      clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33]) 2
+
+      clojure.lang.PersistentQueue (queue [11 22 33]) 2
+      clojure.lang.StringSeq (seq "abc") 2
+      clojure.lang.PersistentVector (Tuple/create 11 22 33) 2))
+
+  (testing "metadata returned from dissoc-ed collections"
+    (are [c-type coll keydex] (and (instance? c-type coll)
+                                   ((meta (dissoc* (with-meta coll {:meta? true}) keydex)) :meta?))
+      clojure.lang.PersistentVector (vector 11 22 33) 2
+      clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3) 2
+      clojure.core.Vec (vector-of :int 11 22 33) 2
+
+      clojure.lang.PersistentList (list 11 22 33) 2
+      clojure.lang.Cons (cons 11 '(22 33)) 2
+
+      clojure.lang.PersistentArrayMap (array-map :a 11 :b 22 :c 33) :c
+      clojure.lang.PersistentHashMap (hash-map :a 11 :b 22 :c 33) :c
+      clojure.lang.PersistentTreeMap (sorted-map :a 11 :b 22 :c 33) :c
+
+      clojure.lang.PersistentHashSet (hash-set 11 22 33) 33
+      clojure.lang.PersistentTreeSet (sorted-set 11 22 33) 33
+
+      clojure.lang.Cycle (cycle [11 22 33]) 2
+      clojure.lang.LazySeq (interleave [11 22] [33 44]) 2
+      clojure.lang.LazySeq (interpose 22 [11 33]) 2
+      clojure.lang.LazySeq (lazy-cat [11 22] [33]) 2
+      clojure.lang.LazySeq (lazy-seq [11 22 33]) 2
+      clojure.lang.LazySeq (mapcat reverse [[22 11] [44 33]]) 3
+      clojure.lang.LongRange (range 0 4) 2
+      clojure.lang.Range (range 11.0 44.0 11.0) 2
+      clojure.lang.APersistentVector$RSeq (rseq [33 22 11]) 2
+      clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33]) 2
+      clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33]) 2
+
+      clojure.lang.PersistentQueue (queue [11 22 33]) 2
+      clojure.lang.StringSeq (seq "abc") 2
+      clojure.lang.PersistentVector (Tuple/create 11 22 33) 2)))
 
 
 #_(run-tests)

@@ -24,7 +24,7 @@
   [:a {:href "#path"} "path"]
   ". A path unambiguously addresses an element of a heterogeneous,
  arbitrarily-nested data structure. Elements in vectors, lists, and other
- sequences are addressed by zero-indexed integers. Hashmap elements are
+ sequentials are addressed by zero-indexed integers. Hashmap elements are
  addressed by their keys, and set elements are addressed by the elements
  themselves."]
 
@@ -42,7 +42,7 @@
   [:br]
   [:code "indexes --> 0  1  2  3"]]
 
- [:p "…and same for other sequences, like " [:code "range"] "."]
+ [:p "…and same for other sequentials, like " [:code "range"] "."]
 
  [:pre
   (print-form-then-eval "(range 29 33)")
@@ -129,7 +129,7 @@
 
  [:p "Nothing terribly special that "
   [:code "clojure.core/get-in"]
-  " can't do. But, if for some reason, that nested thing is instead a list…"]
+  " can't do. But if for some reason, that nested thing is instead a list…"]
 
  [:pre (print-form-then-eval "(get-in [11 22 '(33 44 55)] [2 2])")]
 
@@ -140,9 +140,9 @@
  [:p "…all fine and dandy."]
 
  [:p "Let's look at hashmaps. Hashmap elements are addressed by keys. Let's
- inspect the value at key "
+ inspect the value at key "
   [:code ":z"]
-  ". We insert a "
+  ". We insert a "
   [:code ":z"]
   " keyword into the path arg."]
 
@@ -179,11 +179,11 @@
   ", the starred functions can return a modified copy of a heterogeneous,
  arbitrarily-nested data structure. They all consume a path exactly the way "
   [:code "get-in*"]
-  " does. First, we could swap out — "
-  [:em "associating"]
-  " — a nested value for one we supply."]
+  " does."]
 
- [:p "Let's try associating an element contained in a "
+ [:p "First, we could swap out — "
+  [:em "associating"]
+  " — a nested value for one we supply. Let's try associating an element contained in a "
   [:code "clojure.lang.Cycle"]
   " nested in a list, nested in a hashmap. Going three collections 'deep'
  requires a three-element path."]
@@ -198,7 +198,7 @@
   [:code "clojure.lang.Repeat"]
   ". Diving two levels deep requires a two-element path."]
 
- [:pre (print-form-then-eval "(update-in* (take 3 (repeat [11 22 33])) [2 1] #(+ % 9977))")]
+ [:pre (print-form-then-eval "(take 5 (update-in* (repeat [11 22 33]) [2 1] #(+ % 9977)))")]
 
  [:p "Or, we can simply "
   [:em "dissociate"]

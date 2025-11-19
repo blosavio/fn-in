@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2025-11-15 13:58:12" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2025-11-18 19:57:14" content="width=device-width, initial-scale=1" name="viewport">
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
       fn-in — A library for manipulating heterogeneous, arbitrarily-nested Clojure data structures
@@ -91,7 +91,7 @@
       </p>
       <p>
         Their interface is based on the concept of a <a href="#path">path</a>. A path unambiguously addresses an element of a heterogeneous, arbitrarily-nested
-        data structure. Elements in vectors, lists, and other sequences are addressed by zero-indexed integers. Hashmap elements are addressed by their keys,
+        data structure. Elements in vectors, lists, and other sequentials are addressed by zero-indexed integers. Hashmap elements are addressed by their keys,
         and set elements are addressed by the elements themselves.
       </p>
       <p>
@@ -103,7 +103,7 @@
       </p>
       <pre><code>          '(97 98 99 100)</code><br><code>indexes --&gt; 0  1  2  3</code></pre>
       <p>
-        …and same for other sequences, like <code>range</code>.
+        …and same for other sequentials, like <code>range</code>.
       </p>
       <pre><code>(range 29 33) ;; =&gt; (29 30 31 32)</code><br><code>indexes -----------&gt; 0  1  2  3</code></pre>
       <p>
@@ -150,7 +150,7 @@
       </p>
       <pre><code>(get-in* [11 22 [33 44 55]] [2 2]) ;; =&gt; 55</code></pre>
       <p>
-        Nothing terribly special that <code>clojure.core/get-in</code> can't do. But, if for some reason, that nested thing is instead a list…
+        Nothing terribly special that <code>clojure.core/get-in</code> can't do. But if for some reason, that nested thing is instead a list…
       </p>
       <pre><code>(get-in [11 22 '(33 44 55)] [2 2]) ;; =&gt; nil</code></pre>
       <p>
@@ -161,8 +161,8 @@
         …all fine and dandy.
       </p>
       <p>
-        Let's look at hashmaps. Hashmap elements are addressed by keys. Let's inspect the value at key <code>:z</code>. We insert a <code>:z</code> keyword
-        into the path arg.
+        Let's look at hashmaps. Hashmap elements are addressed by keys. Let's inspect the value at key&nbsp;<code>:z</code>. We insert a&nbsp;<code>:z</code>
+        keyword into the path arg.
       </p>
       <pre><code>(get-in* {:y 22, :z 33, :x 11} [:z]) ;; =&gt; 33</code></pre>
       <p>
@@ -184,12 +184,11 @@
       </p>
       <p>
         Beyond inspecting a value with <code>get-in*</code>, the starred functions can return a modified copy of a heterogeneous, arbitrarily-nested data
-        structure. They all consume a path exactly the way <code>get-in*</code> does. First, we could swap out — <em>associating</em> — a nested value for one
-        we supply.
+        structure. They all consume a path exactly the way <code>get-in*</code> does.
       </p>
       <p>
-        Let's try associating an element contained in a <code>clojure.lang.Cycle</code> nested in a list, nested in a hashmap. Going three collections 'deep'
-        requires a three-element path.
+        First, we could swap out — <em>associating</em> — a nested value for one we supply. Let's try associating an element contained in a
+        <code>clojure.lang.Cycle</code> nested in a list, nested in a hashmap. Going three collections 'deep' requires a three-element path.
       </p>
       <pre><code>(assoc-in* {:a (list 11 (take 3 (cycle ['foo 'bar 'baz])))} [:a 1 2] :Clojure!)
 ;; =&gt; {:a (11 (foo bar :Clojure!))}</code></pre>
@@ -197,8 +196,12 @@
         We could also apply a function to — <em>updating</em> — a nested value. Let's add <code>9977</code> to an integer contained in a vector, nested in a
         <code>clojure.lang.Repeat</code>. Diving two levels deep requires a two-element path.
       </p>
-      <pre><code>(update-in* (take 3 (repeat [11 22 33])) [2 1] #(+ % 9977))
-;; =&gt; ([11 22 33] [11 22 33] [11 9999 33])</code></pre>
+      <pre><code>(take 5 (update-in* (repeat [11 22 33]) [2 1] #(+ % 9977)))
+;; =&gt; ([11 22 33]
+;;     [11 22 33]
+;;     [11 9999 33]
+;;     [11 22 33]
+;;     [11 22 33])</code></pre>
       <p>
         Or, we can simply <em>dissociate</em> a nested value, removing it entirely. Let's dissociate an integer element contained in a
         <code>clojure.lang.Iterate</code>, nested in a list.
@@ -350,7 +353,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 November 15.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 November 18.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

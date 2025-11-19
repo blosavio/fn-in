@@ -293,5 +293,45 @@
       [11 {:b 33}])))
 
 
+(defrecord TestRecord [a b c])
+(defstruct test-struct :a :b :c)
+
+(deftest metadata-tests
+  (testing "metadata returned from empty path `get-in*`"
+    (are [c-type coll] (and (instance? c-type coll)
+                            ((meta (get-in* (with-meta coll {:meta? true}) [])) :meta?))
+      clojure.lang.PersistentVector (vector 11 22 33)
+      clojure.lang.APersistentVector$SubVector (subvec [11 22 33] 0 3)
+      clojure.core.Vec (vector-of :int 11 22 33)
+
+      clojure.lang.PersistentList (list 11 22 33)
+      clojure.lang.Cons (cons 11 '(22 33))
+
+      clojure.lang.PersistentArrayMap (array-map :a 11 :b 22 :c 33)
+      clojure.lang.PersistentHashMap (hash-map :a 11 :b 22 :c 33)
+      clojure.lang.PersistentTreeMap (sorted-map :a 11 :b 22 :c 33)
+      clojure.lang.PersistentStructMap (struct test-struct 11 22 33)
+      fn_in.in_tests.TestRecord (->TestRecord 11 22 33)
+
+      clojure.lang.PersistentHashSet (hash-set 11 22 33)
+      clojure.lang.PersistentTreeSet (sorted-set 11 22 33)
+
+      clojure.lang.Cycle (cycle [11 22 33])
+      clojure.lang.LazySeq (interleave [11 22] [33 44])
+      clojure.lang.LazySeq (interpose 22 [11 33])
+      clojure.lang.LazySeq (lazy-cat [11 22] [33])
+      clojure.lang.LazySeq (lazy-seq [11 22 33])
+      clojure.lang.LazySeq (mapcat reverse [[22 11] [44 33]])
+      clojure.lang.LongRange (range 0 4)
+      clojure.lang.Range (range 11.0 44.0 11.0)
+      clojure.lang.APersistentVector$RSeq (rseq [33 22 11])
+      clojure.lang.PersistentVector$ChunkedSeq (seq [11 22 33])
+      clojure.lang.PersistentVector$ChunkedSeq (sequence [11 22 33])
+
+      clojure.lang.PersistentQueue (queue [11 22 33])
+      clojure.lang.StringSeq (seq "abc")
+      clojure.lang.PersistentVector (Tuple/create 11 22 33))))
+
+
 #_(run-tests)
 

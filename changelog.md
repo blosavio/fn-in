@@ -10,7 +10,8 @@
       <p>
         2025 November 7<br>
         Brad Losavio (blosavio@sagevisuals.com)<br>
-        <em>Description:</em> Fixed `nil` handling. Added handling for arrays, queues, and `clojure.core.Vec`. Improved unit tests. Added property tests.<br>
+        <em>Description:</em> Fixed `nil` handling and output collection metadata. Added handling for arrays, queues, and `clojure.core.Vec`. Improved unit
+        tests. Added property tests.<br>
         <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
         <em>Urgency:</em> medium<br>
         <em>Breaking:</em> no
@@ -32,7 +33,7 @@
         <ul>
           <li>
             <div>
-              Reorganized and streamlined unit tests and added inline checks to verify the type of the input collections being tested.
+              Reorganized and streamlined unit tests and added explicit, inline, checks to verify the type of the input collections being tested.
             </div>
           </li>
           <li>
@@ -58,6 +59,11 @@
           <li>
             <div>
               Extended protocol to primitive arrays.
+            </div>
+          </li>
+          <li>
+            <div>
+              Ensured that output collections preserve the metadata of the input collections.
             </div>
           </li>
         </ul>
@@ -295,7 +301,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 November 18.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 November 19.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>
