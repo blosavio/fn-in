@@ -1,4 +1,4 @@
-(defproject com.sagevisuals/fn-in "6-SNAPSHOT0"
+(defproject com.sagevisuals/fn-in "6"
   :description "A Clojure library for manipulating heterogeneous, arbitrarily-nested data structures."
   :url "https://github.com/blosavio/fn-in"
   :license {:name "MIT License"

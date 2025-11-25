@@ -82,6 +82,16 @@
       short/1 (short-array [11 22 33])))
 
 
+#_{:byte (.getClass ^Object (clojure.core/byte-array 0))
+   :char (.getClass ^Object (clojure.core/char-array 0))
+   :double (.getClass ^Object (clojure.core/double-array 0))
+   :float (.getClass ^Object (clojure.core/float-array 0))
+   :int (.getClass ^Object (clojure.core/int-array 0))
+   :long (.getClass ^Object (clojure.core/long-array 0))
+   :object (.getClass ^Object (clojure.core/object-array 0))
+   :short (.getClass ^Object (clojure.core/short-array 0))}
+
+
 (deftest get*-test
   (testing "`nil`"
     (are [x y] (= x y)
