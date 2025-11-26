@@ -25,7 +25,7 @@
   {:UUIDv4 #uuid "bce76d1f-0541-453e-894c-6fbc83ceb625"
    :no-doc true}
   [coll]
-  (into (clojure.lang.PersistentQueue/EMPTY) coll))
+  (into clojure.lang.PersistentQueue/EMPTY coll))
 
 
 #_(deftest collection-types

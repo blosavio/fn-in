@@ -107,7 +107,7 @@
    :no-doc true}
   [q idx x]
   (with-meta
-    (into (clojure.lang.PersistentQueue/EMPTY) (assoc (vec q) idx x))
+    (into clojure.lang.PersistentQueue/EMPTY (assoc (vec q) idx x))
     (meta q)))
 
 
@@ -151,7 +151,7 @@
    :no-doc true}
   [q idx]
   (with-meta
-    (into (clojure.lang.PersistentQueue/EMPTY) (vector-dissoc (vec q) idx))
+    (into clojure.lang.PersistentQueue/EMPTY (vector-dissoc (vec q) idx))
     (meta q)))
 
 
