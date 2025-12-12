@@ -1,4 +1,4 @@
-(defproject com.sagevisuals/fn-in "6"
+(defproject com.sagevisuals/fn-in "7-SNAPSHOT0"
   :description "A Clojure library for manipulating heterogeneous, arbitrarily-nested data structures."
   :url "https://github.com/blosavio/fn-in"
   :license {:name "MIT License"
@@ -31,6 +31,6 @@
           :doc-files []
           :source-uri "https://github.com/blosavio/fn-in/blob/master/{filepath}#L{line}"
           :html {:transforms [[:div.sidebar.primary] [:append [:ul.index-link [:li.depth-1 [:a {:href "https://github.com/blosavio/fn-in"} "Project Home"]]]]]}
-          :project {:name "fn-in" :version "version 6"}}
+          :project {:name "fn-in" :version "version 7"}}
   :scm {:name "git" :url "https://github.com/blosavio/fn-in"})
 

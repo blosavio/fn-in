@@ -1,0 +1,20 @@
+{:date {:year 2025
+        :month "December"
+        :day 12}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 7
+ :comment "Added tests to verify handling of string sequences."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? false
+ :changes
+ [{:description "Added unit tests to verify proper handling of
+ `clojure.lang.StringSeq` (no implementation change required)."
+   :date {:year 2025
+          :month "December"
+          :day 12}
+   :change-type :tests
+   :breaking? false}]}
+

@@ -4,6 +4,37 @@
       fn-in library changelog
     </h1><a href="https://github.com/blosavio/chlog">changelog info</a>
     <section>
+      <h3 id="v7">
+        version 7
+      </h3>
+      <p>
+        2025 December 12<br>
+        Brad Losavio (blosavio@sagevisuals.com)<br>
+        <em>Description:</em> Added tests to verify handling of string sequences.<br>
+        <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
+        <em>Urgency:</em> medium<br>
+        <em>Breaking:</em> no
+      </p>
+      <p></p>
+      <div>
+        <h4>
+          Breaking changes
+        </h4>
+        <ul></ul>
+        <h4>
+          Non-breaking changes
+        </h4>
+        <ul>
+          <li>
+            <div>
+              Added unit tests to verify proper handling of `clojure.lang.StringSeq` (no implementation change required).
+            </div>
+          </li>
+        </ul>
+      </div>
+      <hr>
+    </section>
+    <section>
       <h3 id="v6">
         version 6
       </h3>
@@ -301,7 +332,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 November 25.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 December 12.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

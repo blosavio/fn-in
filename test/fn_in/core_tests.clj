@@ -304,7 +304,15 @@
       {:a 11} (get* #{{:a 11} [22 33] '(44 55)} {:a 11})
       nil (get* #{{:a 11} [22 33] '(44 55)} {:b 99})
       '(44 55) (get* #{{:a 11} [22 33] '(44 55)} '(44 55))
-      #{66 77} (get* #{{:a 11} [22 33] '(44 55) #{66 77}} #{66 77}))))
+      #{66 77} (get* #{{:a 11} [22 33] '(44 55) #{66 77}} #{66 77})))
+
+  (testing "string sequences"
+    (are [s idx result] (and (instance? clojure.lang.StringSeq s)
+                 (= result (get* s idx)))
+      (seq "abc") 0 \a
+      (seq "abc") 1 \b
+      (seq "abc") 2 \c
+      (seq "abc") 3 nil)))
 
 (deftest assoc*-test
   (testing "`nil`"
@@ -491,7 +499,15 @@
       int/1 (int-array [11 22 33]) 99 (int-array [11 99 33])
       long/1 (long-array [11 22 33]) 99 (long-array [11 99 33])
       short/1 (short-array [11 22 33]) (short 99) (short-array [11 99 33])
-      java.lang.Object/1 (object-array [\a :foo "bar"]) 99 (object-array [\a 99 "bar"]))))
+      java.lang.Object/1 (object-array [\a :foo "bar"]) 99 (object-array [\a 99 "bar"])))
+
+  (testing "assoc-in string sequences"
+    (are [s idx c result] (and (instance? clojure.lang.StringSeq s)
+                               (= result (assoc* s idx c)))
+      (seq "abc") 0 \z (seq "zbc")
+      (seq "abc") 1 \z (seq "azc")
+      (seq "abc") 2 \z (seq "abz")
+      (seq "abc") 3 \z (seq "abcz"))))
 
 
 (deftest update*-test
@@ -567,7 +583,7 @@
       [11 22 333333 44 55] (update* [11 22 33 44 55] 2 + 300 3000 30000 300000)
       [0 1 2 33333 4 5] (update* (range 0 6) 3 + 30 300 3000 30000)))
 
-  (testing "assoc-ing arrays"
+  (testing "updating arrays"
     (are [c-type in-array x out-array] (and (instance? c-type in-array)
                                             (equal-arrays? (update* in-array 1 (constantly x)) out-array))
       boolean/1 (boolean-array [true false true]) true (boolean-array [true true true])
@@ -578,7 +594,14 @@
       int/1 (int-array [11 22 33]) 99 (int-array [11 99 33])
       long/1 (long-array [11 22 33]) 99 (long-array [11 99 33])
       short/1 (short-array [11 22 33]) (short 99) (short-array [11 99 33])
-      java.lang.Object/1 (object-array [\a :foo "bar"]) 99 (object-array [\a 99 "bar"]))))
+      java.lang.Object/1 (object-array [\a :foo "bar"]) 99 (object-array [\a 99 "bar"])))
+
+  (testing "upating string sequences"
+    (are [s idx result] (and (instance? clojure.lang.StringSeq s)
+                             (= result (update* s idx #(Character/toUpperCase %))))
+      (seq "abc") 0 (seq "Abc")
+      (seq "abc") 1 (seq "aBc")
+      (seq "abc") 2 (seq "abC"))))
 
 (deftest dissoc*-test
   (testing "`nil`"
@@ -715,7 +738,15 @@
       int/1 (int-array [11 22 33]) (int-array [11 22])
       long/1 (long-array [11 22 33]) (long-array [11 22])
       short/1 (short-array [11 22 33]) (short-array [11 22])
-      java.lang.Object/1 (object-array [\a :foo "bar"]) (object-array [\a :foo]))))
+      java.lang.Object/1 (object-array [\a :foo "bar"]) (object-array [\a :foo])))
+
+  (testing "removing elements from a string sequence"
+    (are [s idx result] (and (instance? clojure.lang.StringSeq s)
+                             (= result (dissoc* s idx)))
+      (seq "abc") 0 (seq "bc")
+      (seq "abc") 1 (seq "ac")
+      (seq "abc") 2 (seq "ab")
+      (seq "abc") 3 (seq "abc"))))
 
 
 (deftest metadata-tests
