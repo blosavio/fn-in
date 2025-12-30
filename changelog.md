@@ -10,17 +10,23 @@
       <p>
         2025 December 12<br>
         Brad Losavio (blosavio@sagevisuals.com)<br>
-        <em>Description:</em> Added tests to verify handling of string sequences.<br>
+        <em>Description:</em> Streamlined implementation, requiring a new dependency. Added tests to verify handling of string sequences.<br>
         <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
         <em>Urgency:</em> medium<br>
-        <em>Breaking:</em> no
+        <em>Breaking:</em> yes
       </p>
       <p></p>
       <div>
         <h4>
           Breaking changes
         </h4>
-        <ul></ul>
+        <ul>
+          <li>
+            <div>
+              Added dependency on `extended-extend-protocol`, which supplies the `multi-extend-protocol` macro.
+            </div>
+          </li>
+        </ul>
         <h4>
           Non-breaking changes
         </h4>
@@ -28,6 +34,11 @@
           <li>
             <div>
               Added unit tests to verify proper handling of `clojure.lang.StringSeq` (no implementation change required).
+            </div>
+          </li>
+          <li>
+            <div>
+              Streamlined implementation (reduced repetition) using `multi-extend-protocol` macro.
             </div>
           </li>
         </ul>
@@ -332,7 +343,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 December 12.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 December 30.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>

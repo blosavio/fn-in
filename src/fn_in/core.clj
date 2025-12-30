@@ -27,7 +27,9 @@
   * `arg1`, `arg2`, `arg3` optional args to multi-arity function `f`.
 
   See also the [glossary](https://github.com/blosavio/fn-in#glossary) of
-  terms.")
+  terms."
+  (:require
+   [extended-extend-protocol.core :refer [multi-extend-protocol]]))
 
 
 (defn concat-list
@@ -341,7 +343,7 @@
   ```"))
 
 
-(extend-protocol FnIn
+(multi-extend-protocol FnIn
   clojure.lang.APersistentVector
   (get*
     ([v idx] (get v idx nil))
@@ -395,15 +397,6 @@
   (dissoc* [c i] (non-term-dissoc c i))
 
   clojure.lang.PersistentList
-  (get*
-    ([s idx] (nth s idx nil))
-    ([s idx not-found] (nth s idx not-found)))
-  (assoc*
-    ([c i x] (list-assoc c i x))
-    ([c i1 x1 i2 x2] (mult-assoc* c i1 x1 i2 x2))
-    ([c i1 x1 i2 x2 i3 x3] (mult-assoc* c i1 x1 i2 x2 i3 x3)))
-  (dissoc* [c i] (list-dissoc c i))
-
   clojure.lang.PersistentList$EmptyList
   (get*
     ([c idx] (nth c idx nil))
@@ -457,85 +450,13 @@
   (dissoc* [v idx] (gvec-dissoc v idx))
 
   boolean/1
-  (get*
-    ([arr idx] (get arr idx))
-    ([arr idx not-found] (get arr idx not-found)))
-  (assoc*
-    ([arr idx x] (array-assoc arr idx x))
-    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
-    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
-  (dissoc* [arr idx] (array-dissoc arr idx))
-
   byte/1
-  (get*
-    ([arr idx] (get arr idx))
-    ([arr idx not-found] (get arr idx not-found)))
-  (assoc*
-    ([arr idx x] (array-assoc arr idx x))
-    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
-    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
-  (dissoc* [arr idx] (array-dissoc arr idx))
-
   char/1
-  (get*
-    ([arr idx] (get arr idx))
-    ([arr idx not-found] (get arr idx not-found)))
-  (assoc*
-    ([arr idx x] (array-assoc arr idx x))
-    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
-    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
-  (dissoc* [arr idx] (array-dissoc arr idx))
-
   double/1
-  (get*
-    ([arr idx] (get arr idx))
-    ([arr idx not-found] (get arr idx not-found)))
-  (assoc*
-    ([arr idx x] (array-assoc arr idx x))
-    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
-    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
-  (dissoc* [arr idx] (array-dissoc arr idx))
-
   float/1
-  (get*
-    ([arr idx] (get arr idx))
-    ([arr idx not-found] (get arr idx not-found)))
-  (assoc*
-    ([arr idx x] (array-assoc arr idx x))
-    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
-    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
-  (dissoc* [arr idx] (array-dissoc arr idx))
-
   int/1
-  (get*
-    ([arr idx] (get arr idx))
-    ([arr idx not-found] (get arr idx not-found)))
-  (assoc*
-    ([arr idx x] (array-assoc arr idx x))
-    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
-    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
-  (dissoc* [arr idx] (array-dissoc arr idx))
-
   long/1
-  (get*
-    ([arr idx] (get arr idx))
-    ([arr idx not-found] (get arr idx not-found)))
-  (assoc*
-    ([arr idx x] (array-assoc arr idx x))
-    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
-    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
-  (dissoc* [arr idx] (array-dissoc arr idx))
-
   short/1
-  (get*
-    ([arr idx] (get arr idx))
-    ([arr idx not-found] (get arr idx not-found)))
-  (assoc*
-    ([arr idx x] (array-assoc arr idx x))
-    ([arr i1 x1 i2 x2] (mult-assoc* arr i1 x1 i2 x2))
-    ([arr i1 x1 i2 x2 i3 x3] (mult-assoc* arr i1 x1 i2 x2 i3 x3)))
-  (dissoc* [arr idx] (array-dissoc arr idx))
-
   java.lang.Object/1
   (get*
     ([arr idx] (get arr idx))

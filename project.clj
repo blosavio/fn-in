@@ -1,4 +1,4 @@
-(defproject com.sagevisuals/fn-in "7-SNAPSHOT0"
+(defproject com.sagevisuals/fn-in "7-SNAPSHOT1"
   :description "A Clojure library for manipulating heterogeneous, arbitrarily-nested data structures."
   :url "https://github.com/blosavio/fn-in"
   :license {:name "MIT License"
@@ -9,6 +9,7 @@
   :plugins []
   :profiles {:dev {:dependencies [[com.clojure-goes-fast/clj-async-profiler "1.6.2"]
                                   [com.sagevisuals/chlog "5"]
+                                  [com.sagevisuals/extended-extend-protocol "0-SNAPSHOT1"]
                                   [com.sagevisuals/fastester "0"]
                                   [com.sagevisuals/readmoi "6"]
                                   [hiccup "2.0.0-RC3"]

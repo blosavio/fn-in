@@ -4,11 +4,12 @@
  :responsible {:name "Brad Losavio"
                :email "blosavio@sagevisuals.com"}
  :version 7
- :comment "Added tests to verify handling of string sequences."
+ :comment "Streamlined implementation, requiring a new dependency. Added tests
+ to verify handling of string sequences."
  :project-status :active
  :stable false
  :urgency :medium
- :breaking? false
+ :breaking? true
  :changes
  [{:description "Added unit tests to verify proper handling of
  `clojure.lang.StringSeq` (no implementation change required)."
@@ -16,5 +17,21 @@
           :month "December"
           :day 12}
    :change-type :tests
+   :breaking? false}
+
+  {:description "Added dependency on `extended-extend-protocol`, which supplies
+ the `multi-extend-protocol` macro."
+   :date {:year 2025
+          :month "December"
+          :day 30}
+   :change-type :added-dependency
+   :breaking? true}
+
+  {:description "Streamlined implementation (reduced repetition) using
+ `multi-extend-protocol` macro."
+   :date {:year 2025
+          :month "December"
+          :day 30}
+   :change-type :implementation
    :breaking? false}]}
 
