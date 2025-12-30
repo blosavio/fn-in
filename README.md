@@ -3,7 +3,7 @@
     <a href="https://clojars.org/com.sagevisuals/fn-in"><img src="https://img.shields.io/clojars/v/com.sagevisuals/fn-in.svg"></a><br>
     <a href="#setup">Setup</a><br>
     <a href="https://blosavio.github.io/fn-in/index.html">API</a><br>
-    <a href="https://github.com/blosavio/fn-in/blob/master/changelog.md">Changelog</a><br>
+    <a href="https://github.com/blosavio/fn-in/blob/main/changelog.md">Changelog</a><br>
     <a href="#introduction">Introduction</a><br>
     <a href="#ideas">Ideas</a><br>
     <a href="#performance">Performance</a><br>

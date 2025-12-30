@@ -1,6 +1,6 @@
 {:sections [{:section-name "Setup"}
             {:section-name "API" :section-href "https://blosavio.github.io/fn-in/index.html" :skip-section-load? true}
-            {:section-name "Changelog" :section-href "https://github.com/blosavio/fn-in/blob/master/changelog.md" :skip-section-load? true}
+            {:section-name "Changelog" :section-href "https://github.com/blosavio/fn-in/blob/main/changelog.md" :skip-section-load? true}
             {:section-name "Introduction"}
             {:section-name "Ideas"}
             {:section-name "Performance"}
