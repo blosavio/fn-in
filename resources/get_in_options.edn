@@ -27,7 +27,7 @@
               [:a {:href "https://blosavio.github.io/fn-in/performance_summary.html"} "overall summary"]
               " for benchmarking details. The benchmarks displayed in this
  document are defined "
-              [:a {:href "https://github.com/blosavio/fn-in/blob/master/test/fn_in/performance/get_in_benchmarks.clj"} "here"]
+              [:a {:href "https://github.com/blosavio/fn-in/blob/main/test/fn_in/performance/get_in_benchmarks.clj"} "here"]
               "."]]
 
   :comments
