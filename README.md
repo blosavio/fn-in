@@ -21,11 +21,11 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevisuals/fn-in &quot;7-SNAPSHOT1&quot;]</code></pre>
+      <pre><code>[com.sagevisuals/fn-in &quot;7&quot;]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevisuals/fn-in {:mvn/version &quot;7-SNAPSHOT1&quot;}</code></pre>
+      <pre><code>com.sagevisuals/fn-in {:mvn/version &quot;7&quot;}</code></pre>
       <h3>
         Require
       </h3>
@@ -345,7 +345,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 December 30.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 December 31.<span id="uuid"><br>
       59ecaabc-1b75-4616-9f03-2ccde4bb8729</span>
     </p>
   </body>
